@@ -1,0 +1,66 @@
+{
+    "cases": [
+        {
+            "id": 1,
+            "stages": ["provisional", "differential", "investigations", "management", "mcq"],
+            "stem": "56M presents with sudden onset chest pain radiating to his jaw.",
+            "patientImage": "./assets/images/patient1.png",
+            
+            "obs": {
+                "BP": "120/80",
+                "Temp": "36.8",
+                "HR": "75",
+                "RR": "20"
+            },
+
+            "investigations": [
+                { "name": "ECG", "result": "ST elevation in leads II, III, and aVF", "points": 10, "critical": true },
+                { "name": "Urinalysis", "result": "No abnormalities detected", "points": -5, "critical": false },
+                { "name": "ABG", "result": "No acid-base disturbance / evidence of respiratory failure", "points": -5, "critical": false },
+                { "name": "BSL", "result": "8.9 mmol/L (normal <7.8 mmol/L)", "points": -5, "critical": false },
+                { "name": "FBC", "result": "No abnormalities detected", "points": -5, "critical": false },
+                { "name": "Cultures", "result": "No bacterial growth detected", "points": -5, "critical": false },
+                { "name": "Coags", "result": "apTT and INR normal \nD-dimer and fibrinogen elevated", "points": -5, "critical": false },
+                { "name": "EUC", "result": "No abnormalities detected", "points": -5, "critical": false },
+                { "name": "LFT", "result": "No abnormalities detected", "points": -5, "critical": false },
+                { "name": "CRP", "result": "No abnormalities detected", "points": -5, "critical": false },
+                { "name": "Troponins", "result": "12 ng/mL (normal <0.04 ng/mL)", "points": -5, "critical": false },
+                { "name": "Echocardiogram", "result": "Hypokinesis of the inferior wall with an ejection fraction of 45%", "points": -5, "critical": false },
+                { "name": "CXR", "result": "Normal cardiac silhouette, no pulmonary oedema or consolidation.", "points": 5, "critical": false },
+                { "name": "Coronary Angiogram", "result": "90% occlusion of the right coronary artery", "points": 5, "critical": false },
+                { "name": "CT Angiogram", "result": "90% occlusion of the right coronary artery", "points": 5, "critical": false }
+            ]
+        },
+        {
+            "id": 2,
+            "stages": ["provisional", "differential", "investigations", "management", "mcq"],
+            "stem": "66F presents with palpitations and dyspnoea",
+            "patientImage": "./assets/images/patient1.png",
+            
+            "obs": {
+                "BP": "120/80",
+                "Temp": "36.8",
+                "HR": "99",
+                "RR": "20"
+            },
+
+            "investigations": [
+                { "name": "ECG", "result": "Irregularly irregular rhythm with no discernible P waves", "points": 10, "critical" : true },
+                { "name": "Urinalysis", "result": "No abnormalities detected", "points": -5, "critical": false },
+                { "name": "ABG", "result": "No acid-base disturbance / evidence of respiratory failure", "points": -5, "critical": false },
+                { "name": "BSL", "result": "7.5 mmol/L (normal <7.8 mmol/L)", "points": -5, "critical": false },
+                { "name": "FBC", "result": "No abnormalities detected", "points": -5, "critical": false },
+                { "name": "Cultures", "result": "No bacterial growth detected", "points": -5, "critical": false },
+                { "name": "Coags", "result": "apTT and INR normal", "points": -5, "critical": false },
+                { "name": "EUC", "result": "No abnormalities detected", "points": -5, "critical": false },
+                { "name": "LFT", "result": "No abnormalities detected", "points": -5, "critical": false },
+                { "name": "CRP", "result": "No abnormalities detected", "points": -5, "critical": false },
+                { "name": "Troponins", "result": "2.1 ng/mL (normal <0.04 ng/mL)", "points": -5, "critical": false },
+                { "name": "Echocardiogram", "result": "Dilated left atrium, normal LV function", "points": -5, "critical": false },
+                { "name": "CXR", "result": "Normal cardiac silhouette, no pulmonary oedema or consolidation.", "points": 5, "critical": false },
+                { "name": "Coronary Angiogram", "result": "No significant coronary artery disease", "points": 5, "critical": false },
+                { "name": "CT Angiogram", "result": "Dilated left atrium with no pulmonary embolism", "points": 5, "critical": false }
+            ]
+        }
+    ]
+}
