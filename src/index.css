@@ -1,29 +1,62 @@
-.investigate-container {
+.App {
   width: 1000px;
   height: 600px;
   margin: 0 auto;
   padding: 20px;
   background-color: #e0f7fa;
   position: relative;
+  overflow: hidden;
   user-select: none;
+  border-radius: 16px;
+}
+
+.investigate-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding-top: 0px;
+  top: 0;
+  left: 0;
+}
+
+.slide-down {
+  animation: slideDown 1s ease-out fowards;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120%);
+    opacity: 1;
+  }
 }
 
 .patient-stem-container {
   margin: 0 auto;
   width: 800px;
+  height: 125px;
   text-align: center;
+  background-color: white;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .patient-stem {
-  font-size: 24px;
+  font-size: 20px;
   overflow: hidden;
   color: #333333;
-  margin-bottom: 10px;
   padding-bottom: 0px;
   font-family: 'Balatro';
   font-weight: lighter;
   user-select: none;
   display: inline-block;
+  white-space: normal;
   line-height: 1.8;
   animation: typing 1s steps(50, end);
 }
@@ -31,14 +64,14 @@
 .patient-image {
   max-width: 80%;
   display: block;
-  margin: 0 auto 20px; /* Centers the image and adds bottom margin */
+  margin: 160px auto 20px; /* Centers the image and adds bottom margin */
   transform: scale(0.8); /* Scales the image similar to the Phaser scaling */
   user-select: none;
 }
 
 .obs-container {
   position: absolute;
-  top: 145px;
+  top: 205px;
   left: 250px;
   width: 100px;
   height: 160px; /* Accounts for top and bottom padding */
@@ -55,9 +88,9 @@
 
 .investigation-records-container {
   position: absolute;
-  top: 140px;
-  right: 70px;
-  width: 300px;
+  top: 200px;
+  right: 150px;
+  width: 250px;
   height: 200px; /* Accounts for top and bottom padding */
   padding: 20px;
   overflow-y: auto;
@@ -68,27 +101,52 @@
 .investigation-records-container h3 {
   margin-top: 0px;
   font-weight: lighter;
-  font-size: 18px;
-  text-align: left;
-  margin-left: 21px;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 30px;
 }
 
-.investigation-records-container ul {
-  text-align: left;
-  line-height: 1.8;
-  font-size: 17px;
+.highlight-animation {
+  animation: pulse 1s forwards;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    color: #333;
+  }
+  50% {
+    transform: scale(1.1);
+    color: #00ff33; /* Highlight color */
+  }
+  100% {
+    transform: scale(1);
+    color: #333;
+  }
+}
+
+@keyframes pulse2 {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+
+  }
 }
 
 .menu-container {
   position: absolute;
   bottom: 20px;
-  left: 0;
-  right: 0;
-  padding: 0 20px;
+  margin-left: 30px;
   height: 100px;
   display: flex;
-  justify-content: space-around; 
+  justify-content: center; 
   align-items: center;
+  gap: 20px;
 }
 
 .menu-button {
@@ -116,7 +174,7 @@
   display: flex;
   gap: 20px; 
   justify-content: flex-start; 
-  padding-left: 12px; 
+  padding-left: 35px; 
   flex-wrap: wrap;
 }
 
@@ -146,14 +204,14 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 1000; /* Ensure it's above other elements */
 }
 
 .modal-content {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: white;
   padding: 30px;
   border-radius: 10px;
@@ -201,4 +259,174 @@
 
 .ok-button:hover {
   background-color: #337eff;
+}
+
+.proceed-button {
+  background-color: #337eff;
+  border-radius: 10px;
+  font-family: 'Balatro';
+  cursor: pointer;
+  padding: 10px 20px;
+  text-shadow: 2px 2px 0px #666666;
+  border: none;
+  color: white;
+  font-size: 18px;
+  animation: pulse2 1s forwards infinite;
+}
+
+.investigation-report-container {
+  width: auto;
+  height: auto;
+  padding: 5px;
+  margin: auto;
+  margin-top: -15px;
+  border-radius: 16px;
+  font-family: 'Balatro';
+}
+
+.investigation-report-container p {
+  overflow: hidden;
+  line-height: 1.6;
+  margin-bottom: 5px;
+  color: #333333;
+}
+
+.diagnosis-question-container {
+  width: 790px;
+  height: 270px;
+  background-color: white;
+  margin: auto;
+  margin-top: 30px;
+  border-radius: 16px;
+  padding: 5px;
+  font-family: 'Balatro';
+}
+
+.diagnosis-question-container h3 {
+  font-weight: lighter;
+  font-size: 20px;
+  margin-left: 80px;
+  overflow: hidden;
+  line-height: 1.7;
+  display: inline-block;
+  color: #333333;
+  visibility: hidden;
+  animation: typing 1s steps(50, end) 0.5s forwards, show 0s 0.5s forwards;
+}
+
+@keyframes show {
+  from {
+    visibility: hidden;
+  }
+  to {
+    visibility: visible;
+  }
+}
+
+.diagnosis-question-container p {
+  position: absolute;
+  margin-left: 50px;
+  margin-top: 15px;
+  color: gray;
+}
+
+.doctor-image {
+  scale: 0.3;
+  position: absolute;
+  left: -170px;
+  bottom: -150px;
+  animation: vibrating 0.1s linear 0.5s 10;
+}
+
+.vibrating {
+  animation: vibrating 0.1s linear 2;
+}
+
+@keyframes vibrating {
+  0%, 100% {
+    transform: translateX(0); /* No movement */
+  }
+  25% {
+    transform: translateX(-3px); /* Move slightly left */
+  }
+  75% {
+    transform: translateX(3px); /* Move slightly right */
+  }
+}
+
+.answer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 240px); /* Two equal columns */
+  gap: 20px; /* Space between buttons */
+  margin-left: 265px;
+  margin-top: 10px;
+  height: 125px;
+  width: fit-content;
+}
+
+.answer-button {
+  padding: 10px 20px;
+  height: auto;
+  background-color: rgba(222, 12, 12, 0.833);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  font-family: 'Balatro';
+  font-size: 20px;
+  text-shadow: 2px 2px 0px #666666;
+}
+
+.answer-button:hover {
+  background-color: rgba(204, 14, 14, 0.833);
+}
+
+.slide-up {
+  animation: slideUp 1s ease-out forwards;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%); /* Start below the screen */
+    opacity: 1; /* Invisible at the start */
+  }
+  100% {
+    transform: translateY(0); /* End in normal position */
+    opacity: 1; /* Fully visible */
+  }
+}
+
+.correct-text {
+  color: rgb(0, 178, 0);
+}
+
+.correct-text span {
+  display: inline-block;
+  font-size: 30px;
+  animation: wave 1.5s infinite ease-in-out;
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateY(0); /* Default position */
+  }
+  50% {
+    transform: translateY(-2px); /* Move up */
+  }
+}
+
+.next-case-button {
+  padding: 10px;
+  background-color: #26cd00;
+  color: white;
+  font-family: 'Balatro';
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.next-case-button:hover {
+  background-color: #1ea300; 
 }

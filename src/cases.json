@@ -24,12 +24,15 @@
                 { "name": "EUC", "result": "No abnormalities detected", "points": -5, "critical": false },
                 { "name": "LFT", "result": "No abnormalities detected", "points": -5, "critical": false },
                 { "name": "CRP", "result": "No abnormalities detected", "points": -5, "critical": false },
-                { "name": "Troponins", "result": "12 ng/mL (normal <0.04 ng/mL)", "points": -5, "critical": false },
+                { "name": "Troponins", "result": "12 ng/mL (normal <0.04 ng/mL)", "points": -5, "critical": true },
                 { "name": "Echocardiogram", "result": "Hypokinesis of the inferior wall with an ejection fraction of 45%", "points": -5, "critical": false },
                 { "name": "CXR", "result": "Normal cardiac silhouette, no pulmonary oedema or consolidation.", "points": 5, "critical": false },
-                { "name": "Coronary Angiogram", "result": "90% occlusion of the right coronary artery", "points": 5, "critical": false },
+                { "name": "Coronary Angiogram", "result": "90% occlusion of the right coronary artery", "points": 5, "critical": true },
                 { "name": "CT Angiogram", "result": "90% occlusion of the right coronary artery", "points": 5, "critical": false }
-            ]
+            ],
+
+            "diagnosisOptions": ["Anterior STEMI", "Inferior STEMI", "NSTEMI", "Unstable Angina"],
+            "correctOption": "Inferior STEMI"
         },
         {
             "id": 2,
@@ -40,7 +43,7 @@
             "obs": {
                 "BP": "120/80",
                 "Temp": "36.8",
-                "HR": "99",
+                "HR": "100",
                 "RR": "20"
             },
 
@@ -60,7 +63,10 @@
                 { "name": "CXR", "result": "Normal cardiac silhouette, no pulmonary oedema or consolidation.", "points": 5, "critical": false },
                 { "name": "Coronary Angiogram", "result": "No significant coronary artery disease", "points": 5, "critical": false },
                 { "name": "CT Angiogram", "result": "Dilated left atrium with no pulmonary embolism", "points": 5, "critical": false }
-            ]
+            ],
+
+            "diagnosisOptions": ["Atrial fibrillation", "Atrial flutter", "Tachycardia", "Vent. fibrillation"],
+            "correctOption": "Atrial fibrillation"
         }
     ]
 }

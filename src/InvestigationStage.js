@@ -1,47 +1,58 @@
 import React, { useState, useEffect } from 'react';
-import PatientStem from './stemComponent';
 import PatientImage from './patientComponent';
 import InvestigationMenu from './investigationComponent';
-import caseData from './cases.json';
 
-function InvestigationStage() {
-  const [caseID] = useState(2);
+function InvestigationStage({currentCase, setCurrentStage}) {
   const [selectedInvestigation, setSelectedInvestigation] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const currentCase = caseData.cases.find((c) => c.id === caseID);
+  const [criticalCount, setCriticalCount] = useState(0);
 
   const [heartRate, setHeartRate] = useState(parseInt(currentCase.obs.HR, 10));
+  const minHR = parseInt(currentCase.obs.HR, 10) - 10;
+  const maxHR = parseInt(currentCase.obs.HR, 10) + 10;
+
+  const totalCritical = currentCase.investigations.filter((inv) => inv.critical).length;
+  const [selectedInvestigations, setSelectedInvestigations] = useState([]);
 
   const handleInvestigationClick = (investigationName) => {
     const selected = currentCase.investigations.find(
       (investigation) => investigation.name === investigationName
     );
+
     setSelectedInvestigation(selected);
     setIsModalVisible(true);
+
+    if (!selectedInvestigations.includes(investigationName)) {
+      setSelectedInvestigations((prevArray) => [...prevArray, investigationName]);
+
+      if (selected.critical && criticalCount < totalCritical) {
+        setCriticalCount((prevCount) => prevCount + 1);
+      }
+    }
   };
 
-  useEffect(() => {
+  useEffect(() => { 
     const interval = setInterval(() => {
       setHeartRate((prevHR) => {
-        // Generate a random fluctuation between -3 and +3 BPM
         const fluctuation = Math.floor(Math.random() * 7) - 3;
         const newHR = prevHR + fluctuation;
 
-        // Ensure HR stays within a realistic range (e.g., 60 to 100 BPM)
-        return Math.min(Math.max(newHR, 60), 100);
-      });
-    }, 2000); // Update every 2 seconds
+        return Math.min(Math.max(newHR, minHR), maxHR);
+        });
+      }, 2000); 
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, [minHR, maxHR]);
+
+  useEffect(() => {
+    const container = document.querySelector('.investigate-container');
+    if (container) {
+      container.classList.add('slide-up');
+    }
   }, []);
 
   return (
     <div className="investigate-container">
-
-      <div class="patient-stem-container">
-        <PatientStem stem={currentCase.stem} />
-      </div>
 
       <PatientImage image={currentCase.patientImage} />
 
@@ -53,12 +64,30 @@ function InvestigationStage() {
       </div>
 
       <div className="investigation-records-container">
-        <h3>Investigation Results</h3>
-        <ul>
-          <li>???</li>
-          <li>???</li>
-          <li>???</li>
-        </ul>
+        <h3>Critical Investigations</h3>
+        <p className={criticalCount === totalCritical ? 'highlight-animation' : ''}>
+          {criticalCount} / {totalCritical}
+        </p>
+        {criticalCount === totalCritical && (
+          <button 
+            className="proceed-button"
+            onClick={() => {
+
+              const investigateContainer = document.querySelector(".investigate-container");
+                        if (investigateContainer) {
+
+                        investigateContainer.style.animation = "none";
+                        void investigateContainer.offsetWidth;
+                        investigateContainer.style.animation = "slideDown 1s ease-in forwards";
+                        }
+
+              document.querySelector('.investigate-container').classList.add('slide-down');
+              setTimeout(() => setCurrentStage("diagnosis"), 1000); 
+            }}
+          >
+            Proceed
+          </button>
+        )}
       </div>
 
       <InvestigationMenu
@@ -88,6 +117,7 @@ function InvestigationStage() {
         </div>
 
       )}
+
     </div>
   );
 }
