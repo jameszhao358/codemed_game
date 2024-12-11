@@ -312,7 +312,7 @@
   overflow: hidden;
   line-height: 1.7;
   display: inline-block;
-  color: #333333;
+  color: #c80000;
   visibility: hidden;
   animation: typing var(--typing-duration, 1s) steps(50, end) var(--typing-delay, 0.5s) forwards, 
   show 0s var(--typing-delay, 0.5s) forwards;
@@ -331,7 +331,7 @@
   position: absolute;
   margin-left: 30px;
   bottom: 0px;
-  color: gray;
+  color: rgba(214, 0, 0, 0.549);
 }
 
 .doctor-image {
@@ -366,8 +366,8 @@
   display: flex;
   position: absolute;
   flex-direction: column;
-  gap: 2px;
-  bottom: 25px;
+  gap: 5px;
+  bottom: 33px;
 }
 
 .answer-button {
@@ -383,6 +383,7 @@
   margin-left: 210px;
   margin-right: 20px;
   border-radius: 10px;
+  width: 550px;
 }
 
 .answer-button:hover {
