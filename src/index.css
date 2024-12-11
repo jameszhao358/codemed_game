@@ -45,6 +45,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .patient-stem {
@@ -238,8 +240,8 @@
 }
 
 @keyframes typing {
-  from { clip-path: inset(0 100% 0 0); } /* Hide all text at the start */
-  to { clip-path: inset(0 0 0 0); } /* Reveal text left-to-right */
+  from { clip-path: inset(0 100% 0 0); } 
+  to { clip-path: inset(0 0 0 0); } 
 }
 
 .ok-button {
@@ -299,19 +301,21 @@
   margin-top: 30px;
   border-radius: 16px;
   padding: 5px;
+  padding-right: 20px;
   font-family: 'Balatro';
+  text-align: left;
 }
 
 .diagnosis-question-container h3 {
   font-weight: lighter;
-  font-size: 20px;
-  margin-left: 80px;
+  margin-left: 220px;
   overflow: hidden;
   line-height: 1.7;
   display: inline-block;
   color: #333333;
   visibility: hidden;
-  animation: typing 1s steps(50, end) 0.5s forwards, show 0s 0.5s forwards;
+  animation: typing var(--typing-duration, 1s) steps(50, end) var(--typing-delay, 0.5s) forwards, 
+  show 0s var(--typing-delay, 0.5s) forwards;
 }
 
 @keyframes show {
@@ -325,17 +329,21 @@
 
 .diagnosis-question-container p {
   position: absolute;
-  margin-left: 50px;
-  margin-top: 15px;
+  margin-left: 30px;
+  bottom: 0px;
   color: gray;
 }
 
 .doctor-image {
-  scale: 0.3;
+  scale: 0.45;
   position: absolute;
-  left: -170px;
-  bottom: -150px;
-  animation: vibrating 0.1s linear 0.5s 10;
+  left: 100px;
+  top: 35px;
+  filter: brightness(110%);
+}
+
+.doctor-image.vibrating {
+  animation: vibrating 0.1s linear var(--vibrating-iterations, 10);
 }
 
 .vibrating {
@@ -355,32 +363,30 @@
 }
 
 .answer-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 240px); /* Two equal columns */
-  gap: 20px; /* Space between buttons */
-  margin-left: 265px;
-  margin-top: 10px;
-  height: 125px;
-  width: fit-content;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  gap: 2px;
+  bottom: 25px;
 }
 
 .answer-button {
-  padding: 10px 20px;
   height: auto;
-  background-color: rgba(222, 12, 12, 0.833);
-  color: white;
+  color: #555555;
+  padding: 10px;
   border: none;
-  border-radius: 5px;
+  background-color: white;
   cursor: pointer;
-  font-size: 1rem;
-  text-align: center;
   font-family: 'Balatro';
-  font-size: 20px;
-  text-shadow: 2px 2px 0px #666666;
+  font-size: 15px;
+  text-align: left;
+  margin-left: 210px;
+  margin-right: 20px;
+  border-radius: 10px;
 }
 
 .answer-button:hover {
-  background-color: rgba(204, 14, 14, 0.833);
+  background-color: rgb(234, 234, 234);
 }
 
 .slide-up {

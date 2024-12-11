@@ -7,7 +7,7 @@
             "patientImage": "./assets/images/patient1.png",
             
             "obs": {
-                "BP": "120/80",
+                "BP": "135/85",
                 "Temp": "36.8",
                 "HR": "75",
                 "RR": "20"
@@ -25,25 +25,34 @@
                 { "name": "LFT", "result": "No abnormalities detected", "points": -5, "critical": false },
                 { "name": "CRP", "result": "No abnormalities detected", "points": -5, "critical": false },
                 { "name": "Troponins", "result": "12 ng/mL (normal <0.04 ng/mL)", "points": -5, "critical": true },
+                { "name": "TFT", "result": "TSH, T3 and T4 within normal limits", "points": -5, "critical": false },
                 { "name": "Echocardiogram", "result": "Hypokinesis of the inferior wall with an ejection fraction of 45%", "points": -5, "critical": false },
                 { "name": "CXR", "result": "Normal cardiac silhouette, no pulmonary oedema or consolidation.", "points": 5, "critical": false },
                 { "name": "Coronary Angiogram", "result": "90% occlusion of the right coronary artery", "points": 5, "critical": true },
-                { "name": "CT Angiogram", "result": "90% occlusion of the right coronary artery", "points": 5, "critical": false }
+                { "name": "CT Angiogram", "result": "90% occlusion of the right coronary artery", "points": 5, "critical": false },
+                { "name": "Endomyocardial Biopsy", "result": "Myocardial necrosis and neutrophilic infiltrate", "points": 5, "critical": false },
+                { "name": "Stress Test", "result": "Patient condition becomes a lot worse...", "points": 5, "critical": false },
+                { "name": "Right Heart Catheterisation", "result": "Elevated pulmonary capillary wedge pressure", "points": 5, "critical": false }
             ],
 
-            "diagnosisOptions": ["Anterior STEMI", "Inferior STEMI", "NSTEMI", "Unstable Angina"],
-            "correctOption": "Inferior STEMI"
+            "questions": [
+                { "prompt": "What is the most likely diagnosis?", "options": ["Anterior STEMI", "Inferior STEMI", "NSTEMI", "Unstable Angina"], "correctOption": "Inferior STEMI" },
+                { "prompt": "What is your immediate supportive management?", "options": ["Supplemental oxygen, GTN, morphine", "Supplemental oxygen, GTN, aspirin", "Supplemental oxygen, IV fluids, morhpine", "IV fluids, GTN, morphine"], "correctOption": "Supplemental oxygen, GTN, morphine" },
+                { "prompt": "What is your definitive management?", "options": ["PCI within 90 minutes / fibrinolysis within 12 hours", "PCI within 6 hours / fibrinolysis within 24 hours", "Antiplatelets, beta-blockers, PCI within 2-72 hours", "Anticoagulation, beta-blockers, PCI within 2 hours"], "correctOption": "PCI within 90 minutes / fibrinolysis within 12 hours" },
+                { "prompt": "What pathological changes would you expect to see on autopsy within 24 hours?", "options": ["Pale infarct and myocyte swelling", "Coagulative necrosis, inflammatory changes, eosinophilic infiltrate", "Pink granulation tissue, angiogenesis, collagen deposition", "Coagulative necrosis, collagen deposition, myocyte swelling"], "correctOption": "Coagulative necrosis, inflammatory changes, eosinophilic infiltrate" }
+            ]
         },
+
         {
             "id": 2,
             "stages": ["provisional", "differential", "investigations", "management", "mcq"],
-            "stem": "66F presents with palpitations and dyspnoea",
+            "stem": "66F presents with dizziness, breathlessness and palpitations over the last 3 hours. She denies any chest pain but feels 'weak and shaky'.",
             "patientImage": "./assets/images/patient1.png",
             
             "obs": {
-                "BP": "120/80",
+                "BP": "110/70",
                 "Temp": "36.8",
-                "HR": "100",
+                "HR": "140",
                 "RR": "20"
             },
 
@@ -54,19 +63,27 @@
                 { "name": "BSL", "result": "7.5 mmol/L (normal <7.8 mmol/L)", "points": -5, "critical": false },
                 { "name": "FBC", "result": "No abnormalities detected", "points": -5, "critical": false },
                 { "name": "Cultures", "result": "No bacterial growth detected", "points": -5, "critical": false },
-                { "name": "Coags", "result": "apTT and INR normal", "points": -5, "critical": false },
+                { "name": "Coags", "result": "apTT and INR normal \nD-dimer and fibrinogen elevated", "points": -5, "critical": false },
                 { "name": "EUC", "result": "No abnormalities detected", "points": -5, "critical": false },
                 { "name": "LFT", "result": "No abnormalities detected", "points": -5, "critical": false },
                 { "name": "CRP", "result": "No abnormalities detected", "points": -5, "critical": false },
                 { "name": "Troponins", "result": "2.1 ng/mL (normal <0.04 ng/mL)", "points": -5, "critical": false },
-                { "name": "Echocardiogram", "result": "Dilated left atrium, normal LV function", "points": -5, "critical": false },
+                { "name": "TFT", "result": "TSH, T3 and T4 within normal limits", "points": -5, "critical": true },
+                { "name": "Echocardiogram", "result": "Dilated left atrium, normal LV function", "points": -5, "critical": true },
                 { "name": "CXR", "result": "Normal cardiac silhouette, no pulmonary oedema or consolidation.", "points": 5, "critical": false },
                 { "name": "Coronary Angiogram", "result": "No significant coronary artery disease", "points": 5, "critical": false },
-                { "name": "CT Angiogram", "result": "Dilated left atrium with no pulmonary embolism", "points": 5, "critical": false }
+                { "name": "CT Angiogram", "result": "Dilated left atrium with no pulmonary embolism", "points": 5, "critical": false },
+                { "name": "Endomyocardial Biopsy", "result": "Normal cardiac tissue", "points": 5, "critical": false },
+                { "name": "Stress Test", "result": "Patient condition becomes a lot worse...", "points": 5, "critical": false },
+                { "name": "Right Heart Catheterisation", "result": "Elevated right atrial pressure and pulmonary capillary wedge pressure", "points": 5, "critical": false }
             ],
 
-            "diagnosisOptions": ["Atrial fibrillation", "Atrial flutter", "Tachycardia", "Vent. fibrillation"],
-            "correctOption": "Atrial fibrillation"
+            "questions": [
+                { "prompt": "What is the most likely diagnosis?", "options": ["Atrial fibrillation", "Atrial flutter", "Ventricular fibrillation", "Ventricular tachycardia"], "correctOption": "Atrial fibrillation" },
+                { "prompt": "What is the role of calculating a CHADSVASC score in a patient with AF?", "options": ["To decide between rate and rhythm control strategies", "To determine the risk of stroke", "To determine the risk of a heart failure exacerbation", "To determine the risk of DVT"], "correctOption": "To determine the risk of stroke" },
+                { "prompt": "This patient is stable with a CHADSVASC score of 3. What is your management plan?", "options": ["Rate control, anticoagulation, emergency cardioversion", "Rate control, anticoagulation, cardioversion to be considered", "Rhythm control, anticoagulation, cardioversion to be considered", "Rate control, antiplatelets, cardioversion to be considered"], "correctOption": "Rate control, anticoagulation, cardioversion to be considered"},
+                { "prompt": "What drugs are considered first line for rate control?", "options": ["Beta blockers and non-dihydropyridine calcium channel blockers", "Amiodarone and dihydropyridine calcium channel blockers", "Flecainide and sotalol", "Amiodarone and digoxin"], "correctOption": "Beta blockers and non-dihydropyridine calcium channel blockers"}
+            ]
         }
     ]
 }

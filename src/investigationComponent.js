@@ -5,9 +5,9 @@ function InvestigationMenu({ onInvestigationClick }) {
   
     const submenuOptions = {
       bedside: ['ECG', 'Urinalysis', 'ABG', 'BSL'],
-      labs: ['FBC', 'Cultures', 'Coags', 'EUC', 'LFT', 'CRP', 'Troponins'],
+      labs: ['FBC', 'Cultures', 'Coags', 'EUC', 'LFT', 'CRP', 'Troponins', 'TFT'],
       imaging: ['Echocardiogram', 'CXR', 'Coronary Angiogram', 'CT Angiogram'],
-      special: ['Biopsy', 'Genetic Test', 'EEG']
+      special: ['Endomyocardial Biopsy', 'Stress Test', 'Right Heart Catheterisation']
     };
   
     const handleMenuClick = (category) => {

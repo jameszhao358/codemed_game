@@ -1,18 +1,40 @@
-import doctorImage from "./assets/images/drstrange.png";
-import React, {useState, useEffect} from "react";
+import doctorImage from "./assets/images/perrycardium.png";
+import React, {useState, useEffect, useRef} from "react";
 
 function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
 
+    const questions = currentCase.questions;
     const criticalInvestigations = currentCase.investigations.filter(
         (investigation) => investigation.critical
       );
 
-    const [showModal, setShowModal] = useState(false);
+    // const [showModal, setShowModal] = useState(false);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [shuffledOptions, setShuffledOptions] = useState([]);
+    const [dialogue, setDialogue] = useState(questions[0].prompt);
+    const isFirstRender = useRef(true);
 
     useEffect(() => {
-        setShuffledOptions([...currentCase.diagnosisOptions].sort(() => Math.random() - 0.5));
-      }, [currentCase]);
+        setShuffledOptions([...questions[currentQuestionIndex].options].sort(() => Math.random() - 0.5));
+        setDialogue(questions[currentQuestionIndex].prompt);
+        if (isFirstRender.current) {isFirstRender.current = false;}
+    }, [currentQuestionIndex, questions]);
+
+    useEffect(() => {
+        const doctorImage = document.querySelector(".doctor-image");
+        if (doctorImage) {
+            // Remove and force reflow to reset animation
+            doctorImage.classList.remove("vibrating");
+            void doctorImage.offsetWidth; // Trigger reflow
+    
+            // Set the animation iterations dynamically
+            const iterations = dialogue === "Correct!" ? 2 : 10; // 2 iterations for "Correct!", 10 for others
+            doctorImage.style.setProperty("--vibrating-iterations", iterations);
+    
+            // Reapply the vibrating class
+            doctorImage.classList.add("vibrating");
+        }
+    }, [dialogue]);
 
     useEffect(() => {
     const container = document.querySelector('.diagnosis-container');
@@ -22,14 +44,38 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
     }, []);
 
     const handleAnswerClick = (option, e) => {
-        if (option === currentCase.correctOption) {
-            setShowModal(true); // Show modal for correct answer
+        if (option === questions[currentQuestionIndex].correctOption) {
+            setDialogue("Correct!"); 
+
+            setTimeout(() => {
+                if (currentQuestionIndex + 1 < questions.length) {
+                    setCurrentQuestionIndex(currentQuestionIndex + 1); // Move to the next question
+                } else {
+
+                    const diagnosisContainer = document.querySelector(".diagnosis-container");
+                        if (diagnosisContainer) {
+
+                        diagnosisContainer.style.animation = "none";
+                        void diagnosisContainer.offsetWidth;
+                        diagnosisContainer.style.animation = "slideDown 1s ease-in forwards";
+                        }
+                    
+                    setTimeout(() => {
+                        setCaseID((prevCaseID) => {
+                            const nextCaseID = prevCaseID + 1;
+                            return nextCaseID > caseData.cases.length ? 1 : nextCaseID;
+                        });
+                        setCurrentStage("investigation");
+                    }, 1000);
+                }
+            }, 1000);
+
         } else {
-            // Trigger shake animation directly
+            // Shake animation for incorrect answer
             const button = e.target;
-            button.classList.remove("vibrating"); // Remove the class first
-            void button.offsetWidth; // Trigger reflow to allow re-adding the class
-            button.classList.add("vibrating"); // Re-add the class to restart the animation
+            button.classList.remove("vibrating");
+            void button.offsetWidth; // Trigger reflow
+            button.classList.add("vibrating");
         }
     };
 
@@ -53,7 +99,14 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
             className="doctor-image"
             />
 
-            <h3>What is the most likely diagnosis?</h3> 
+            <h3 
+                style={{
+                    '--typing-duration': dialogue.length <= 8 ? '0.2s' : '1s',
+                    '--typing-delay': isFirstRender.current ? '0.5s' : '0s',
+                    'fontSize': dialogue.length > 54 ? "18px" : "20px",
+                }}
+                key={dialogue}>{dialogue} 
+            </h3> 
 
             <div className="answer-grid">
                 {shuffledOptions.map((option, index) => (
@@ -70,10 +123,9 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
             <p> Dr. Perry Cardium</p>
 
         </div>
-
       </div>
 
-      {showModal !== false && (
+      {/* {showModal !== false && (
         <div className="modal">
             <div className="modal-content">
                 <h3 className="correct-text">
@@ -115,7 +167,8 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
 
             </div>
         </div>
-       )}
+
+       )} */}
 
     </>
     );
