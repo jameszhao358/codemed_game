@@ -10,6 +10,50 @@
   border-radius: 16px;
 }
 
+.start-title span {
+  margin-top: 175px;
+  font-family: 'Balatro';
+  color: #337eff;
+  font-size: 80px;
+  text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+}
+
+.start-title span {
+  display: inline-block;
+  animation: wave 1.5s infinite ease-in-out;
+}
+
+.start-button {
+  background-color: #337eff;
+  margin-top: 30px;
+  border-radius: 16px;
+  width: 100px;
+  padding: 15px;
+  color: white;
+  font-size: 24px;
+  font-family: 'Balatro';
+  border: none;
+  cursor: pointer;
+}
+
+.start-button:hover {
+  background-color: #2767d6;
+}
+
+.start-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.start-menu p {
+  position: absolute;
+  bottom: 0px;
+  font-family: 'Balatro';
+  font-weight: lighter;
+  color: #b3b3b3;
+}
+
 .investigate-container {
   position: absolute;
   width: 100%;
@@ -64,17 +108,17 @@
 }
 
 .patient-image {
-  max-width: 80%;
   display: block;
   margin: 160px auto 20px; /* Centers the image and adds bottom margin */
-  transform: scale(0.8); /* Scales the image similar to the Phaser scaling */
+  transform: scale(0.75); /* Scales the image similar to the Phaser scaling */
+  filter: brightness(110%);
   user-select: none;
 }
 
 .obs-container {
   position: absolute;
   top: 205px;
-  left: 250px;
+  left: 240px;
   width: 100px;
   height: 160px; /* Accounts for top and bottom padding */
   padding: 20px;
@@ -97,7 +141,7 @@
   padding: 20px;
   overflow-y: auto;
   font-family: 'Balatro';
-  color: #333;
+  color: #333333;
 }
 
 .investigation-records-container h3 {
@@ -420,7 +464,7 @@
     transform: translateY(0); /* Default position */
   }
   50% {
-    transform: translateY(-2px); /* Move up */
+    transform: translateY(-5px); /* Move up */
   }
 }
 

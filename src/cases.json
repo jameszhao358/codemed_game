@@ -4,7 +4,7 @@
             "id": 1,
             "stages": ["provisional", "differential", "investigations", "management", "mcq"],
             "stem": "56M presents with sudden onset chest pain radiating to his jaw.",
-            "patientImage": "./assets/images/patient1.png",
+            "patientImage": "./assets/images/patient2.png",
             
             "obs": {
                 "BP": "135/85",
@@ -57,7 +57,7 @@
             },
 
             "investigations": [
-                { "name": "ECG", "result": "Irregularly irregular rhythm with no discernible P waves", "points": 10, "critical" : true },
+                { "name": "ECG", "result": "Irregularly irregular rhythm, narrow QRS complex, no discernible P waves", "points": 10, "critical" : true },
                 { "name": "Urinalysis", "result": "No abnormalities detected", "points": -5, "critical": false },
                 { "name": "ABG", "result": "No acid-base disturbance / evidence of respiratory failure", "points": -5, "critical": false },
                 { "name": "BSL", "result": "7.5 mmol/L (normal <7.8 mmol/L)", "points": -5, "critical": false },
@@ -82,7 +82,9 @@
                 { "prompt": "What is the most likely diagnosis?", "options": ["Atrial fibrillation", "Atrial flutter", "Ventricular fibrillation", "Ventricular tachycardia"], "correctOption": "Atrial fibrillation" },
                 { "prompt": "What is the role of calculating a CHADSVASC score in a patient with AF?", "options": ["To decide between rate and rhythm control strategies", "To determine the risk of stroke", "To determine the risk of a heart failure exacerbation", "To determine the risk of DVT"], "correctOption": "To determine the risk of stroke" },
                 { "prompt": "This patient is stable with a CHADSVASC score of 3. What is your management plan?", "options": ["Rate control, anticoagulation, emergency cardioversion", "Rate control, anticoagulation, cardioversion to be considered", "Rhythm control, anticoagulation, cardioversion to be considered", "Rate control, antiplatelets, cardioversion to be considered"], "correctOption": "Rate control, anticoagulation, cardioversion to be considered"},
-                { "prompt": "What drugs are considered first line for rate control?", "options": ["Beta blockers and non-dihydropyridine calcium channel blockers", "Amiodarone and dihydropyridine calcium channel blockers", "Flecainide and sotalol", "Amiodarone and digoxin"], "correctOption": "Beta blockers and non-dihydropyridine calcium channel blockers"}
+                { "prompt": "What drugs are considered first line for rate control in this patient?", "options": ["Beta blockers and non-dihydropyridine calcium channel blockers", "Amiodarone and dihydropyridine calcium channel blockers", "Flecainide and sotalol", "Amiodarone and digoxin"], "correctOption": "Beta blockers and non-dihydropyridine calcium channel blockers"},
+                { "prompt": "What drugs are considered first line for pharmacological cardioversion in this patient?", "options": ["Beta blockers and non-dihydropyridine calcium channel blockers", "Amiodarone and dihydropyridine calcium channel blockers", "Flecainide and sotalol", "Amiodarone and digoxin"], "correctOption": "Flecainide and sotalol"},
+                { "prompt": "Recall the MOA of flecainide and sotalol, respectively.", "options": ["Sodium channel blockade, potassium channel blockade", "Potassium channel blockade, sodium channel blockade", "Calcium channel blockade, sodium channel blockade", "Potassium channel blockade, clacium channel blocakde"], "correctOption": "Sodium channel blockade, potassium channel blockade"}
             ]
         }
     ]

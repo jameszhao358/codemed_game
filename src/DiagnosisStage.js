@@ -1,4 +1,4 @@
-import doctorImage from "./assets/images/perrycardium.png";
+import doctorImage from "./assets/images/perrycardium2.png";
 import React, {useState, useEffect, useRef} from "react";
 
 function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
@@ -13,6 +13,7 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
     const [shuffledOptions, setShuffledOptions] = useState([]);
     const [dialogue, setDialogue] = useState(questions[0].prompt);
     const isFirstRender = useRef(true);
+    const incorrectResponses = ["Try again...", "Not quite.", "Incorrect.", "Nope."];
 
     useEffect(() => {
         setShuffledOptions([...questions[currentQuestionIndex].options].sort(() => Math.random() - 0.5));
@@ -28,7 +29,7 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
             void doctorImage.offsetWidth; // Trigger reflow
     
             // Set the animation iterations dynamically
-            const iterations = dialogue === "Correct!" ? 2 : 10; // 2 iterations for "Correct!", 10 for others
+            const iterations = dialogue.length < 15 ? 2 : 10; // 2 iterations for "Correct!", 10 for others
             doctorImage.style.setProperty("--vibrating-iterations", iterations);
     
             // Reapply the vibrating class
@@ -71,11 +72,21 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
             }, 1000);
 
         } else {
-            // Shake animation for incorrect answer
+            setDialogue((prevDialogue) => {
+                let newDialogue;
+                do {
+                    newDialogue = incorrectResponses[Math.floor(Math.random() * incorrectResponses.length)];
+                } while (newDialogue === prevDialogue); // Ensure it's not the same as the last response
+                return newDialogue;
+            });
             const button = e.target;
             button.classList.remove("vibrating");
             void button.offsetWidth; // Trigger reflow
             button.classList.add("vibrating");
+
+            setTimeout(() => {
+                setDialogue(questions[currentQuestionIndex].prompt);
+            }, 500);
         }
     };
 
@@ -101,7 +112,7 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
 
             <h3 
                 style={{
-                    '--typing-duration': dialogue.length <= 8 ? '0.2s' : '1s',
+                    '--typing-duration': dialogue.length <= 15 ? '0.2s' : '1s',
                     '--typing-delay': isFirstRender.current ? '0.5s' : '0s',
                     'fontSize': dialogue.length > 54 ? "18px" : "20px",
                 }}
