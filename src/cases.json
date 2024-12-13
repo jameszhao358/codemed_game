@@ -73,18 +73,138 @@
                 { "name": "CXR", "result": "Normal cardiac silhouette, no pulmonary oedema or consolidation.", "points": 5, "critical": false },
                 { "name": "Coronary Angiogram", "result": "No significant coronary artery disease", "points": 5, "critical": false },
                 { "name": "CT Angiogram", "result": "Dilated left atrium with no pulmonary embolism", "points": 5, "critical": false },
-                { "name": "Endomyocardial Biopsy", "result": "Normal cardiac tissue", "points": 5, "critical": false },
+                { "name": "Endomyocardial Biopsy", "result": "Normal cardiac tissue on histology", "points": 5, "critical": false },
                 { "name": "Stress Test", "result": "Patient condition becomes a lot worse...", "points": 5, "critical": false },
                 { "name": "Right Heart Catheterisation", "result": "Elevated right atrial pressure and pulmonary capillary wedge pressure", "points": 5, "critical": false }
             ],
 
             "questions": [
-                { "prompt": "What is the most likely diagnosis?", "options": ["Atrial fibrillation", "Atrial flutter", "Ventricular fibrillation", "Ventricular tachycardia"], "correctOption": "Atrial fibrillation" },
-                { "prompt": "What is the role of calculating a CHADSVASC score in a patient with AF?", "options": ["To decide between rate and rhythm control strategies", "To determine the risk of stroke", "To determine the risk of a heart failure exacerbation", "To determine the risk of DVT"], "correctOption": "To determine the risk of stroke" },
-                { "prompt": "This patient is stable with a CHADSVASC score of 3. What is your management plan?", "options": ["Rate control, anticoagulation, emergency cardioversion", "Rate control, anticoagulation, cardioversion to be considered", "Rhythm control, anticoagulation, cardioversion to be considered", "Rate control, antiplatelets, cardioversion to be considered"], "correctOption": "Rate control, anticoagulation, cardioversion to be considered"},
-                { "prompt": "What drugs are considered first line for rate control in this patient?", "options": ["Beta blockers and non-dihydropyridine calcium channel blockers", "Amiodarone and dihydropyridine calcium channel blockers", "Flecainide and sotalol", "Amiodarone and digoxin"], "correctOption": "Beta blockers and non-dihydropyridine calcium channel blockers"},
-                { "prompt": "What drugs are considered first line for pharmacological cardioversion in this patient?", "options": ["Beta blockers and non-dihydropyridine calcium channel blockers", "Amiodarone and dihydropyridine calcium channel blockers", "Flecainide and sotalol", "Amiodarone and digoxin"], "correctOption": "Flecainide and sotalol"},
-                { "prompt": "Recall the MOA of flecainide and sotalol, respectively.", "options": ["Sodium channel blockade, potassium channel blockade", "Potassium channel blockade, sodium channel blockade", "Calcium channel blockade, sodium channel blockade", "Potassium channel blockade, clacium channel blocakde"], "correctOption": "Sodium channel blockade, potassium channel blockade"}
+                { 
+                    "prompt": "What is the most likely diagnosis?", 
+                    "options": [
+                        "Atrial fibrillation", 
+                        "Atrial flutter", 
+                        "Ventricular fibrillation", 
+                        "Ventricular tachycardia"], 
+                    "correctOption": "Atrial fibrillation" 
+                },
+                { 
+                    "prompt": "What is the role of calculating a CHADSVASC score in a patient with AF?", 
+                    "options": [
+                        "To decide between rate and rhythm control strategies", 
+                        "To determine the risk of stroke", 
+                        "To determine the risk of a heart failure exacerbation", 
+                        "To determine the risk of DVT"], 
+                    "correctOption": "To determine the risk of stroke" 
+                },
+                { 
+                    "prompt": "This patient is stable with a CHADSVASC score of 3. What is your management plan?", 
+                    "options": [
+                        "Rate control, anticoagulation, emergency cardioversion", 
+                        "Rate control, anticoagulation, cardioversion to be considered", 
+                        "Rhythm control, anticoagulation, cardioversion to be considered", 
+                        "Rate control, antiplatelets, cardioversion to be considered"], 
+                    "correctOption": "Rate control, anticoagulation, cardioversion to be considered"
+                },
+                { 
+                    "prompt": "What would you use for rate control in this patient?", 
+                    "options": [
+                        "Beta blockers and non-dihydropyridine calcium channel blockers", 
+                        "Amiodarone and dihydropyridine calcium channel blockers", 
+                        "Flecainide and sotalol", 
+                        "Amiodarone and digoxin"], 
+                    "correctOption": "Beta blockers and non-dihydropyridine calcium channel blockers"
+                },
+                { 
+                    "prompt": "What would you use for pharmacological cardioversion in this patient?", 
+                    "options": [
+                        "Beta blockers and non-dihydropyridine calcium channel blockers", 
+                        "Amiodarone and dihydropyridine calcium channel blockers", 
+                        "Flecainide and sotalol", 
+                        "Amiodarone and digoxin"], 
+                    "correctOption": "Flecainide and sotalol"
+                },
+                { 
+                    "prompt": "Recall the MOA of flecainide and sotalol, respectively.", 
+                    "options": [
+                        "Sodium channel blockade, potassium channel blockade", 
+                        "Potassium channel blockade, sodium channel blockade", 
+                        "Calcium channel blockade, sodium channel blockade", 
+                        "Potassium channel blockade, calcium channel blocakde"], 
+                        "correctOption": "Sodium channel blockade, potassium channel blockade"}
+            ]
+        },
+
+        {
+            "id": 3,
+            "stages": ["provisional", "differential", "investigations", "management", "mcq"],
+            "stem": "45M presents with sudden onset, severe chest pain. He is diaphoretic and appears distressed.",
+            "patientImage": "./assets/images/patient3.png",
+            
+            "obs": {
+                "BP": "180/110",
+                "Temp": "36.5",
+                "HR": "110",
+                "RR": "22"
+            },
+        
+            "investigations": [
+                { "name": "ECG", "result": "Sinus tachycardia, no ischaemic changes", "points": -5, "critical": true },
+                { "name": "Urinalysis", "result": "No abnormalities detected", "points": -5, "critical": false },
+                { "name": "ABG", "result": "pH 7.36, pCO2 42 mmHg, pO2 92 mmHg, HCO3 24 mmol/L (normal range)", "points": -5, "critical": false },
+                { "name": "BSL", "result": "6.5 mmol/L (normal <7.8 mmol/L)", "points": -5, "critical": false },
+                { "name": "FBC", "result": "No significant abnormalities", "points": -5, "critical": false },
+                { "name": "Cultures", "result": "No bacterial growth detected", "points": -5, "critical": false },
+                { "name": "Coags", "result": "Normal PT, aPTT, INR", "points": -5, "critical": false },
+                { "name": "EUC", "result": "No abnormalities detected", "points": -5, "critical": false },
+                { "name": "LFT", "result": "Within normal limits", "points": -5, "critical": false },
+                { "name": "CRP", "result": "No abnormalities detected", "points": -5, "critical": false },
+                { "name": "Troponins", "result": "0.02 ng/mL (normal <0.04 ng/mL)", "points": -5, "critical": false },
+                { "name": "TFT", "result": "TSH, T3, and T4 within normal limits", "points": -5, "critical": false },
+                { "name": "Echocardiogram", "result": "Pericardial effusion with possible tamponade", "points": 10, "critical": true },
+                { "name": "CXR", "result": "Widened mediastinum, cardiomegaly noted", "points": 10, "critical": true },
+                { "name": "Coronary Angiogram", "result": "No evidence of coronary artery occlusion", "points": -5, "critical": false },
+                { "name": "CT Angiogram", "result": "Dissection flap extending from the ascending aorta to the descending aorta", "points": 15, "critical": true },
+                { "name": "Endomyocardial Biopsy", "result": "Normal cardiac tissue on histology", "points": -5, "critical": false },
+                { "name": "Stress Test", "result": "Not performed due to patient condition", "points": -5, "critical": false },
+                { "name": "Right Heart Catheterisation", "result": "Normal pulmonary capillary wedge pressure", "points": -5, "critical": false }
+            ],
+        
+            "questions": [
+                {
+                    "prompt": "What is the most likely diagnosis?",
+                    "options": [
+                        "Stanford B aortic dissection", 
+                        "Stanford A aortic dissection", 
+                        "Pneumothorax", 
+                        "Acute MI"],
+                    "correctOption": "Stanford A aortic dissection"
+                },
+                {
+                    "prompt": "What could you expect to hear on auscultation?",
+                    "options": [
+                        "Systolic murmur radiating to the carotids",
+                        "Diastolic murmur over the aortic area",
+                        "Pericardial friction rub",
+                        "Normal heart sounds"
+                    ],
+                    "correctOption": "Diastolic murmur over the aortic area"
+                },
+                {
+                    "prompt": "What is the initial medical management of an aortic dissection?",
+                    "options": [
+                        "Beta-blockers to reduce heart rate and blood pressure",
+                        "IV fluids to stabilize blood pressure",
+                        "Nitroglycerin to improve chest pain",
+                        "Thrombolytics to dissolve the dissection flap"
+                    ],
+                    "correctOption": "Beta-blockers to reduce heart rate and blood pressure"
+                },
+                {
+                    "prompt": "Are you going to prep this patient for surgery?",
+                    "options": ["Yes", "No"],
+                    "correctOption": "Yes"
+                }
             ]
         }
     ]

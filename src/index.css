@@ -331,13 +331,14 @@
 }
 
 .investigation-report-container p {
-  overflow: hidden;
-  line-height: 1.6;
+  /* overflow: hidden; */
+  line-height: 1;
   margin-bottom: 5px;
   color: #333333;
 }
 
 .diagnosis-question-container {
+  position: relative;
   width: 790px;
   height: 270px;
   background-color: white;
@@ -381,8 +382,8 @@
 .doctor-image {
   scale: 0.45;
   position: absolute;
-  left: 100px;
-  top: 35px;
+  left: 5px;
+  bottom: -120px;
   filter: brightness(110%);
 }
 
@@ -411,7 +412,7 @@
   position: absolute;
   flex-direction: column;
   gap: 5px;
-  bottom: 33px;
+  top: 95px;
 }
 
 .answer-button {

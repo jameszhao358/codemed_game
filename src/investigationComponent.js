@@ -6,7 +6,7 @@ function InvestigationMenu({ onInvestigationClick }) {
     const submenuOptions = {
       bedside: ['ECG', 'Urinalysis', 'ABG', 'BSL'],
       labs: ['FBC', 'Cultures', 'Coags', 'EUC', 'LFT', 'CRP', 'Troponins', 'TFT'],
-      imaging: ['Echocardiogram', 'CXR', 'Coronary Angiogram', 'CT Angiogram'],
+      imaging: ['CXR', 'Echocardiogram', 'Coronary Angiogram', 'CT Angiogram'],
       special: ['Endomyocardial Biopsy', 'Stress Test', 'Right Heart Catheterisation']
     };
   
