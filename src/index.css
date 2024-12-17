@@ -266,6 +266,42 @@
   box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.1);
 }
 
+.modal-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 200px;
+  width: auto;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  font-family: 'Balatro';
+  box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-button {
+  scale: 0.8;
+  margin-bottom: -25px;
+  margin-top: -20px;
+  cursor: pointer;
+}
+
+.toggle-button:hover {
+  transform: scale(1.1);
+}
+
+.toggle-button.pulse2 {
+  animation: pulse2 1s ease-in-out;
+}
+
+.modal-box-content {
+  margin-top: -20px;
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
 .modal-content h3 {
   font-weight: lighter;
   margin-top: 5px;

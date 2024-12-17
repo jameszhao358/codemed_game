@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import PatientImage from './patientComponent';
 import InvestigationMenu from './investigationComponent';
+import notePad from "./assets/images/notepad.png";
 
 function InvestigationStage({currentCase, setCurrentStage}) {
   const [selectedInvestigation, setSelectedInvestigation] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [criticalCount, setCriticalCount] = useState(0);
+  const [criticalRevealed, setCriticalRevealed] = useState({});
+  const [isListVisible, setIsListVisible] = useState(false);
 
   const [heartRate, setHeartRate] = useState(parseInt(currentCase.obs.HR, 10));
   const minHR = parseInt(currentCase.obs.HR, 10) - 10;
@@ -22,14 +25,39 @@ function InvestigationStage({currentCase, setCurrentStage}) {
     setSelectedInvestigation(selected);
     setIsModalVisible(true);
 
+    if (selected.critical) {
+      setCriticalRevealed((prev) => ({
+        ...prev,
+        [investigationName]: true,
+      }));
+    }
+
     if (!selectedInvestigations.includes(investigationName)) {
       setSelectedInvestigations((prevArray) => [...prevArray, investigationName]);
 
       if (selected.critical && criticalCount < totalCritical) {
         setCriticalCount((prevCount) => prevCount + 1);
+
+        const notepadElement = document.querySelector('.toggle-button');
+        if (notepadElement) {
+          notepadElement.classList.add('pulse2');
+          setTimeout(() => {
+            notepadElement.classList.remove('pulse2');
+          }, 1000); 
+        }
       }
     }
   };
+
+  useEffect(() => {
+    const initialRevealed = {};
+    currentCase.investigations
+      .filter((inv) => inv.critical)
+      .forEach((inv) => {
+        initialRevealed[inv.name] = false;
+      });
+    setCriticalRevealed(initialRevealed);
+  }, [currentCase]);
 
   useEffect(() => { 
     const interval = setInterval(() => {
@@ -64,6 +92,12 @@ function InvestigationStage({currentCase, setCurrentStage}) {
       </div>
 
       <div className="investigation-records-container">
+        <img
+          src={notePad}
+          alt="Notepad"
+          className="toggle-button"
+          onClick={() => setIsListVisible((prev) => !prev)}
+        />
         <h3>Critical Investigations</h3>
         <p className={criticalCount === totalCritical ? 'highlight-animation' : ''}>
           {criticalCount} / {totalCritical}
@@ -89,6 +123,40 @@ function InvestigationStage({currentCase, setCurrentStage}) {
           </button>
         )}
       </div>
+
+      {isListVisible && (  
+        <div className="modal">
+          <div className="modal-box">
+            <div className="modal-box-content">
+              {currentCase.investigations
+                .filter((inv) => inv.critical)
+                .every((inv) => !criticalRevealed[inv.name]) && (
+                <p> Critical investigation results are recorded here. </p>
+              )}
+                    
+              {currentCase.investigations
+                .filter((inv) => inv.critical)
+                .map((criticalInv) => (
+                  <p
+                    key={criticalInv.name}
+                    style={{
+                      color: criticalRevealed[criticalInv.name] ? '#333333' : 'grey',
+                    }}
+                  >
+                    {criticalRevealed[criticalInv.name] ? criticalInv.result : '???'}
+                  </p>
+                ))}
+              <button
+                className="ok-button"
+                onClick={() => setIsListVisible(false)} // Close the list
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
 
       <InvestigationMenu
         investigations={currentCase.investigations.map((inv) => inv.name)}

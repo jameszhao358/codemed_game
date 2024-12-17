@@ -116,7 +116,7 @@
                     "correctOption": "Beta blockers and non-dihydropyridine calcium channel blockers"
                 },
                 { 
-                    "prompt": "What would you use for pharmacological cardioversion in this patient?", 
+                    "prompt": "What are our first-line options for pharmacological cardioversion in this patient?", 
                     "options": [
                         "Beta blockers and non-dihydropyridine calcium channel blockers", 
                         "Amiodarone and dihydropyridine calcium channel blockers", 
