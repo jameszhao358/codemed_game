@@ -6,7 +6,7 @@ import caseData from './cases.json';
 import React, { useState } from 'react';
 
   function App() {
-    const [caseID, setCaseID] = useState(3);
+    const [caseID, setCaseID] = useState(1);
     const currentCase = caseData.cases.find((c) => c.id === caseID);
     const [currentStage, setCurrentStage] = useState("start");
 
