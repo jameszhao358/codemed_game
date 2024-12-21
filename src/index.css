@@ -115,6 +115,26 @@
   user-select: none;
 }
 
+.popup-message {
+  position: absolute;
+  top: 410px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #b50015;
+  font-family: 'Balatro';
+  font-size: 20px;
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s ease-in-out; /* Smooth fade-in and fade-out */
+}
+
+.popup-message.fade-in {
+  opacity: 1; /* Fully visible after fade-in */
+}
+
+.popup-message.fade-out {
+  opacity: 0; /* Fades out smoothly */
+}
+
 .obs-container {
   position: absolute;
   top: 205px;
@@ -367,10 +387,13 @@
 }
 
 .investigation-report-container p {
-  /* overflow: hidden; */
   line-height: 1;
   margin-bottom: 5px;
   color: #333333;
+}
+
+.investigation-report-container:has(p:nth-child(5)) {
+  font-size: 13px; /* Adjust font size when there are 6 or more items */
 }
 
 .diagnosis-question-container {
@@ -389,7 +412,8 @@
 
 .diagnosis-question-container h3 {
   font-weight: lighter;
-  margin-left: 220px;
+  margin-left: 217px;
+  padding-left: 2px;
   overflow: hidden;
   line-height: 1.7;
   display: inline-block;

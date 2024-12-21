@@ -50,6 +50,24 @@ function InvestigationStage({currentCase, setCurrentStage}) {
   };
 
   useEffect(() => {
+    const popup = document.querySelector('.popup-message');
+    if (popup) {
+      setTimeout(() => {
+        popup.classList.add('fade-in');
+      }, 700); // Delay before appearing (500ms)
+  
+      setTimeout(() => {
+        popup.classList.remove('fade-in');
+        popup.classList.add('fade-out');
+      }, 2500); // Starts fading out after 4 seconds total (500ms delay + 3.5s display time)
+
+      setTimeout(() => {
+        popup.remove(); // Destroy popup after fade-out animation
+      }, 4000);
+    }
+  }, []);
+
+  useEffect(() => {
     const initialRevealed = {};
     currentCase.investigations
       .filter((inv) => inv.critical)
@@ -82,7 +100,10 @@ function InvestigationStage({currentCase, setCurrentStage}) {
   return (
     <div className="investigate-container">
 
+      <div className="popup-message">Choose your investigations!</div>
+
       <PatientImage image={currentCase.patientImage} />
+
 
       <div className="obs-container">
         <p>BP: {currentCase.obs.BP}</p>

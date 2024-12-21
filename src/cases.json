@@ -159,7 +159,7 @@
                 { "name": "EUC", "result": "No abnormalities detected", "points": -5, "critical": false },
                 { "name": "LFT", "result": "Within normal limits", "points": -5, "critical": false },
                 { "name": "CRP", "result": "No abnormalities detected", "points": -5, "critical": false },
-                { "name": "Troponins", "result": "0.02 ng/mL (normal <0.04 ng/mL)", "points": -5, "critical": false },
+                { "name": "Troponins", "result": "0.02 ng/mL (normal <0.04 ng/mL)", "points": -5, "critical": true },
                 { "name": "TFT", "result": "TSH, T3, and T4 within normal limits", "points": -5, "critical": false },
                 { "name": "Echocardiogram", "result": "Pericardial effusion with possible tamponade", "points": 10, "critical": true },
                 { "name": "CXR", "result": "Widened mediastinum, cardiomegaly noted", "points": 10, "critical": true },
