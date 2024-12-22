@@ -5,7 +5,16 @@ function InvestigationMenu({ onInvestigationClick }) {
   
     const submenuOptions = {
       bedside: ['ECG', 'Urinalysis', 'ABG', 'BSL'],
-      labs: ['FBC', 'Cultures', 'Coags', 'EUC', 'LFT', 'CRP', 'Troponins', 'TFT'],
+      labs: [
+        { name: 'FBC', tubeColor: 'purple' },
+        { name: 'Cultures', tubeColor: 'red' },
+        { name: 'Coags', tubeColor: 'light-blue' },
+        { name: 'EUC', tubeColor: 'gold' },
+        { name: 'LFT', tubeColor: 'gold' },
+        { name: 'CRP', tubeColor: 'gold' },
+        { name: 'Troponins', tubeColor: 'gold' },
+        { name: 'TFT', tubeColor: 'gold' }
+      ],
       imaging: ['CXR', 'Echocardiogram', 'Coronary Angiogram', 'CT Angiogram'],
       special: ['Endomyocardial Biopsy', 'Stress Test', 'Right Heart Catheterisation']
     };
@@ -30,15 +39,20 @@ function InvestigationMenu({ onInvestigationClick }) {
   
         {activeSubmenu && (
           <div className="submenu-container">
-          {submenuOptions[activeSubmenu].map((option) => (
-            <button
-              key={option}
-              className="submenu-button"
-              onClick={() => onInvestigationClick(option)} // Pass the clicked investigation name
-            >
-              {option}
-            </button>
-          ))}
+          {submenuOptions[activeSubmenu].map((option) => {
+            // Check if option is an object (labs) or string (other categories)
+            const isLabOption = typeof option === 'object';
+        
+            return (
+              <button
+                key={isLabOption ? option.name : option}
+                className={`submenu-button ${isLabOption ? option.tubeColor : ''}`} // Add tubeColor class only for labs
+                onClick={() => onInvestigationClick(isLabOption ? option.name : option)}
+              >
+                {isLabOption ? option.name : option}
+              </button>
+            );
+          })}
         </div>
         )}
       </div>

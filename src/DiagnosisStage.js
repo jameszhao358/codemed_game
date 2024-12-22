@@ -14,6 +14,8 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
     const [dialogue, setDialogue] = useState(questions[0].prompt);
     const isFirstRender = useRef(true);
     const incorrectResponses = ["Try again...", "Not quite.", "Incorrect.", "Nope."];
+    const [tableInvestigation, setTableInvestigation] = useState(null); // Stores the selected investigation for table
+    const [isTableModalVisible, setIsTableModalVisible] = useState(false); // Tracks modal visibility
 
     useEffect(() => {
         setShuffledOptions([...questions[currentQuestionIndex].options].sort(() => Math.random() - 0.5));
@@ -94,14 +96,54 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
     <>
       <div className="diagnosis-container">
 
+        {isTableModalVisible && tableInvestigation && (
+            <div className="modal">
+                <div className="modal-content">
+                <h3>{tableInvestigation.name}</h3>
+                <table>
+                    <tbody>
+                    {tableInvestigation.result.split("\n").map((line, index) => {
+                        const [parameter, value, reference] = line.split(": ");
+                        return (
+                        <tr key={index}>
+                            <td>{parameter}</td>
+                            <td>{value}</td>
+                            <td>{reference}</td>
+                        </tr>
+                        );
+                    })}
+                    </tbody>
+                </table>
+                <button
+                    className="close-button"
+                    onClick={() => setIsTableModalVisible(false)}
+                >
+                    Close
+                </button>
+                </div>
+            </div>
+        )}
+
         <div className = "investigation-report-container">
-            {criticalInvestigations.map((inv, index) => (
-            <p key={index}>
-                {inv.name}: {inv.result}
+        {criticalInvestigations.map((inv, index) => (
+            <p
+                key={index}
+                style={{
+                    cursor: inv.isTable ? 'pointer' : 'default',
+                    color: inv.isTable ? '#007bff' : '#333333',
+                }}
+                onClick={() => {
+                    if (inv.isTable) {
+                    setTableInvestigation({ ...inv }); // Set the selected investigation for the table
+                    setIsTableModalVisible(true); // Open the modal
+                    }
+                }}
+                >
+                {inv.isTable ? `${inv.name} (click for results)` : `${inv.name}: ${inv.result}`}
             </p>
-            ))}
+        ))}
         </div>
-        
+
         <div className = "diagnosis-question-container">
 
             <img

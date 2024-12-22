@@ -10,6 +10,7 @@ function InvestigationStage({currentCase, setCurrentStage}) {
   const [criticalRevealed, setCriticalRevealed] = useState({});
   const [isListVisible, setIsListVisible] = useState(false);
 
+
   const [heartRate, setHeartRate] = useState(parseInt(currentCase.obs.HR, 10));
   const minHR = parseInt(currentCase.obs.HR, 10) - 10;
   const maxHR = parseInt(currentCase.obs.HR, 10) + 10;
@@ -104,7 +105,6 @@ function InvestigationStage({currentCase, setCurrentStage}) {
 
       <PatientImage image={currentCase.patientImage} />
 
-
       <div className="obs-container">
         <p>BP: {currentCase.obs.BP}</p>
         <p>Temp: {currentCase.obs.Temp}</p>
@@ -161,19 +161,35 @@ function InvestigationStage({currentCase, setCurrentStage}) {
                   <p
                     key={criticalInv.name}
                     style={{
-                      color: criticalRevealed[criticalInv.name] ? '#333333' : 'grey',
+                      cursor: criticalInv.isTable && criticalRevealed[criticalInv.name] ? 'pointer' : 'default',
+                      color: !criticalRevealed[criticalInv.name]
+                        ? 'grey' // Unrevealed investigations show as grey
+                        : criticalInv.isTable
+                        ? '#007bff' // Revealed table investigations as blue
+                        : '#333333', // Revealed non-table investigations as dark gray
+                    }}
+                    onClick={() => {
+                      if (criticalInv.isTable && criticalRevealed[criticalInv.name]) {
+                        setSelectedInvestigation({...criticalInv}); // Reuse your existing logic
+                        setIsModalVisible(true); // Open the modal
+                      }
                     }}
                   >
-                    {criticalRevealed[criticalInv.name] ? criticalInv.result : '???'}
+                    {criticalRevealed[criticalInv.name]
+                    ? criticalInv.isTable
+                      ? `${criticalInv.name} (click for table)`
+                      : `${criticalInv.name}: ${criticalInv.result}`
+                    : "???"}
                   </p>
                 ))}
-              <button
-                className="ok-button"
+              
+            </div>
+            <button
+                className="close-button"
                 onClick={() => setIsListVisible(false)} // Close the list
               >
                 Close
-              </button>
-            </div>
+            </button>
           </div>
         </div>
       )}
@@ -188,14 +204,31 @@ function InvestigationStage({currentCase, setCurrentStage}) {
         <div className="modal">
           <div className="modal-content">
             <h3>{selectedInvestigation.name}</h3>
-            <p>
-              {selectedInvestigation.result.split('\n').map((line, index) => (
-                <React.Fragment key={index}>
-                  {line}
-                  <br />
-                </React.Fragment>
-              ))}
-            </p>
+            {selectedInvestigation.isTable ?? false ? (
+              <table>
+                <tbody>
+                  {selectedInvestigation.result.split("\n").map((line, index) => {
+                    const [parameter, value, reference] = line.split(": ");
+                    return (
+                      <tr key={index}>
+                        <td>{parameter}</td>
+                        <td>{value}</td>
+                        <td>{reference}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            ) : (
+              <p>
+                {selectedInvestigation.result.split("\n").map((line, index) => (
+                  <React.Fragment key={index}>
+                    {line}
+                    <br />
+                  </React.Fragment>
+                ))}
+              </p>
+            )}
             <button
               className="ok-button"
               onClick={() => setIsModalVisible(false)}
@@ -204,7 +237,6 @@ function InvestigationStage({currentCase, setCurrentStage}) {
             </button>
           </div>
         </div>
-
       )}
 
     </div>
