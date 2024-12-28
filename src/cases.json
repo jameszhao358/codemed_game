@@ -36,8 +36,24 @@
             ],
 
             "questions": [
-                { "prompt": "What is the most likely diagnosis?", "options": ["Anterior STEMI", "Inferior STEMI", "NSTEMI", "Unstable Angina"], "correctOption": "Inferior STEMI" },
-                { "prompt": "What is your immediate supportive management?", "options": ["Supplemental oxygen, GTN, morphine", "Supplemental oxygen, GTN, aspirin", "Supplemental oxygen, IV fluids, morhpine", "IV fluids, GTN, morphine"], "correctOption": "Supplemental oxygen, GTN, morphine" },
+                { "prompt": "What is the most likely diagnosis?", 
+                    "options": [
+                        "Anterior STEMI", 
+                        "Inferior STEMI", 
+                        "NSTEMI", 
+                        "Unstable Angina"], 
+                    "correctOption": "Inferior STEMI",
+                    "explanation": "The clinical presentation, ECG findings, and troponin levels all align with the diagnosis of an Inferior STEMI. This is further confirmed by the coronary angiogram showing severe RCA occlusion. \n \nPrompt recognition and treatment with primary PCI or fibrinolysis are critical to improve outcomes."
+                    },
+                { "prompt": "What is your immediate supportive management?", 
+                    "options": [
+                        "Supplemental oxygen, GTN, morphine", 
+                        "Supplemental oxygen, GTN, aspirin", 
+                        "Supplemental oxygen, IV fluids, morphine", 
+                        "IV fluids, GTN, morphine"], 
+                    "correctOption": "Supplemental oxygen, GTN, morphine",
+                    "explanation": "Explanation." 
+                    },
                 { "prompt": "What is your definitive management?", "options": ["PCI within 90 minutes / fibrinolysis within 12 hours", "PCI within 6 hours / fibrinolysis within 24 hours", "Antiplatelets, beta-blockers, PCI within 2-72 hours", "Anticoagulation, beta-blockers, PCI within 2 hours"], "correctOption": "PCI within 90 minutes / fibrinolysis within 12 hours" },
                 { "prompt": "What pathological changes would you expect to see on autopsy within 24 hours?", "options": ["Pale infarct and myocyte swelling", "Coagulative necrosis, inflammatory changes, eosinophilic infiltrate", "Pink granulation tissue, angiogenesis, collagen deposition", "Coagulative necrosis, collagen deposition, myocyte swelling"], "correctOption": "Coagulative necrosis, inflammatory changes, eosinophilic infiltrate" }
             ]
@@ -46,7 +62,7 @@
         {
             "id": 2,
             "stages": ["provisional", "differential", "investigations", "management", "mcq"],
-            "stem": "66F presents with dizziness, breathlessness and palpitations over the last 3 hours. She denies any chest pain but feels 'weak and shaky'.",
+            "stem": "66F presents with dizziness, dyspnoea and palpitations over the last 3 hours. She denies any chest pain, There is no known history of arrythmias.",
             "patientImage": "./assets/images/patient1.png",
             
             "obs": {
@@ -68,7 +84,7 @@
                 { "name": "LFT", "result": "No abnormalities detected", "points": -5, "critical": false },
                 { "name": "CRP", "result": "No abnormalities detected", "points": -5, "critical": false },
                 { "name": "Troponins", "result": "2.1 ng/mL (normal <0.04 ng/mL)", "points": -5, "critical": false },
-                { "name": "TFT", "isTable": true, "result": "TSH: 2.0: (0.4–4.0 mIU/L)\nFree T4: 16: (9–19 pmol/L)\nFree T3: 4.5: (3.5–6.5 pmol/L)", "points": -5, "critical": true },
+                { "name": "TFT", "isTable": true, "result": "TSH: 2.0: (0.4–4.0 mIU/L)\nFree T4: 16: (9–19 pmol/L)\nFree T3: 4.5: (3.5–6.5 pmol/L)", "points": -5, "critical": false },
                 { "name": "Echocardiogram", "result": "Dilated left atrium, normal LV function", "points": -5, "critical": true },
                 { "name": "CXR", "result": "Normal cardiac silhouette, no pulmonary oedema or consolidation.", "points": 5, "critical": false },
                 { "name": "Coronary Angiogram", "result": "No significant coronary artery disease", "points": 5, "critical": false },

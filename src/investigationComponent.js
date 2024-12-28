@@ -7,8 +7,8 @@ function InvestigationMenu({ onInvestigationClick }) {
       bedside: ['ECG', 'Urinalysis', 'ABG', 'BSL'],
       labs: [
         { name: 'FBC', tubeColor: 'purple' },
-        { name: 'Cultures', tubeColor: 'red' },
         { name: 'Coags', tubeColor: 'light-blue' },
+        { name: 'Cultures', tubeColor: 'red' },
         { name: 'EUC', tubeColor: 'gold' },
         { name: 'LFT', tubeColor: 'gold' },
         { name: 'CRP', tubeColor: 'gold' },

@@ -16,6 +16,7 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
     const incorrectResponses = ["Try again...", "Not quite.", "Incorrect.", "Nope."];
     const [tableInvestigation, setTableInvestigation] = useState(null); // Stores the selected investigation for table
     const [isTableModalVisible, setIsTableModalVisible] = useState(false); // Tracks modal visibility
+    const [isExplanationVisible, setIsExplanationVisible] = useState(false);
 
     useEffect(() => {
         setShuffledOptions([...questions[currentQuestionIndex].options].sort(() => Math.random() - 0.5));
@@ -48,46 +49,25 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
 
     const handleAnswerClick = (option, e) => {
         if (option === questions[currentQuestionIndex].correctOption) {
-            setDialogue("Correct!"); 
-
-            setTimeout(() => {
-                if (currentQuestionIndex + 1 < questions.length) {
-                    setCurrentQuestionIndex(currentQuestionIndex + 1); // Move to the next question
-                } else {
-
-                    const diagnosisContainer = document.querySelector(".diagnosis-container");
-                        if (diagnosisContainer) {
-
-                        diagnosisContainer.style.animation = "none";
-                        void diagnosisContainer.offsetWidth;
-                        diagnosisContainer.style.animation = "slideDown 1s ease-in forwards";
-                        }
-                    
-                    setTimeout(() => {
-                        setCaseID((prevCaseID) => {
-                            const nextCaseID = prevCaseID + 1;
-                            return nextCaseID > caseData.cases.length ? 1 : nextCaseID;
-                        });
-                        setCurrentStage("investigation");
-                    }, 1000);
-                }
-            }, 1000);
-
+            setDialogue("Correct!"); // Set dialogue to "Correct!" and halt progression
         } else {
+            // Handle incorrect responses
             setDialogue((prevDialogue) => {
                 let newDialogue;
                 do {
                     newDialogue = incorrectResponses[Math.floor(Math.random() * incorrectResponses.length)];
-                } while (newDialogue === prevDialogue); // Ensure it's not the same as the last response
+                } while (newDialogue === prevDialogue); // Ensure a different response
                 return newDialogue;
             });
+    
+            // Add vibration effect to the button
             const button = e.target;
             button.classList.remove("vibrating");
             void button.offsetWidth; // Trigger reflow
             button.classList.add("vibrating");
-
+    
             setTimeout(() => {
-                setDialogue(questions[currentQuestionIndex].prompt);
+                setDialogue(questions[currentQuestionIndex].prompt); // Reset prompt
             }, 500);
         }
     };
@@ -95,7 +75,25 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
     return (
     <>
       <div className="diagnosis-container">
-
+        {isExplanationVisible && (
+            <div className="modal">
+                <div className="modal-content">
+                    <h3>Explanation</h3>
+                    <p>
+                        <span>
+                            {questions[currentQuestionIndex].explanation}
+                        </span>
+                    </p>
+                    <button
+                        className="close-button"
+                        onClick={() => setIsExplanationVisible(false)}
+                    >
+                        Close
+                    </button>
+                </div>
+            </div>
+        )}
+        
         {isTableModalVisible && tableInvestigation && (
             <div className="modal">
                 <div className="modal-content">
@@ -161,12 +159,51 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
                 key={dialogue}>{dialogue} 
             </h3> 
 
+            {dialogue === "Correct!" && (
+                <>
+                <button
+                    className="continue-button"
+                    onClick={() => {
+                        if (currentQuestionIndex + 1 < questions.length) {
+                            setCurrentQuestionIndex(currentQuestionIndex + 1); // Move to the next question
+                            setDialogue(questions[currentQuestionIndex + 1].prompt); // Update dialogue
+                        } else {
+                            const diagnosisContainer = document.querySelector(".diagnosis-container");
+                            if (diagnosisContainer) {
+                                diagnosisContainer.style.animation = "none";
+                                void diagnosisContainer.offsetWidth;
+                                diagnosisContainer.style.animation = "slideDown 1s ease-in forwards";
+                            }
+
+                            setTimeout(() => {
+                                setCaseID((prevCaseID) => {
+                                    const nextCaseID = prevCaseID + 1;
+                                    return nextCaseID > caseData.cases.length ? 1 : nextCaseID;
+                                });
+                                setCurrentStage("investigation");
+                            }, 1000);
+                        }
+                    }}
+                >
+                    Continue
+                </button>
+
+                <button
+                    className="view-explanation-button"
+                    onClick={() => setIsExplanationVisible(true)}
+                    >
+                    View Explanation
+                </button>
+                </>
+            )}
+
             <div className="answer-grid">
                 {shuffledOptions.map((option, index) => (
                     <button
                     key={index}
                     className="answer-button"
                     onClick={(e) => handleAnswerClick(option, e)}
+                    disabled = {dialogue === "Correct!"}
                     >
                         {option}
                     </button>
