@@ -9,7 +9,11 @@ function InvestigationStage({currentCase, setCurrentStage}) {
   const [criticalCount, setCriticalCount] = useState(0);
   const [criticalRevealed, setCriticalRevealed] = useState({});
   const [isListVisible, setIsListVisible] = useState(false);
-
+  const [investigationPoints, setInvestigationPoints] = useState([
+    { category: "critical", points: 0 },
+    { category: "ancillary", points: 0 },
+    { category: "unnecessary", points: 0 },
+  ]);
 
   const [heartRate, setHeartRate] = useState(parseInt(currentCase.obs.HR, 10));
   const minHR = parseInt(currentCase.obs.HR, 10) - 10;
@@ -22,9 +26,20 @@ function InvestigationStage({currentCase, setCurrentStage}) {
     const selected = currentCase.investigations.find(
       (investigation) => investigation.name === investigationName
     );
+    const category = selected.points;
+    const points = category === "critical" ? 100 : category === "ancillary" ? 10 : -10;
 
     setSelectedInvestigation(selected);
-    setIsModalVisible(true);
+    setIsModalVisible(true);  
+
+    if (!selectedInvestigations.includes(investigationName)) {
+    setInvestigationPoints((prevPoints) =>
+      prevPoints.map((entry) =>
+        entry.category === category
+          ? { ...entry, points: entry.points + points }
+          : entry
+      )
+    );
 
     if (selected.critical) {
       setCriticalRevealed((prev) => ({
@@ -47,6 +62,7 @@ function InvestigationStage({currentCase, setCurrentStage}) {
           }, 1000); 
         }
       }
+    }
     }
   };
 
@@ -137,7 +153,14 @@ function InvestigationStage({currentCase, setCurrentStage}) {
                         }
 
               document.querySelector('.investigate-container').classList.add('slide-down');
-              setTimeout(() => setCurrentStage("diagnosis"), 1000); 
+
+              setTimeout(() => {
+                setCurrentStage({
+                  stage: "diagnosis",
+                  investigationPoints: [...investigationPoints], // Pass points directly
+                });
+              }, 1000);
+
             }}
           >
             Proceed

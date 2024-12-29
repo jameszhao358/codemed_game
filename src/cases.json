@@ -1,5 +1,6 @@
 {
     "cases": [
+
         {
             "id": 1,
             "stages": ["provisional", "differential", "investigations", "management", "mcq"],
@@ -14,25 +15,126 @@
             },
 
             "investigations": [
-                { "name": "ECG", "result": "ST elevation in leads II, III, and aVF", "points": 10, "critical": true },
-                { "name": "Urinalysis", "result": "Clear \npH: 6.0 (4.5-8.0)\nProtein: - \nGlucose: - \nBlood: -", "points": -5, "critical": false },
-                { "name": "ABG", "isTable": true, "result": "pH: 7.40: (7.35–7.45)\nPaCO₂: 40: (35–45 mmHg)\nPaO₂: 95: (80–100 mmHg)\nHCO₃⁻: 24: (22–26 mmol/L)\nBase Excess: 0: (-2 to +2)\nSaO₂: 98%: (≥95%)", "points": -5, "critical": false },
-                { "name": "BSL", "result": "8.9 (<7.8 mmol/L)", "points": -5, "critical": false },
-                { "name": "FBC", "isTable": true, "result": "Haemoglobin: 14.5: (13–17 g/dL)\nRCC: 4.8: (4.5–5.5 x 10¹²/L)\nMCV: 90: (80–100 fL)\nWBC: 6.8: (4–11 x 10⁹/L)\nPlatelets: 250: (150–400 x 10⁹/L)", "points": -5, "critical": false },
-                { "name": "Cultures", "result": "No bacterial growth detected", "points": -5, "critical": false },
-                { "name": "Coags", "isTable": true, "result": "PT: 13.5: (11–14 seconds)\nINR: 1.1: (0.8–1.2)\naPTT: 32: (25–35 seconds)\nD-dimer: 0.3: (<0.5 µg/mL FEU)\nFibrinogen: 2.8: (2.0–4.0 g/L)", "points": -5, "critical": false },
-                { "name": "EUC", "isTable": true, "result": "Sodium: 140: (135–145 mmol/L)\nPotassium: 4.0: (3.5–5.0 mmol/L)\nChloride: 102: (95–105 mmol/L)\nBicarbonate: 24: (22–28 mmol/L)\nUrea: 5.0: (2.5–7.5 mmol/L)\nCreatinine: 80: (60–110 µmol/L)", "points": -5, "critical": false },
-                { "name": "LFT", "isTable": true, "result": "Bilirubin: 10: (0–20 µmol/L)\nALT: 25: (10–40 U/L)\nAST: 20: (10–40 U/L)\nALP: 80: (30–120 U/L)\nGGT: 25: (10–50 U/L)\nTotal Protein: 70: (60–80 g/L)\nAlbumin: 45: (35–50 g/L)", "points": -5, "critical": false },
-                { "name": "CRP", "result": "<5 (0-5 mg/L)", "points": -5, "critical": false },
-                { "name": "Troponins", "result": "12 ng/mL (<0.04 ng/mL)", "points": -5, "critical": true },
-                { "name": "TFT", "isTable": true, "result": "TSH: 2.0: (0.4–4.0 mIU/L)\nFree T4: 16: (9–19 pmol/L)\nFree T3: 4.5: (3.5–6.5 pmol/L)", "points": -5, "critical": false },
-                { "name": "Echocardiogram", "result": "Hypokinesis of the inferior wall with an ejection fraction of 45%", "points": -5, "critical": false },
-                { "name": "CXR", "result": "Normal cardiac silhouette, no pulmonary oedema or consolidation.", "points": 5, "critical": false },
-                { "name": "Coronary Angiogram", "result": "90% occlusion of the right coronary artery", "points": 5, "critical": true },
-                { "name": "CT Angiogram", "result": "90% occlusion of the right coronary artery", "points": 5, "critical": false },
-                { "name": "Endomyocardial Biopsy", "result": "Myocardial necrosis and neutrophilic infiltrate", "points": 5, "critical": false },
-                { "name": "Stress Test", "result": "Patient condition becomes a lot worse...", "points": 5, "critical": false },
-                { "name": "Right Heart Catheterisation", "result": "Elevated pulmonary capillary wedge pressure", "points": 5, "critical": false }
+                {
+                    "name": "ECG",
+                    "result": "ST elevation in leads II, III, and aVF",
+                    "points": "critical",
+                    "critical": true
+                },
+                {
+                    "name": "Urinalysis",
+                    "result": "Clear \npH: 6.0 (4.5-8.0)\nProtein: - \nGlucose: - \nBlood: -",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "ABG",
+                    "isTable": true,
+                    "result": "pH: 7.40: (7.35–7.45)\nPaCO₂: 40: (35–45 mmHg)\nPaO₂: 95: (80–100 mmHg)\nHCO₃⁻: 24: (22–26 mmol/L)\nBase Excess: 0: (-2 to +2)\nSaO₂: 98%: (≥95%)",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "BSL",
+                    "result": "8.9 (<7.8 mmol/L)",
+                    "points": -5,
+                    "critical": false
+                },
+                {
+                    "name": "FBC",
+                    "isTable": true,
+                    "result": "Haemoglobin: 14.5: (13–17 g/dL)\nRCC: 4.8: (4.5–5.5 x 10¹²/L)\nMCV: 90: (80–100 fL)\nWBC: 6.8: (4–11 x 10⁹/L)\nPlatelets: 250: (150–400 x 10⁹/L)",
+                    "points": "ancillary",
+                    "critical": false
+                },
+                {
+                    "name": "Cultures",
+                    "result": "No bacterial growth detected",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Coags",
+                    "isTable": true,
+                    "result": "PT: 13.5: (11–14 seconds)\nINR: 1.1: (0.8–1.2)\naPTT: 32: (25–35 seconds)\nD-dimer: 0.3: (<0.5 µg/mL FEU)\nFibrinogen: 2.8: (2.0–4.0 g/L)",
+                    "points": "ancillary",
+                    "critical": false
+                },
+                {
+                    "name": "EUC",
+                    "isTable": true,
+                    "result": "Sodium: 140: (135–145 mmol/L)\nPotassium: 4.0: (3.5–5.0 mmol/L)\nChloride: 102: (95–105 mmol/L)\nBicarbonate: 24: (22–28 mmol/L)\nUrea: 5.0: (2.5–7.5 mmol/L)\nCreatinine: 80: (60–110 µmol/L)",
+                    "points": "ancillary",
+                    "critical": false
+                },
+                {
+                    "name": "LFT",
+                    "isTable": true,
+                    "result": "Bilirubin: 10: (0–20 µmol/L)\nALT: 25: (10–40 U/L)\nAST: 20: (10–40 U/L)\nALP: 80: (30–120 U/L)\nGGT: 25: (10–50 U/L)\nTotal Protein: 70: (60–80 g/L)\nAlbumin: 45: (35–50 g/L)",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "CRP",
+                    "result": "<5 (0-5 mg/L)",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Troponins",
+                    "result": "12 ng/mL (<0.04 ng/mL)",
+                    "points": "critical",
+                    "critical": true
+                },
+                {
+                    "name": "TFT",
+                    "isTable": true,
+                    "result": "TSH: 2.0: (0.4–4.0 mIU/L)\nFree T4: 16: (9–19 pmol/L)\nFree T3: 4.5: (3.5–6.5 pmol/L)",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Echocardiogram",
+                    "result": "Hypokinesis of the inferior wall with an ejection fraction of 45%",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "CXR",
+                    "result": "Normal cardiac silhouette, no pulmonary oedema or consolidation.",
+                    "points": "ancillary",
+                    "critical": false
+                },
+                {
+                    "name": "Coronary Angiogram",
+                    "result": "90% occlusion of the right coronary artery",
+                    "points": "critical",
+                    "critical": true
+                },
+                {
+                    "name": "CT Angiogram",
+                    "result": "90% occlusion of the right coronary artery",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Endomyocardial Biopsy",
+                    "result": "Myocardial necrosis and neutrophilic infiltrate",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Stress Test",
+                    "result": "Patient condition becomes a lot worse...",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Right Heart Catheterisation",
+                    "result": "Elevated pulmonary capillary wedge pressure",
+                    "points": "unnecessary",
+                    "critical": false
+                }
             ],
 
             "questions": [
@@ -45,6 +147,7 @@
                     "correctOption": "Inferior STEMI",
                     "explanation": "The clinical presentation, ECG findings, and troponin levels all align with the diagnosis of an Inferior STEMI. This is further confirmed by the coronary angiogram showing severe RCA occlusion. \n \nPrompt recognition and treatment with primary PCI or fibrinolysis are critical to improve outcomes."
                     },
+
                 { "prompt": "What is your immediate supportive management?", 
                     "options": [
                         "Supplemental oxygen, GTN, morphine", 
@@ -54,8 +157,24 @@
                     "correctOption": "Supplemental oxygen, GTN, morphine",
                     "explanation": "Explanation." 
                     },
-                { "prompt": "What is your definitive management?", "options": ["PCI within 90 minutes / fibrinolysis within 12 hours", "PCI within 6 hours / fibrinolysis within 24 hours", "Antiplatelets, beta-blockers, PCI within 2-72 hours", "Anticoagulation, beta-blockers, PCI within 2 hours"], "correctOption": "PCI within 90 minutes / fibrinolysis within 12 hours" },
-                { "prompt": "What pathological changes would you expect to see on autopsy within 24 hours?", "options": ["Pale infarct and myocyte swelling", "Coagulative necrosis, inflammatory changes, eosinophilic infiltrate", "Pink granulation tissue, angiogenesis, collagen deposition", "Coagulative necrosis, collagen deposition, myocyte swelling"], "correctOption": "Coagulative necrosis, inflammatory changes, eosinophilic infiltrate" }
+
+                { "prompt": "What is your definitive management?", 
+                    "options": [
+                        "PCI within 90 minutes / fibrinolysis within 12 hours", 
+                        "PCI within 6 hours / fibrinolysis within 24 hours", 
+                        "Antiplatelets, beta-blockers, PCI within 2-72 hours", 
+                        "Anticoagulation, beta-blockers, PCI within 2 hours"], 
+                    "correctOption": "PCI within 90 minutes / fibrinolysis within 12 hours" 
+                    },
+
+                { "prompt": "What pathological changes would you expect to see on autopsy within 24 hours?", 
+                    "options": [
+                        "Pale infarct and myocyte swelling", 
+                        "Coagulative necrosis, inflammatory changes, eosinophilic infiltrate", 
+                        "Pink granulation tissue, angiogenesis, collagen deposition", 
+                        "Coagulative necrosis, collagen deposition, myocyte swelling"], 
+                    "correctOption": "Coagulative necrosis, inflammatory changes, eosinophilic infiltrate" 
+                    }
             ]
         },
 
@@ -73,25 +192,126 @@
             },
 
             "investigations": [
-                { "name": "ECG", "result": "Irregularly irregular rhythm, narrow QRS complex, no discernible P waves", "points": 10, "critical" : true },
-                { "name": "Urinalysis", "result": "No abnormalities detected", "points": -5, "critical": false },
-                { "name": "ABG", "result": "No acid-base disturbance / evidence of respiratory failure", "points": -5, "critical": false },
-                { "name": "BSL", "result": "7.5 mmol/L (normal <7.8 mmol/L)", "points": -5, "critical": false },
-                { "name": "FBC", "result": "No abnormalities detected", "points": -5, "critical": false },
-                { "name": "Cultures", "result": "No bacterial growth detected", "points": -5, "critical": false },
-                { "name": "Coags", "result": "apTT and INR normal \nD-dimer and fibrinogen elevated", "points": -5, "critical": false },
-                { "name": "EUC", "result": "No abnormalities detected", "points": -5, "critical": false },
-                { "name": "LFT", "result": "No abnormalities detected", "points": -5, "critical": false },
-                { "name": "CRP", "result": "No abnormalities detected", "points": -5, "critical": false },
-                { "name": "Troponins", "result": "2.1 ng/mL (normal <0.04 ng/mL)", "points": -5, "critical": false },
-                { "name": "TFT", "isTable": true, "result": "TSH: 2.0: (0.4–4.0 mIU/L)\nFree T4: 16: (9–19 pmol/L)\nFree T3: 4.5: (3.5–6.5 pmol/L)", "points": -5, "critical": false },
-                { "name": "Echocardiogram", "result": "Dilated left atrium, normal LV function", "points": -5, "critical": true },
-                { "name": "CXR", "result": "Normal cardiac silhouette, no pulmonary oedema or consolidation.", "points": 5, "critical": false },
-                { "name": "Coronary Angiogram", "result": "No significant coronary artery disease", "points": 5, "critical": false },
-                { "name": "CT Angiogram", "result": "Dilated left atrium with no pulmonary embolism", "points": 5, "critical": false },
-                { "name": "Endomyocardial Biopsy", "result": "Normal cardiac tissue on histology", "points": 5, "critical": false },
-                { "name": "Stress Test", "result": "Patient condition becomes a lot worse...", "points": 5, "critical": false },
-                { "name": "Right Heart Catheterisation", "result": "Elevated right atrial pressure and pulmonary capillary wedge pressure", "points": 5, "critical": false }
+                {
+                    "name": "ECG",
+                    "result": "Irregularly irregular rhythm, narrow QRS complex, no discernible P waves",
+                    "points": "critical",
+                    "critical": true
+                },
+                {
+                    "name": "Urinalysis",
+                    "result": "No abnormalities detected",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "ABG",
+                    "isTable": true,
+                    "result": "pH: 7.40: (7.35–7.45)\nPaCO₂: 40: (35–45 mmHg)\nPaO₂: 95: (80–100 mmHg)\nHCO₃⁻: 24: (22–26 mmol/L)\nBase Excess: 0: (-2 to +2)\nSaO₂: 98%: (≥95%)",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "BSL",
+                    "result": "7.5 mmol/L (normal <7.8 mmol/L)",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "FBC",
+                    "isTable": true,
+                    "result": "Haemoglobin: 14.5: (13–17 g/dL)\nRCC: 4.8: (4.5–5.5 x 10¹²/L)\nMCV: 90: (80–100 fL)\nWBC: 6.8: (4–11 x 10⁹/L)\nPlatelets: 250: (150–400 x 10⁹/L)",
+                    "points": "ancillary",
+                    "critical": false
+                },
+                {
+                    "name": "Cultures",
+                    "result": "No bacterial growth detected",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Coags",
+                    "isTable": true,
+                    "result": "PT: 13.5: (11–14 seconds)\nINR: 1.1: (0.8–1.2)\naPTT: 32: (25–35 seconds)\nD-dimer: 0.3: (<0.5 µg/mL FEU)\nFibrinogen: 2.8: (2.0–4.0 g/L)",
+                    "points": "ancillary",
+                    "critical": false
+                },
+                {
+                    "name": "EUC",
+                    "isTable": true,
+                    "result": "Sodium: 140: (135–145 mmol/L)\nPotassium: 4.0: (3.5–5.0 mmol/L)\nChloride: 102: (95–105 mmol/L)\nBicarbonate: 24: (22–28 mmol/L)\nUrea: 5.0: (2.5–7.5 mmol/L)\nCreatinine: 80: (60–110 µmol/L)",
+                    "points": "ancillary",
+                    "critical": false
+                },
+                {
+                    "name": "LFT",
+                    "isTable": true,
+                    "result": "Bilirubin: 10: (0–20 µmol/L)\nALT: 25: (10–40 U/L)\nAST: 20: (10–40 U/L)\nALP: 80: (30–120 U/L)\nGGT: 25: (10–50 U/L)\nTotal Protein: 70: (60–80 g/L)\nAlbumin: 45: (35–50 g/L)",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "CRP",
+                    "result": "No abnormalities detected",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Troponins",
+                    "result": "2.1 ng/mL (normal <0.04 ng/mL)",
+                    "points": "ancillary",
+                    "critical": false
+                },
+                {
+                    "name": "TFT",
+                    "isTable": true,
+                    "result": "TSH: 2.0: (0.4–4.0 mIU/L)\nFree T4: 16: (9–19 pmol/L)\nFree T3: 4.5: (3.5–6.5 pmol/L)",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Echocardiogram",
+                    "result": "Dilated left atrium, normal LV function",
+                    "points": "critical",
+                    "critical": true
+                },
+                {
+                    "name": "CXR",
+                    "result": "Normal cardiac silhouette, no pulmonary oedema or consolidation.",
+                    "points": "ancillary",
+                    "critical": false
+                },
+                {
+                    "name": "Coronary Angiogram",
+                    "result": "No significant coronary artery disease",
+                    "points": "ancillary",
+                    "critical": false
+                },
+                {
+                    "name": "CT Angiogram",
+                    "result": "Dilated left atrium with no pulmonary embolism",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Endomyocardial Biopsy",
+                    "result": "Normal cardiac tissue on histology",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Stress Test",
+                    "result": "Patient condition becomes a lot worse...",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Right Heart Catheterisation",
+                    "result": "Elevated right atrial pressure and pulmonary capillary wedge pressure",
+                    "points": "unnecessary",
+                    "critical": false
+                }
             ],
 
             "questions": [
@@ -165,25 +385,126 @@
             },
         
             "investigations": [
-                { "name": "ECG", "result": "Sinus tachycardia, no ischaemic changes", "points": -5, "critical": true },
-                { "name": "Urinalysis", "result": "No abnormalities detected", "points": -5, "critical": false },
-                { "name": "ABG", "result": "pH 7.36, pCO2 42 mmHg, pO2 92 mmHg, HCO3 24 mmol/L (normal range)", "points": -5, "critical": false },
-                { "name": "BSL", "result": "6.5 mmol/L (normal <7.8 mmol/L)", "points": -5, "critical": false },
-                { "name": "FBC", "result": "No significant abnormalities", "points": -5, "critical": false },
-                { "name": "Cultures", "result": "No bacterial growth detected", "points": -5, "critical": false },
-                { "name": "Coags", "result": "Normal PT, aPTT, INR", "points": -5, "critical": false },
-                { "name": "EUC", "result": "No abnormalities detected", "points": -5, "critical": false },
-                { "name": "LFT", "result": "Within normal limits", "points": -5, "critical": false },
-                { "name": "CRP", "result": "No abnormalities detected", "points": -5, "critical": false },
-                { "name": "Troponins", "result": "0.02 ng/mL (normal <0.04 ng/mL)", "points": -5, "critical": true },
-                { "name": "TFT", "result": "TSH, T3, and T4 within normal limits", "points": -5, "critical": false },
-                { "name": "Echocardiogram", "result": "Pericardial effusion with possible tamponade", "points": 10, "critical": true },
-                { "name": "CXR", "result": "Widened mediastinum, cardiomegaly noted", "points": 10, "critical": true },
-                { "name": "Coronary Angiogram", "result": "No evidence of coronary artery occlusion", "points": -5, "critical": false },
-                { "name": "CT Angiogram", "result": "Dissection flap extending from the ascending aorta to the descending aorta", "points": 15, "critical": true },
-                { "name": "Endomyocardial Biopsy", "result": "Normal cardiac tissue on histology", "points": -5, "critical": false },
-                { "name": "Stress Test", "result": "Not performed due to patient condition", "points": -5, "critical": false },
-                { "name": "Right Heart Catheterisation", "result": "Normal pulmonary capillary wedge pressure", "points": -5, "critical": false }
+                {
+                    "name": "ECG",
+                    "result": "Sinus tachycardia, no ischaemic changes",
+                    "points": "critical",
+                    "critical": true
+                },
+                {
+                    "name": "Urinalysis",
+                    "result": "Clear \npH: 6.0 (4.5-8.0)\nProtein: - \nGlucose: - \nBlood: -",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "ABG",
+                    "isTable": true,
+                    "result": "pH: 7.36: (7.35–7.45)\nPaCO₂: 42: (35–45 mmHg)\nPaO₂: 92: (80–100 mmHg)\nHCO₃⁻: 24: (22–26 mmol/L)\nBase Excess: 0: (-2 to +2)\nSaO₂: 98%: (≥95%)",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "BSL",
+                    "result": "6.5 mmol/L (normal <7.8 mmol/L)",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "FBC",
+                    "isTable": true,
+                    "result": "Haemoglobin: 14.5: (13–17 g/dL)\nRCC: 4.8: (4.5–5.5 x 10¹²/L)\nMCV: 90: (80–100 fL)\nWBC: 6.8: (4–11 x 10⁹/L)\nPlatelets: 250: (150–400 x 10⁹/L)",
+                    "points": "ancillary",
+                    "critical": false
+                },
+                {
+                    "name": "Cultures",
+                    "result": "No bacterial growth detected",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Coags",
+                    "isTable": true,
+                    "result": "PT: 13.5: (11–14 seconds)\nINR: 1.1: (0.8–1.2)\naPTT: 32: (25–35 seconds)\nD-dimer: 0.3: (<0.5 µg/mL FEU)\nFibrinogen: 2.8: (2.0–4.0 g/L)",
+                    "points": "ancillary",
+                    "critical": false
+                },
+                {
+                    "name": "EUC",
+                    "isTable": true,
+                    "result": "Sodium: 140: (135–145 mmol/L)\nPotassium: 4.0: (3.5–5.0 mmol/L)\nChloride: 102: (95–105 mmol/L)\nBicarbonate: 24: (22–28 mmol/L)\nUrea: 5.0: (2.5–7.5 mmol/L)\nCreatinine: 80: (60–110 µmol/L)",
+                    "points": "ancillary",
+                    "critical": false
+                },
+                {
+                    "name": "LFT",
+                    "isTable": true,
+                    "result": "Bilirubin: 10: (0–20 µmol/L)\nALT: 25: (10–40 U/L)\nAST: 20: (10–40 U/L)\nALP: 80: (30–120 U/L)\nGGT: 25: (10–50 U/L)\nTotal Protein: 70: (60–80 g/L)\nAlbumin: 45: (35–50 g/L)",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "CRP",
+                    "result": "No abnormalities detected",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Troponins",
+                    "result": "0.02 ng/mL (normal <0.04 ng/mL)",
+                    "points": "critical",
+                    "critical": true
+                },
+                {
+                    "name": "TFT",
+                    "isTable": true,
+                    "result": "TSH: 2.0: (0.4–4.0 mIU/L)\nFree T4: 16: (9–19 pmol/L)\nFree T3: 4.5: (3.5–6.5 pmol/L)",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "CXR",
+                    "result": "Widened mediastinum, cardiomegaly noted",
+                    "points": "critical",
+                    "critical": true
+                },
+                {
+                    "name": "Echocardiogram",
+                    "result": "Pericardial effusion with possible tamponade",
+                    "points": "critical",
+                    "critical": true
+                },
+                {
+                    "name": "Coronary Angiogram",
+                    "result": "No evidence of coronary artery occlusion",
+                    "points": "ancillary",
+                    "critical": false
+                },
+                {
+                    "name": "CT Angiogram",
+                    "result": "Dissection flap extending from the ascending aorta to the descending aorta",
+                    "points": "critical",
+                    "critical": true
+                },
+                {
+                    "name": "Endomyocardial Biopsy",
+                    "result": "Normal cardiac tissue on histology",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Stress Test",
+                    "result": "Patient condition becomes a lot worse...",
+                    "points": "unnecessary",
+                    "critical": false
+                },
+                {
+                    "name": "Right Heart Catheterisation",
+                    "result": "Normal pulmonary capillary wedge pressure",
+                    "points": "ancillary",
+                    "critical": false
+                }
             ],
         
             "questions": [

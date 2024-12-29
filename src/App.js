@@ -2,24 +2,29 @@ import './App.css';
 import PatientStem from './stemComponent';
 import InvestigationStage from './InvestigationStage';
 import DiagnosisStage from './DiagnosisStage';
+import ScoringStage from './ScoringStage';
 import caseData from './cases.json';
 import React, { useState } from 'react';
 
   function App() {
     const [caseID, setCaseID] = useState(1);
+    const [overallScore, setOverallScore] = useState(0);
+    const [totalPoints, setTotalPoints] = useState(0);
     const currentCase = caseData.cases.find((c) => c.id === caseID);
-    const [currentStage, setCurrentStage] = useState("start");
+    const [currentStage, setCurrentStage] = useState({
+      stage: "start", // Initial stage
+      investigationPoints: [], // Store investigation points here
+      diagnosisPoints: []
+    });
 
     return (
       <div className="App">
 
-        {currentStage !== "start" && (
-          <div className="patient-stem-container">
-            <PatientStem key={caseID} stem={currentCase.stem} />
-          </div>
+        {currentStage.stage !== "start" && (
+          <PatientStem key={caseID} stem={currentCase.stem} currentStage={currentStage.stage} />
         )}
 
-        {currentStage === "start" && (
+        {currentStage.stage === "start" && (
           <div className="start-menu">
             <h1 className="start-title">
               {"CODE: MED".split("").map((char, index) => (
@@ -36,7 +41,7 @@ import React, { useState } from 'react';
           </h1>
             <button
               className="start-button"
-              onClick={() => setCurrentStage("investigation")}
+              onClick={() => setCurrentStage({ ...currentStage, stage: "investigation" })}
             >
               BEGIN
             </button>
@@ -44,21 +49,36 @@ import React, { useState } from 'react';
           </div>
         )}
 
-        {currentStage === "investigation" && (
-          <InvestigationStage
-            currentCase={currentCase}
-            setCurrentStage={setCurrentStage}
-          />
+        {currentStage.stage === "investigation" && (
+            <InvestigationStage
+              currentCase={currentCase}
+              setCurrentStage={setCurrentStage}
+            />
         )}
 
-        {currentStage === "diagnosis" && 
+        {currentStage.stage === "diagnosis" && (
           <DiagnosisStage 
             currentCase={currentCase}
             setCaseID={setCaseID}
             setCurrentStage={setCurrentStage}
+            investigationPoints={currentStage.investigationPoints}
             caseData={caseData}
           />
-        }
+        )}
+
+        {currentStage.stage === "scoring" && (
+        <ScoringStage
+          investigationPoints={currentStage.investigationPoints}
+          diagnosisPoints={currentStage.diagnosisPoints}
+          totalPoints={totalPoints}
+          setTotalPoints={setTotalPoints}
+          currentCase={currentCase}
+          overallScore={overallScore} // Pass overall score
+          setOverallScore={setOverallScore} // Pass setter
+          setCaseID={setCaseID}
+          setCurrentStage={setCurrentStage}
+        />
+        )}
 
       </div>
     );

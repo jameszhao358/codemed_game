@@ -1,15 +1,15 @@
 import doctorImage from "./assets/images/perrycardium2.png";
 import React, {useState, useEffect, useRef} from "react";
 
-function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
+function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData, investigationPoints }) {
 
     const questions = currentCase.questions;
     const criticalInvestigations = currentCase.investigations.filter(
         (investigation) => investigation.critical
       );
-
-    // const [showModal, setShowModal] = useState(false);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [attempts, setAttempts] = useState(0);
+    const [diagnosisPoints, setDiagnosisPoints] = useState([]);
     const [shuffledOptions, setShuffledOptions] = useState([]);
     const [dialogue, setDialogue] = useState(questions[0].prompt);
     const isFirstRender = useRef(true);
@@ -21,6 +21,7 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
     useEffect(() => {
         setShuffledOptions([...questions[currentQuestionIndex].options].sort(() => Math.random() - 0.5));
         setDialogue(questions[currentQuestionIndex].prompt);
+        setAttempts(0);
         if (isFirstRender.current) {isFirstRender.current = false;}
     }, [currentQuestionIndex, questions]);
 
@@ -49,7 +50,15 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
 
     const handleAnswerClick = (option, e) => {
         if (option === questions[currentQuestionIndex].correctOption) {
+
+            if (attempts === 0) {
+                setDiagnosisPoints((prev) => [...prev, 1]);
+            } else {
+                setDiagnosisPoints((prev) => [...prev, 0]);
+            }
+
             setDialogue("Correct!"); // Set dialogue to "Correct!" and halt progression
+
         } else {
             // Handle incorrect responses
             setDialogue((prevDialogue) => {
@@ -59,7 +68,9 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
                 } while (newDialogue === prevDialogue); // Ensure a different response
                 return newDialogue;
             });
-    
+            
+            setAttempts((prev) => prev + 1);
+
             // Add vibration effect to the button
             const button = e.target;
             button.classList.remove("vibrating");
@@ -175,13 +186,20 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
                                 diagnosisContainer.style.animation = "slideDown 1s ease-in forwards";
                             }
 
+                            const stemContainer = document.querySelector('.patient-stem-container');
+                            if (stemContainer) {
+                            stemContainer.style.animation = 'none'; // Reset animation
+                            void stemContainer.offsetWidth; // Trigger reflow
+                            stemContainer.style.animation = 'slideUpStem 0.7s ease-in forwards';
+                            }
+
                             setTimeout(() => {
-                                setCaseID((prevCaseID) => {
-                                    const nextCaseID = prevCaseID + 1;
-                                    return nextCaseID > caseData.cases.length ? 1 : nextCaseID;
+                                setCurrentStage({
+                                  stage: "scoring", // Transition to scoring stage
+                                  investigationPoints, // Pass points directly
+                                  diagnosisPoints,
                                 });
-                                setCurrentStage("investigation");
-                            }, 1000);
+                              }, 1000);
                         }
                     }}
                 >
@@ -214,52 +232,6 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData }) {
 
         </div>
       </div>
-
-      {/* {showModal !== false && (
-        <div className="modal">
-            <div className="modal-content">
-                <h3 className="correct-text">
-                    {"Well done!".split("").map((char, index) => (
-                        <span
-                        key={index}
-                        className={char === " " ? "space" : ""}
-                        style={{ 
-                            animationDelay: `${-index * 0.2}s`,
-                        }}
-                        >
-                            {char === " " ? "\u00A0" : char}    
-                        </span>
-                    ))}
-                </h3>
-                <button 
-                    className="next-case-button" 
-                    onClick={() => {
-                        setShowModal(false);
-
-                        const diagnosisContainer = document.querySelector(".diagnosis-container");
-                        if (diagnosisContainer) {
-
-                        diagnosisContainer.style.animation = "none";
-                        void diagnosisContainer.offsetWidth;
-                        diagnosisContainer.style.animation = "slideDown 1s ease-in forwards";
-                        }
-
-                        setTimeout(() => {
-                            setCaseID((prevCaseID) => {
-                              const nextCaseID = prevCaseID + 1;
-                              return nextCaseID > caseData.cases.length ? 1 : nextCaseID;
-                            });
-                            setCurrentStage("investigation");
-                          }, 1000);
-                        }}
-                    >Next Case!
-                </button>
-
-            </div>
-        </div>
-
-       )} */}
-
     </>
     );
   }
