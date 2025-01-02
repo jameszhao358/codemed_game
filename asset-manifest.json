@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/codemed_game/static/css/main.391a037d.css",
-    "main.js": "/codemed_game/static/js/main.f3c3cc7a.js",
+    "main.css": "/codemed_game/static/css/main.b3e06648.css",
+    "main.js": "/codemed_game/static/js/main.9b59b6b6.js",
     "static/js/453.07a6ab98.chunk.js": "/codemed_game/static/js/453.07a6ab98.chunk.js",
     "static/media/DePixelHalbfett.ttf": "/codemed_game/static/media/DePixelHalbfett.519749799470abd72e4e.ttf",
     "static/media/balatro.ttf": "/codemed_game/static/media/balatro.4bc479bb6ca136f0675e.ttf",
     "static/media/index.cjs": "/codemed_game/static/media/index.3799a449eaa3633df8f4.cjs",
     "static/media/logo.svg": "/codemed_game/static/media/logo.6ce24c58023cc2f8fd88.svg",
     "index.html": "/codemed_game/index.html",
-    "main.391a037d.css.map": "/codemed_game/static/css/main.391a037d.css.map",
-    "main.f3c3cc7a.js.map": "/codemed_game/static/js/main.f3c3cc7a.js.map",
+    "main.b3e06648.css.map": "/codemed_game/static/css/main.b3e06648.css.map",
+    "main.9b59b6b6.js.map": "/codemed_game/static/js/main.9b59b6b6.js.map",
     "453.07a6ab98.chunk.js.map": "/codemed_game/static/js/453.07a6ab98.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.391a037d.css",
-    "static/js/main.f3c3cc7a.js"
+    "static/css/main.b3e06648.css",
+    "static/js/main.9b59b6b6.js"
   ]
 }
