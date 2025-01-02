@@ -3,7 +3,7 @@ import PatientImage from './patientComponent';
 import InvestigationMenu from './investigationComponent';
 import notePad from "./assets/images/notepad.png";
 
-function InvestigationStage({currentCase, setCurrentStage}) {
+function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
   const [selectedInvestigation, setSelectedInvestigation] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [criticalCount, setCriticalCount] = useState(0);
@@ -126,6 +126,7 @@ function InvestigationStage({currentCase, setCurrentStage}) {
         <p>Temp: {currentCase.obs.Temp}</p>
         <p>HR: {heartRate}</p>
         <p>RR: {currentCase.obs.RR}</p>
+        <p>SPO2: {currentCase.obs.SPO2}</p>
       </div>
 
       <div className="investigation-records-container">
@@ -219,6 +220,7 @@ function InvestigationStage({currentCase, setCurrentStage}) {
 
 
       <InvestigationMenu
+        selectedSpecialty={selectedSpecialty}
         investigations={currentCase.investigations.map((inv) => inv.name)}
         onInvestigationClick={handleInvestigationClick}
       />
@@ -231,12 +233,12 @@ function InvestigationStage({currentCase, setCurrentStage}) {
               <table>
                 <tbody>
                   {selectedInvestigation.result.split("\n").map((line, index) => {
-                    const [parameter, value, reference] = line.split(": ");
+                    const columns = line.split(": "); // Split the line into an array of columns
                     return (
                       <tr key={index}>
-                        <td>{parameter}</td>
-                        <td>{value}</td>
-                        <td>{reference}</td>
+                        {columns.map((column, colIndex) => (
+                          <td key={colIndex}>{column}</td>
+                        ))}
                       </tr>
                     );
                   })}

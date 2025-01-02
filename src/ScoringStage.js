@@ -40,13 +40,18 @@ function ScoringStage({ investigationPoints = [], diagnosisPoints = [], totalPoi
     }, [totalEarned, totalPoints]);
   
     const proceedToNextCase = () => {
-      setTotalPoints((prev) => prev + totalInvestigationPoints + totalDiagnosisPoints);
-      setCaseID((currentCase.id % caseData.cases.length) + 1);
-      setOverallScore(overallScore + totalEarned);
-      setCurrentStage({
-        stage: "investigation",
-        investigationPoints: [], // Reset for the next case
-        diagnosisPoints: [],
+        const filteredCases = caseData.cases.filter((c) => c.specialty === currentCase.specialty);
+        const currentIndex = filteredCases.findIndex((c) => c.id === currentCase.id);
+        const nextIndex = (currentIndex + 1) % filteredCases.length;
+        const nextCaseID = filteredCases[nextIndex].id;
+        
+        setTotalPoints((prev) => prev + totalInvestigationPoints + totalDiagnosisPoints);
+        setCaseID(nextCaseID);
+        setOverallScore(overallScore + totalEarned);
+        setCurrentStage({
+            stage: "investigation",
+            investigationPoints: [], // Reset for the next case
+            diagnosisPoints: [],
       });
     };
   

@@ -7,21 +7,34 @@ import caseData from './cases.json';
 import React, { useState } from 'react';
 
   function App() {
-    const [caseID, setCaseID] = useState(1);
+    const [caseID, setCaseID] = useState(5);
     const [overallScore, setOverallScore] = useState(0);
     const [totalPoints, setTotalPoints] = useState(0);
+    const [selectedSpecialty, setSelectedSpecialty] = useState(null);
     const currentCase = caseData.cases.find((c) => c.id === caseID);
+
     const [currentStage, setCurrentStage] = useState({
       stage: "start", // Initial stage
       investigationPoints: [], // Store investigation points here
       diagnosisPoints: []
     });
 
+    const handleSpecialtySelection = (specialty) => {
+      const filteredCases = caseData.cases.filter((c) => c.specialty === specialty);
+      if (filteredCases.length > 0) {
+          setSelectedSpecialty(specialty);
+          setCaseID(filteredCases[0].id); 
+          setCurrentStage({ ...currentStage, stage: "investigation" });
+      } else {
+          alert(`No cases available yet.`);
+      }
+    };  
+
     return (
       <div className="App">
 
-        {currentStage.stage !== "start" && (
-          <PatientStem key={caseID} stem={currentCase.stem} currentStage={currentStage.stage} />
+        {currentStage.stage !== "start" && currentStage.stage !== "specialty" && (
+            <PatientStem key={caseID} stem={currentCase.stem} currentStage={currentStage.stage} />
         )}
 
         {currentStage.stage === "start" && (
@@ -41,17 +54,38 @@ import React, { useState } from 'react';
           </h1>
             <button
               className="start-button"
-              onClick={() => setCurrentStage({ ...currentStage, stage: "investigation" })}
+              onClick={() => setCurrentStage({ ...currentStage, stage: "specialty" })}
             >
               BEGIN
             </button>
-            <p> A project by Bill Goh & James Zhao</p>
+            <p> A project by James Zhao & Bill Goh</p>
+          </div>
+        )}
+
+        {currentStage.stage === "specialty" && (
+          <div className="specialty-menu">
+              <h2>Select Your Specialty</h2>
+              <div className="specialty-buttons">
+                  <button
+                      className="specialty-button"
+                      onClick={() => handleSpecialtySelection("cardiology")}
+                  >
+                      Cardiology
+                  </button>
+                  <button
+                      className="specialty-button"
+                      onClick={() => handleSpecialtySelection("respiratory")}
+                  >
+                      Respiratory
+                  </button>
+              </div>
           </div>
         )}
 
         {currentStage.stage === "investigation" && (
             <InvestigationStage
               currentCase={currentCase}
+              selectedSpecialty={selectedSpecialty}
               setCurrentStage={setCurrentStage}
             />
         )}

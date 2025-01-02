@@ -96,11 +96,12 @@
 .patient-stem-container {
   margin: 0 auto;
   width: 800px;
-  height: 125px;
+  min-height: 100px;
   text-align: center;
   background-color: white;
   border-radius: 16px;
   margin-bottom: 30px;
+  margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -109,16 +110,15 @@
 }
 
 .patient-stem {
-  font-size: 20px;
+  font-size: 17px;
   overflow: hidden;
   color: #333333;
-  padding-bottom: 0px;
   font-family: 'Balatro';
   font-weight: lighter;
   user-select: none;
   display: inline-block;
   white-space: normal;
-  line-height: 1.8;
+  line-height: 2;
   visibility: hidden;
   animation: typing 1s steps(50, end) forwards;
   animation-delay: 0.3s;
@@ -130,6 +130,10 @@
   transform: scale(0.75); /* Scales the image similar to the Phaser scaling */
   filter: brightness(110%);
   user-select: none;
+}
+
+.patient-image:hover {
+  scale: 1.02
 }
 
 .popup-message {
@@ -157,22 +161,22 @@
   top: 205px;
   left: 240px;
   width: 100px;
-  height: 160px; /* Accounts for top and bottom padding */
+  height: auto; /* Accounts for top and bottom padding */
   padding: 20px;
-  padding-top: 10px;
-  padding-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 5px;
   text-align: left;
   overflow-y: auto;
   font-family: 'Balatro';
-  color: #333333;
+  color: #474747;
   background-color: #ffa6002a;
   border-radius: 16px;
 }
 
 .investigation-records-container {
   position: absolute;
-  top: 200px;
-  right: 150px;
+  top: 210px;
+  right: 140px;
   width: 250px;
   height: 200px; /* Accounts for top and bottom padding */
   padding: 20px;
@@ -408,6 +412,7 @@
   display: inline-block;
   white-space: pre-wrap;
   line-height: 1.8;
+  margin-left: 4px;
   margin-top: 0px;
   margin-bottom: 20px; /* Adds spacing below the text */
   padding-bottom: 5px;
@@ -416,12 +421,13 @@
 }
 
 .modal-content p span {
-  color: #474747;
+  color: #505050;
   display: inline-block;
   text-align: left;
-  line-height: 2;
+  line-height: 2.2;
   white-space: pre-wrap;
   animation: typing 0.5s steps(40,end);
+  font-size: 15px;
 }
 
 .modal-content table {
@@ -440,7 +446,8 @@
   padding: 0px 15px;
 }
 
-.modal-content table td:nth-child(3) {
+.modal-content table td:nth-child(3),
+.modal-content table td:nth-child(4) {
   color: gray;
 }
 
@@ -521,15 +528,16 @@
   height: auto;
   padding: 5px;
   margin: auto;
-  margin-top: 160px;
+  margin-top: 165px;
+  margin-bottom: -20px;
   border-radius: 16px;
   font-family: 'Balatro';
+  color: gray;
 }
 
 .investigation-report-container p {
   line-height: 1;
-  margin-bottom: 5px;
-  color: #333333;
+  color: #6b6b6b;
 }
 
 .investigation-report-container:has(p:nth-child(5)) {
@@ -748,7 +756,7 @@
   font-size: 20px;
   margin-bottom: 30px;
   margin-top: 0px;
-  color: green;
+  color: #26cd00;
   visibility: hidden;
   animation: show 0s linear forwards;
 }
@@ -762,7 +770,7 @@
   padding-bottom: 30px;
   font-family: 'Balatro';
   font-weight: lighter;
-  color: green; 
+  color: #2ae400; 
   visibility: hidden;
   animation: show 0s linear forwards;
 }
@@ -774,7 +782,7 @@
   font-weight: lighter;
   margin-bottom: 30px;
   margin-top: 0px;
-  color: green;
+  color: #26cd00;
   font-size: 20px;
   visibility: hidden;
   animation: show 0s linear forwards;
@@ -790,7 +798,7 @@
   padding-bottom: 30px;
   font-family: 'Balatro';
   font-weight: lighter;
-  color: green; 
+  color: #2ae400; 
   visibility: hidden;
   animation: show 0s linear forwards;
   animation-delay: 0.3s;
@@ -821,6 +829,7 @@
   visibility: hidden;
   animation: show 0s linear forwards;
   animation-delay: 0.6s;
+  color: #26cd00;
 }
 
 .row-total2 {

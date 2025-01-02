@@ -139,7 +139,7 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData, inv
                 key={index}
                 style={{
                     cursor: inv.isTable ? 'pointer' : 'default',
-                    color: inv.isTable ? '#007bff' : '#333333',
+                    color: inv.isTable ? '#007bff' : '#505050',
                 }}
                 onClick={() => {
                     if (inv.isTable) {

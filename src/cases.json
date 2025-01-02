@@ -3,6 +3,7 @@
 
         {
             "id": 1,
+            "specialty": "cardiology",
             "stages": ["provisional", "differential", "investigations", "management", "mcq"],
             "stem": "56M presents with sudden onset chest pain radiating to his jaw.",
             "patientImage": "./assets/images/patient2.png",
@@ -11,7 +12,8 @@
                 "BP": "135/85",
                 "Temp": "36.8",
                 "HR": "75",
-                "RR": "20"
+                "RR": "20",
+                "SPO2": "98%"
             },
 
             "investigations": [
@@ -180,6 +182,7 @@
 
         {
             "id": 2,
+            "specialty": "cardiology",
             "stages": ["provisional", "differential", "investigations", "management", "mcq"],
             "stem": "66F presents with dizziness, dyspnoea and palpitations over the last 3 hours. She denies any chest pain, There is no known history of arrythmias.",
             "patientImage": "./assets/images/patient1.png",
@@ -188,7 +191,8 @@
                 "BP": "110/70",
                 "Temp": "36.8",
                 "HR": "140",
-                "RR": "20"
+                "RR": "20",
+                "SPO2": "98%"
             },
 
             "investigations": [
@@ -373,6 +377,7 @@
 
         {
             "id": 3,
+            "specialty": "cardiology",
             "stages": ["provisional", "differential", "investigations", "management", "mcq"],
             "stem": "45M presents with sudden onset, severe chest pain. He is diaphoretic and appears distressed.",
             "patientImage": "./assets/images/patient3.png",
@@ -381,7 +386,8 @@
                 "BP": "180/110",
                 "Temp": "36.5",
                 "HR": "110",
-                "RR": "22"
+                "RR": "22",
+                "SPO2": "98%"
             },
         
             "investigations": [
@@ -543,6 +549,457 @@
                     "correctOption": "Yes"
                 }
             ]
-        }
+        },
+        {
+            "id": 4,
+            "specialty": "respiratory",
+            "stages": ["provisional", "differential", "investigations", "management", "mcq"],
+            "stem": "32F presents with worsening shortness of breath and wheezing which started an hour ago during a run. She is unable to speak in full sentences. She has a past history of asthma and is on a salbutamol rescue inhaler.",
+            "patientImage": "./assets/images/patient3.png",
+            
+            "obs": {
+              "BP": "140/90",
+              "Temp": "36.5",
+              "HR": "110",
+              "RR": "32",
+              "SPO2": "91%"
+            },
+          
+            "investigations": [
+              {
+                "name": "ECG",
+                "result": "Sinus tachycardia, no ischaemic changes",
+                "points": "critical",
+                "critical": true
+              },
+              {
+                "name": "Urinalysis",
+                "result": "Clear \npH: 6.0 (4.5-8.0)\nProtein: - \nGlucose: - \nBlood: -",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "ABG",
+                "isTable": true,
+                "result": "pH: 7.48: (7.35–7.45)\nPaCO₂: 30: (35–45 mmHg)\nPaO₂: 75: (80–100 mmHg)\nHCO₃⁻: 24: (22–26 mmol/L)\nBase Excess: 0: (-2 to +2)\nSaO₂: 89%: (≥95%)",
+                "points": "critical",
+                "critical": true
+              },
+              {
+                "name": "BSL",
+                "result": "6.5 mmol/L (normal <7.8 mmol/L)",
+                "points": "ancillary",
+                "critical": false
+              },
+              {
+                "name": "FBC",
+                "isTable": true,
+                "result": "Haemoglobin: 14.5: (13–17 g/dL)\nRCC: 4.8: (4.5–5.5 x 10¹²/L)\nMCV: 90: (80–100 fL)\nWBC: 6.8: (4–11 x 10⁹/L)\nPlatelets: 250: (150–400 x 10⁹/L)",
+                "points": "ancillary",
+                "critical": false
+              },
+              {
+                "name": "Cultures",
+                "result": "No bacterial growth detected",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "Coags",
+                "isTable": true,
+                "result": "PT: 13.5: (11–14 seconds)\nINR: 1.1: (0.8–1.2)\naPTT: 32: (25–35 seconds)\nD-dimer: 0.3: (<0.5 µg/mL FEU)\nFibrinogen: 2.8: (2.0–4.0 g/L)",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "EUC",
+                "isTable": true,
+                "result": "Sodium: 140: (135–145 mmol/L)\nPotassium: 4.0: (3.5–5.0 mmol/L)\nChloride: 102: (95–105 mmol/L)\nBicarbonate: 24: (22–28 mmol/L)\nUrea: 5.0: (2.5–7.5 mmol/L)\nCreatinine: 80: (60–110 µmol/L)",
+                "points": "ancillary",
+                "critical": false
+              },
+              {
+                "name": "LFT",
+                "isTable": true,
+                "result": "Bilirubin: 10: (0–20 µmol/L)\nALT: 25: (10–40 U/L)\nAST: 20: (10–40 U/L)\nALP: 80: (30–120 U/L)\nGGT: 25: (10–50 U/L)\nTotal Protein: 70: (60–80 g/L)\nAlbumin: 45: (35–50 g/L)",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "CRP",
+                "result": "No abnormalities detected",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "Troponins",
+                "result": "0.02 ng/mL (normal <0.04 ng/mL)",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "TFT",
+                "isTable": true,
+                "result": "TSH: 2.0: (0.4–4.0 mIU/L)\nFree T4: 16: (9–19 pmol/L)\nFree T3: 4.5: (3.5–6.5 pmol/L)",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "CXR",
+                "result": "Lungs clear, no evidence of pneumothorax",
+                "points": "critical",
+                "critical": true
+              },
+              {
+                "name": "Ultrasound",
+                "result": "Lung sliding present",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "Bronchoscopy",
+                "result": "No abnormalities detected",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "CT Chest",
+                "result": "No abnormalities detected",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "CTPA",
+                "result": "No abnormalities detected",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "MRI",
+                "result": "No abnormalities detected",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "V/Q Scan",
+                "result": "No mismatch detected",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "Peak Flow",
+                "result": "300 L/min (45% of predicted value)",
+                "points": "critical",
+                "critical": true
+              },
+              {
+                "name": "Spirometry",
+                "isTable": true,
+                "result": "FEV1: 0.8: 23%: (3.5L)\nFVC: 2.5: 63%: (4.0L)\nFEV1/FVC: 0.32 : - : (≥0.7)",
+                "points": "ancillary",
+                "critical": false
+              },
+              {
+                "name": "Thoracentesis",
+                "result": "No pleural effusion detected",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "Biopsy",
+                "result": "Normal lung parenchyma",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "Right Heart Catheterisation",
+                "result": "Normal pulmonary capillary wedge pressure",
+                "points": "unnecessary",
+                "critical": false
+              }
+            ],
+          
+            "questions": [
+              {
+                "prompt": "What is the most likely diagnosis?",
+                "options": [
+                  "Exacerbation of COPD", 
+                  "Severe exacerbation of asthma", 
+                  "Spontaneous pneumothorax", 
+                  "Community acquired pneumonia"
+                ],
+                "correctOption": "Severe exacerbation of asthma",
+                "explanation": "Given an absence of history / features indicating pneumothorax, COPD or infection, asthma is the most likely explanation for her symptoms. A peak expiratory flow (PEF) of 33-50% of the predicted value is indicative of a severe attack. Other features indicating a severe attack include: \n \n • Inability to complete sentences in one breath \n • Respiratory rate of ≥ 25 \n • Tachycardia of ≥ 120 bpm"
+              },
+              {
+                "prompt": "What is your interpretation of her ABG?",
+                "options": [
+                  "Respiratory alkalosis without metabolic compensation",
+                  "Respiratory alkalosis with metabolic compensation",
+                  "Metabolic alkalosis with respiratory compensation",
+                  "Mixed metabolic and respiratory alkalosis"
+                ],
+                "correctOption": "Respiratory alkalosis without metabolic compensation",
+                "explanation": "The ABG shows a slightly basic blood pH with a low CO2 and normal HCO3, which suggests a respiratory alkalosis without metabolic compensation. Respiratory alkalosis is a common finding in the early stages of a severe asthma exacerbation due to initial hyperventilation. \n \nRespiratory acidosis can be seen in later presentations with deterioration and significant airway obstruction leading to CO2 retention."
+              },
+              {
+                "prompt": "What is your initial definitive management?",
+                "options": [
+                  "Salbutamol + ipratropium bromide (inhaler)",
+                  "Salbutamol (nebulised)",
+                  "Salbutamol (inhaler)",
+                  "Salbutamol (inhaler) + oral prednisolone"
+                ],
+                "correctOption": "Salbutamol + ipratropium bromide (inhaler)",
+                "explanation": "For the immediate management of severe asthma, the National Asthma Council (asthmahandbook.org.au) suggests salbutamol (12 puffs) + ipratropium bromide \n(8 puffs) via a pressurised metered dose inhaler (pMDI) and spacer. \n \nIf the patient cannot tolerate a spacer, 5mg nebule salbutamol + 500 mcg ipratropium bromide is to be given in a nebulised solution. \n \nSupplementary oxygen should also be given, with a target O2 saturation of 93-95%"
+              },
+              {
+                "prompt": "What drug class does ipratropium bromide belong to?",
+                "options": [
+                  "Short acting muscarinic antagonist",
+                  "Long acting muscarinic antagonist",
+                  "Long acting beta agonist",
+                  "Corticosteroid"
+                ],
+                "correctOption": "Short acting muscarinic antagonist",
+                "explanation": "Ipratropium bromide (Atrovent) is a short acting muscarinic antagonist (SAMA), along with oxitropium bromide."
+              },
+              {
+                "prompt": "The patient has a poor response to your initial management. What should we give next?",
+                "options": [
+                  "IV magnesium sulfate +/- oral prednisolone",
+                  "IV salbutamol + aminophylline",
+                  "Formoterol + budesonide (nebulised)",
+                  "IV salbutamol + hydrocortisone"
+                ],
+                "correctOption": "IV magnesium sulfate +/- oral prednisolone",
+                "explanation": "Following a poor response to initial therapy, the National Asthma Council suggests adding 10 mmol of IV magnesium sulfate over 20 minutes. Add-on treatment options such as oral prednisolone / IV hydrocortisone may also be considered within the first hour. \n \nIV salbutamol and aminophylline are considered if these interventions are ineffective. \n \nFormoterol + budesonide is used for long-term maintenancce therapy in chronic obstructive pulmonary diseases."
+              },
+              {
+                "prompt": "Which of the following is a hallmark pathological airway change in asthma?",
+                "options": [
+                  "Destruction of alveolar walls and capillaries",
+                  "Subepithelial collagen deposition and goblet cell hyperplasia",
+                  "Hyaline membrane formation and alveolar edema",
+                  "Granuloma formation and caseous necrosis"
+                ],
+                "correctOption": "Subepithelial collagen deposition and goblet cell hyperplasia",
+                "explanation": "The pathological features of airway remodelling in asthma include: \n \n • Goblet cell metaplasia and hyperplasia\n • Smooth muscle hypertrophy and hyperplasia\n • Increased vascularity\n • Subepithelial collagen deposition"
+              },
+              {
+                "prompt": "What is the role of IgE in allergic asthma?",
+                "options": [
+                  "Eosinophil recruitment and activation",
+                  "IgE is released by mast cells in response to allergen",
+                  "Triggers mast cell degranulation upon allergen re-exposure",
+                  "Direct airway smooth muscle contraction"
+                ],
+                "correctOption": "Triggers mast cell degranulation upon allergen re-exposure",
+                "explanation": "IgE mediates acute and chronic inflammation in allergic asthma. Allergen-specific IgE binds to mast cells, and re-exposure leads to mast cell degranulation, releasing mediators like histamine and leukotrienes that cause bronchoconstriction and airway edema. IgE also sustains chronic inflammation by recruiting eosinophils and promoting airway remodeling."
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "specialty": "respiratory",
+            "stages": ["provisional", "differential", "investigations", "management", "mcq"],
+            "stem": "75M develops sudden shortness of breath, cough and pleuritic chest pain a week after his appendicectomy. His cough is non-productive and there is no calf pain or swelling.",
+            "patientImage": "./assets/images/patient2.png",
+            
+            "obs": {
+              "BP": "125/80",
+              "Temp": "37.5",
+              "HR": "110",
+              "RR": "22",
+              "SPO2": "95%"
+            },
+          
+            "investigations": [
+              {
+                "name": "ECG",
+                "result": "Sinus tachycardia, no ischaemic changes",
+                "points": "critical",
+                "critical": true
+              },
+              {
+                "name": "Urinalysis",
+                "result": "Clear \npH: 6.0 (4.5-8.0)\nProtein: - \nGlucose: - \nBlood: -",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "ABG",
+                "isTable": true,
+                "result": "pH: 7.4: (7.35–7.45)\nPaCO₂: 45: (35–45 mmHg)\nPaO₂: 65: (80–100 mmHg)\nHCO₃⁻: 25: (22–26 mmol/L)\nBase Excess: 0: (-2 to +2)\nSaO₂: 89%: (≥95%)",
+                "points": "ancillary",
+                "critical": false
+              },
+              {
+                "name": "BSL",
+                "result": "6.5 mmol/L (normal <7.8 mmol/L)",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "FBC",
+                "isTable": true,
+                "result": "Haemoglobin: 14.5: (13–17 g/dL)\nRCC: 4.8: (4.5–5.5 x 10¹²/L)\nMCV: 90: (80–100 fL)\nWBC: 6.8: (4–11 x 10⁹/L)\nPlatelets: 250: (150–400 x 10⁹/L)",
+                "points": "ancillary",
+                "critical": false
+              },
+              {
+                "name": "Cultures",
+                "result": "No bacterial growth detected",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "Coags",
+                "isTable": true,
+                "result": "PT: 13.5: (11–14 seconds)\nINR: 1.1: (0.8–1.2)\naPTT: 32: (25–35 seconds)\nD-dimer: 0.8: (<0.5 µg/mL FEU)\nFibrinogen: 3.0: (2.0–4.0 g/L)",
+                "points": "critical",
+                "critical": true
+              },
+              {
+                "name": "EUC",
+                "isTable": true,
+                "result": "Sodium: 140: (135–145 mmol/L)\nPotassium: 4.0: (3.5–5.0 mmol/L)\nChloride: 102: (95–105 mmol/L)\nBicarbonate: 24: (22–28 mmol/L)\nUrea: 5.0: (2.5–7.5 mmol/L)\nCreatinine: 80: (60–110 µmol/L)",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "LFT",
+                "isTable": true,
+                "result": "Bilirubin: 10: (0–20 µmol/L)\nALT: 25: (10–40 U/L)\nAST: 20: (10–40 U/L)\nALP: 80: (30–120 U/L)\nGGT: 25: (10–50 U/L)\nTotal Protein: 70: (60–80 g/L)\nAlbumin: 45: (35–50 g/L)",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "CRP",
+                "result": "No abnormalities detected",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "Troponins",
+                "result": "0.02 ng/mL (normal <0.04 ng/mL)",
+                "points": "ancillary",
+                "critical": false
+              },
+              {
+                "name": "TFT",
+                "isTable": true,
+                "result": "TSH: 2.0: (0.4–4.0 mIU/L)\nFree T4: 16: (9–19 pmol/L)\nFree T3: 4.5: (3.5–6.5 pmol/L)",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "CXR",
+                "result": "Lungs clear, no evidence of pneumothorax",
+                "points": "critical",
+                "critical": true
+              },
+              {
+                "name": "Ultrasound",
+                "result": "Lung sliding present",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "Bronchoscopy",
+                "result": "No abnormalities detected",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "CT Chest",
+                "result": "No abnormalities detected",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "CTPA",
+                "result": "Filling defect in subsegmental branch of right lower lobe pulmonary artery. No signs of infarction.",
+                "points": "critical",
+                "critical": true
+              },
+              {
+                "name": "MRI",
+                "result": "No abnormalities detected",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "V/Q Scan",
+                "result": "No mismatch detected, ruling out pulmonary embolism",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "Peak Flow",
+                "result": "300 L/min (normal range: 400-550 L/min)",
+                "points": "ancillary",
+                "critical": false
+              },
+              {
+                "name": "Spirometry",
+                "isTable": true,
+                "result": "FEV1: 0.8: 23%: (3.5L)\nFVC: 2.5: 63%: (4.0L)\nFEV1/FVC: 0.32 : - : (≥0.7)",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "Thoracentesis",
+                "result": "No pleural effusion detected",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "Biopsy",
+                "result": "Normal lung parenchyma",
+                "points": "unnecessary",
+                "critical": false
+              },
+              {
+                "name": "Right Heart Catheterisation",
+                "result": "Normal pulmonary capillary wedge pressure",
+                "points": "unnecessary",
+                "critical": false
+              }
+            ],
+          
+            "questions": [
+              {
+                "prompt": "What is the most likely diagnosis?",
+                "options": [
+                  "Exacerbation of COPD", 
+                  "Asthma exacerbation", 
+                  "Pneumothorax", 
+                  "Panic attack"
+                ],
+                "correctOption": "Asthma exacerbation"
+              },
+              {
+                "prompt": "What is your interpretation of her ABG?",
+                "options": [
+                  "Respiratory acidosis without metabolic compensation",
+                  "Respiratory acidosis with metabolic compensation",
+                  "Metabolic acidosis with respiratory compensation",
+                  "Mixed metabolic and respiratory acidosis"
+                ],
+                "correctOption": "Respiratory acidosis without metabolic compensation"
+              },
+              {
+                "prompt": "What initial treatment should be administered?",
+                "options": [
+                  "Nebulized salbutamol and ipratropium bromide",
+                  "Oral corticosteroids",
+                  "Intravenous antibiotics",
+                  "Oxygen via nasal cannula"
+                ],
+                "correctOption": "Nebulized salbutamol and ipratropium bromide"
+              }
+            ]
+          }
     ]
 }
