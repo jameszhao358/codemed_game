@@ -54,6 +54,70 @@
   color: #b3b3b3;
 }
 
+.specialty-menu {
+  text-align: center;
+  font-family: 'Balatro';
+  font-weight: lighter;
+}
+
+.specialty-menu h2 {
+  margin-top: 50px;
+  font-size: 30px;
+  font-weight: lighter;
+  color: #696969;
+  text-shadow: 2px 2px 0px rgba(82, 82, 82, 0.2);
+}
+
+.specialty-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 70px;
+}
+
+.specialty-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  padding: 30px;
+  width: 200px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.specialty-button img {
+  margin-top: -30px;
+  margin-bottom: -15px;
+}
+
+.cardiology-button {
+  animation: wave 1.5s infinite ease-in-out;
+  animation-delay: 0s;
+}
+
+.respiratory-button {
+  scale: 1.05;
+  animation: wave 1.5s infinite ease-in-out;
+  animation-delay: -0.3s;
+  position: relative;
+  top: -5px;
+}
+
+.specialty-button span {
+  bottom: auto;
+  font-size: 24px;
+  font-family: 'Balatro';
+  color: #d85555;
+  text-shadow: 2px 2px 0px rgba(82, 82, 82, 0.2);
+}
+
+.specialty-button:hover span {
+  scale: 1.05;
+}
+
 .investigate-container {
   position: absolute;
   width: 100%;

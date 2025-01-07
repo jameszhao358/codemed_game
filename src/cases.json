@@ -550,11 +550,12 @@
                 }
             ]
         },
+
         {
             "id": 4,
             "specialty": "respiratory",
             "stages": ["provisional", "differential", "investigations", "management", "mcq"],
-            "stem": "32F presents with worsening shortness of breath and wheezing which started an hour ago during a run. She is unable to speak in full sentences. She has a past history of asthma and is on a salbutamol rescue inhaler.",
+            "stem": "32F presents with worsening shortness of breath and wheezing for the past hour. She is unable to speak in full sentences. She has a past history of asthma.",
             "patientImage": "./assets/images/patient3.png",
             
             "obs": {
@@ -798,8 +799,9 @@
                 "explanation": "IgE mediates acute and chronic inflammation in allergic asthma. Allergen-specific IgE binds to mast cells, and re-exposure leads to mast cell degranulation, releasing mediators like histamine and leukotrienes that cause bronchoconstriction and airway edema. IgE also sustains chronic inflammation by recruiting eosinophils and promoting airway remodeling."
               }
             ]
-          },
-          {
+        },
+
+        {
             "id": 5,
             "specialty": "respiratory",
             "stages": ["provisional", "differential", "investigations", "management", "mcq"],
@@ -1000,6 +1002,6 @@
                 "correctOption": "Nebulized salbutamol and ipratropium bromide"
               }
             ]
-          }
+        }
     ]
 }

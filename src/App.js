@@ -5,6 +5,8 @@ import DiagnosisStage from './DiagnosisStage';
 import ScoringStage from './ScoringStage';
 import caseData from './cases.json';
 import React, { useState } from 'react';
+import cardiology from "./assets/images/cardiology.png";
+import respiratory from "./assets/images/respiratory.png";
 
   function App() {
     const [caseID, setCaseID] = useState(5);
@@ -64,21 +66,23 @@ import React, { useState } from 'react';
 
         {currentStage.stage === "specialty" && (
           <div className="specialty-menu">
-              <h2>Select Your Specialty</h2>
-              <div className="specialty-buttons">
+              <h2>Choose Your Specialty</h2>
+                <div className="specialty-buttons">
                   <button
-                      className="specialty-button"
-                      onClick={() => handleSpecialtySelection("cardiology")}
+                    className="specialty-button"
+                    onClick={() => handleSpecialtySelection("cardiology")}
                   >
-                      Cardiology
+                    <img className="cardiology-button" src={cardiology} alt="Cardiology" />
+                    <span>Cardiology</span>
                   </button>
                   <button
-                      className="specialty-button"
-                      onClick={() => handleSpecialtySelection("respiratory")}
+                    className="specialty-button"
+                    onClick={() => handleSpecialtySelection("respiratory")}
                   >
-                      Respiratory
+                    <img className="respiratory-button" src={respiratory} alt="Respiratory" />
+                    <span>Respiratory</span>
                   </button>
-              </div>
+                </div>
           </div>
         )}
 
