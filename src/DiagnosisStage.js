@@ -95,6 +95,27 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData, inv
                             {questions[currentQuestionIndex].explanation}
                         </span>
                     </p>
+                    <p className="citation">
+                        {questions[currentQuestionIndex].sources && questions[currentQuestionIndex].sources.length > 0 ? (
+                            questions[currentQuestionIndex].sources.map((source, index) => (
+                                <div key={index}>
+                                    {source.url ? (
+                                        <a
+                                            href={source.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            {source.name}
+                                        </a>
+                                    ) : (
+                                        <span className="non-url">{source.name}</span>
+                                    )}
+                                </div>
+                            ))
+                        ) : (
+                            <div>Source coming soon.</div>
+                        )}
+                    </p>
                     <button
                         className="close-button"
                         onClick={() => setIsExplanationVisible(false)}

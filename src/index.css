@@ -492,6 +492,35 @@
   white-space: pre-wrap;
   animation: typing 0.5s steps(40,end);
   font-size: 15px;
+  margin-bottom: 0px;
+}
+
+.citation {
+  font-size: 11px; /* Small text */
+  color: grey; /* Light grey color */
+  position: relative;
+  margin-top: -25px;
+  margin-bottom: -20px;
+  text-align: left; /* Align it to the right */
+}
+
+.citation a {
+  color: grey;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 2;
+}
+
+.citation a:hover {
+  text-decoration: underline; 
+  color: grey; 
+}
+
+.citation .non-url {
+  color: grey;
+  font-size: 11px;
+  text-decoration: none; /* No underline for non-links */
+  cursor: default; /* No pointer cursor for non-links */
 }
 
 .modal-content table {
@@ -553,7 +582,7 @@
   margin-left: auto;
   margin-right: -10px;
   margin-bottom: -10px;
-  margin-top: 0px;
+  margin-top: -10px;
   padding: 10px 0px;
   font-size: 1em;
   font-family: 'Balatro';

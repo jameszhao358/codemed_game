@@ -5,7 +5,7 @@
             "id": 1,
             "specialty": "cardiology",
             "stages": ["provisional", "differential", "investigations", "management", "mcq"],
-            "stem": "56M presents with sudden onset chest pain radiating to his jaw.",
+            "stem": "56M presents with a 2 hour history of sudden onset chest pain radiating to his jaw.",
             "patientImage": "./assets/images/patient2.png",
             
             "obs": {
@@ -84,7 +84,8 @@
                 },
                 {
                     "name": "Troponins",
-                    "result": "12 ng/mL (<0.04 ng/mL)",
+                    "isTable": true,
+                    "result": "hs-cTn I: 12 ng/L: <14 ng/L",
                     "points": "critical",
                     "critical": true
                 },
@@ -104,14 +105,14 @@
                 {
                     "name": "CXR",
                     "result": "Normal cardiac silhouette, no pulmonary oedema or consolidation.",
-                    "points": "ancillary",
-                    "critical": false
+                    "points": "critical",
+                    "critical": true
                 },
                 {
                     "name": "Coronary Angiogram",
                     "result": "90% occlusion of the right coronary artery",
-                    "points": "critical",
-                    "critical": true
+                    "points": "ancillary",
+                    "critical": false
                 },
                 {
                     "name": "CT Angiogram",
@@ -147,26 +148,49 @@
                         "NSTEMI", 
                         "Unstable Angina"], 
                     "correctOption": "Inferior STEMI",
-                    "explanation": "The clinical presentation, ECG findings, and troponin levels all align with the diagnosis of an Inferior STEMI. This is further confirmed by the coronary angiogram showing severe RCA occlusion. \n \nPrompt recognition and treatment with primary PCI or fibrinolysis are critical to improve outcomes."
+                    "explanation": "Given ST elevation in 2 contiguous leads + chest pain, a provisional diagnosis of STEMI should be made until proven otherwise. The unremarkable chest x-ray can help rule out respiratory causes of chest pain (pneumothorax, pneumonia) and cardiac causes (aortic dissection, pericardial effusion). Troponins are likely to be normal within 2 hours of symptom onset. \n \n• ST elevation of II, III and aVF suggests inferior MI\n• ST elevation of V5, V6, I and aVL suggests lateral MI\n• ST elevation of V1-4 suggests anterior MI",
+                    "sources": [
+                      {
+                        "name": "Pathway for Acute Coronary Syndrome Assessment (PACSA) Flow Chart",
+                        "url": "https://aci.health.nsw.gov.au/__data/assets/pdf_file/0019/824140/PACSA-STEMI-Reperfusion-flow-chart-SAMPLE.pdf"
+                      }
+                    ]
                     },
 
                 { "prompt": "What is your immediate supportive management?", 
                     "options": [
                         "Supplemental oxygen, GTN, morphine", 
-                        "Supplemental oxygen, GTN, aspirin", 
-                        "Supplemental oxygen, IV fluids, morphine", 
+                        "Aspirin, GTN +/- morphine", 
+                        "Supplemental oxygen, aspirin, morphine", 
                         "IV fluids, GTN, morphine"], 
-                    "correctOption": "Supplemental oxygen, GTN, morphine",
-                    "explanation": "Explanation." 
+                    "correctOption": "Aspirin, GTN +/- morphine",
+                    "explanation": "Regarding initial management, the NSW PACSA flowchart suggests 300mg aspirin (oral) unless contraindicated, as well as administration of glyceryl trinitrate (sublingual). Supplemental oxygen is not required in stable patients if their SPO2 is above 93%. Morphine (2.5-5 mg IV) can be given if pain persists, often with an antiemetic e.g. 10mg metoclopramide.",
+                    "sources": [
+                      {
+                        "name": "Pathway for Acute Coronary Syndrome Assessment (PACSA) Flow Chart",
+                        "url": "https://aci.health.nsw.gov.au/__data/assets/pdf_file/0019/824140/PACSA-STEMI-Reperfusion-flow-chart-SAMPLE.pdf"
+                      },
+                      {
+                        "name": "Emergency Medicine: Diagnosis and Management 6th Edition (Brown & Cadogan, 2011)",
+                        "url": "https://www.amazon.com.au/Emergency-Medicine-Diagnosis-Management-Revised/dp/1444120131"
+                      }
+                    ]
                     },
 
                 { "prompt": "What is your definitive management?", 
                     "options": [
-                        "PCI within 90 minutes / fibrinolysis within 12 hours", 
+                        "PCI within 60 minutes / fibrinolysis within 12 hours", 
                         "PCI within 6 hours / fibrinolysis within 24 hours", 
                         "Antiplatelets, beta-blockers, PCI within 2-72 hours", 
                         "Anticoagulation, beta-blockers, PCI within 2 hours"], 
-                    "correctOption": "PCI within 90 minutes / fibrinolysis within 12 hours" 
+                    "correctOption": "PCI within 60 minutes / fibrinolysis within 12 hours",
+                    "explanation": "The PACSA STEMI Reperfusion flowchart suggests percutaneous coronary intervention (PCI) if available within 60 minutes. Otherwise, thrombolysis with tenecteplase (IV) should be given within 12 hours of symptom onset provided there are no contraindications.",
+                    "sources": [
+                      {
+                        "name": "PACSA STEMI Reperfusion Flow Chart",
+                        "url": "https://aci.health.nsw.gov.au/__data/assets/pdf_file/0019/824140/PACSA-STEMI-Reperfusion-flow-chart-SAMPLE.pdf"
+                      }
+                    ]
                     },
 
                 { "prompt": "What pathological changes would you expect to see on autopsy within 24 hours?", 
@@ -774,7 +798,7 @@
                   "IV salbutamol + hydrocortisone"
                 ],
                 "correctOption": "IV magnesium sulfate +/- oral prednisolone",
-                "explanation": "Following a poor response to initial therapy, the National Asthma Council suggests adding 10 mmol of IV magnesium sulfate over 20 minutes. Add-on treatment options such as oral prednisolone / IV hydrocortisone may also be considered within the first hour. \n \nIV salbutamol and aminophylline are considered if these interventions are ineffective. \n \nFormoterol + budesonide is used for long-term maintenancce therapy in chronic obstructive pulmonary diseases."
+                "explanation": "Following a poor response to initial therapy, the National Asthma Council suggests adding 10 mmol of IV magnesium sulfate over 20 minutes. Add-on treatment options such as oral prednisolone / IV hydrocortisone may also be considered within the first hour. \n \nIV salbutamol and aminophylline are considered if these interventions are ineffective. \n \nFormoterol + budesonide is used for long-term maintenance therapy in chronic obstructive pulmonary diseases."
               },
               {
                 "prompt": "Which of the following is a hallmark pathological airway change in asthma?",
