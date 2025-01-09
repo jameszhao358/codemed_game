@@ -638,12 +638,13 @@
 }
 
 .diagnosis-question-container {
-  position: relative;
+  position: absolute;
   width: 790px;
   height: 270px;
   background-color: white;
-  margin: auto;
-  margin-top: 30px;
+  bottom: 30px;
+  left: 50%;
+  transform: translate(-50%, 0%);
   border-radius: 16px;
   padding: 5px;
   padding-right: 20px;

@@ -193,13 +193,32 @@
                     ]
                     },
 
-                { "prompt": "What pathological changes would you expect to see on autopsy within 24 hours?", 
+                { "prompt": "What is the most likely site of occlusion in this case?", 
                     "options": [
-                        "Pale infarct and myocyte swelling", 
-                        "Coagulative necrosis, inflammatory changes, eosinophilic infiltrate", 
-                        "Pink granulation tissue, angiogenesis, collagen deposition", 
-                        "Coagulative necrosis, collagen deposition, myocyte swelling"], 
-                    "correctOption": "Coagulative necrosis, inflammatory changes, eosinophilic infiltrate" 
+                        "Right coronary artery", 
+                        "Left circumflex artery", 
+                        "Left anterior descending artery", 
+                        "Left coronary artery"], 
+                    "correctOption": "Right coronary artery",
+                    "explanation": "The RCA supplies the inferior wall in those with a right-dominant circulation (~80% of people). Less commonly, an inferior STEMI is caused by occlusion of the LCx in those with a left-dominant circulation (~20% of people)."
+
+                    },
+
+                { "prompt": "When would you expect this patient's troponin levels to peak?", 
+                    "options": [
+                        "6 - 9 hours", 
+                        "9 - 18 hours", 
+                        "18 - 24 hours", 
+                        "24 - 48 hours"], 
+                    "correctOption": "18 - 24 hours",
+                    "explanation": "Cardiac troponins begin to rise 4 - 6 hours after symptom onset and peak at 18 - 24 hours.",
+                    "sources": [
+                      {
+                        "name": "Babuin, L., & Jaffe, A. S. (2005)",
+                        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1277047/#:~:text=Like%20CK%2DMB%2C%20cardiac%20troponin,24%20hours%20after%20symptom%20onset."
+                      }
+                    ]
+
                     }
             ]
         },
@@ -208,7 +227,7 @@
             "id": 2,
             "specialty": "cardiology",
             "stages": ["provisional", "differential", "investigations", "management", "mcq"],
-            "stem": "66F presents with dizziness, dyspnoea and palpitations over the last 3 hours. She denies any chest pain, There is no known history of arrythmias.",
+            "stem": "66F presents with dizziness, dyspnoea and palpitations over the last 3 hours. She denies any chest pain, There is no known history of arrhythmias.",
             "patientImage": "./assets/images/patient1.png",
             
             "obs": {
@@ -394,7 +413,7 @@
                         "Sodium channel blockade, potassium channel blockade", 
                         "Potassium channel blockade, sodium channel blockade", 
                         "Calcium channel blockade, sodium channel blockade", 
-                        "Potassium channel blockade, calcium channel blocakde"], 
+                        "Potassium channel blockade, calcium channel blockade"], 
                         "correctOption": "Sodium channel blockade, potassium channel blockade"}
             ]
         },
@@ -403,14 +422,14 @@
             "id": 3,
             "specialty": "cardiology",
             "stages": ["provisional", "differential", "investigations", "management", "mcq"],
-            "stem": "45M presents with sudden onset, severe chest pain. He is diaphoretic and appears distressed.",
+            "stem": "60M presents with sudden onset, severe chest pain which started 1 hour ago. He is diaphoretic and dyspnoeic.",
             "patientImage": "./assets/images/patient3.png",
             
             "obs": {
                 "BP": "180/110",
                 "Temp": "36.5",
                 "HR": "110",
-                "RR": "22",
+                "RR": "26",
                 "SPO2": "98%"
             },
         
@@ -547,6 +566,7 @@
                         "Acute MI"],
                     "correctOption": "Stanford A aortic dissection"
                 },
+
                 {
                     "prompt": "What could you expect to hear on auscultation?",
                     "options": [
@@ -555,22 +575,56 @@
                         "Pericardial friction rub",
                         "Normal heart sounds"
                     ],
-                    "correctOption": "Diastolic murmur over the aortic area"
+                    "correctOption": "Diastolic murmur over the aortic area",
+                    "explanation": "If the dissection involves the ascending aorta or aortic root, it may pull apart the aortic valve leaflets or disrupt their alignment, preventing them from closing properly during diastole. This results in an aortic regurgitation murmur."
                 },
+
                 {
-                    "prompt": "What is the initial medical management of an aortic dissection?",
+                  "prompt": "In an aortic dissection, between which layers of the aorta does the blood collect?",
+                  "options": [
+                      "Tunica intima and tunica media",
+                      "Tunica intima and tunica adventitia",
+                      "Tunica media and tunica adventitia"
+                  ],
+                  "correctOption": "Tunica intima and tunica media",
+                  "explanation": "An aortic dissection is a tear in the intimal layer of the aortic wall, causing blood to flow between and splitting apart the tunica intima and media.",
+                  "sources": [
+                    {
+                      "name": "Aortic Dissection (teachmesurgery.com)",
+                      "url": "https://teachmesurgery.com/vascular/arterial/aortic-dissection/"
+                    }
+                  ]
+              },
+
+                {
+                    "prompt": "You provide fentanyl PCA for pain relief. What is the most appropriate next step?",
                     "options": [
-                        "Beta-blockers to reduce heart rate and blood pressure",
-                        "IV fluids to stabilize blood pressure",
-                        "Nitroglycerin to improve chest pain",
-                        "Thrombolytics to dissolve the dissection flap"
+                        "Labetalol IV + sodium nitroprusside IV",
+                        "Metoprolol (oral) + glyceryl trinitrate (sublingual)",
+                        "Bisoprolol IV + metaraminol IV",
+                        "Labetalol IV + verapamil IV"
                     ],
-                    "correctOption": "Beta-blockers to reduce heart rate and blood pressure"
+                    "correctOption": "Labetalol IV + sodium nitroprusside IV",
+                    "explanation": "A target HR of 60-80 should be reached via an IV bolus & infusion of esmolol / labetalol / metoprolol. Following this, a target BP of 100-120 systolic (right arm likely most accurate) should be reached using sodium nitroprusside IV.",
+                    "sources": [
+                      {
+                        "name": "Aortic Dissection: Management (Emergency Care Institute)",
+                        "url": "https://aci.health.nsw.gov.au/networks/eci/clinical/tools/cardiology/aortic-dissection"
+                      }
+                    ]
                 },
+
                 {
-                    "prompt": "Are you going to prep this patient for surgery?",
+                    "prompt": "Are you going to call cardiothoracic surgery?",
                     "options": ["Yes", "No"],
-                    "correctOption": "Yes"
+                    "correctOption": "Yes",
+                    "explanation": "In Stanford A dissections, surgical repair represents the mainstay of treatment. Stanford B dissections can be managed medically.",
+                    "sources": [
+                      {
+                        "name": "Aortic Dissection: Management (Emergency Care Institute)",
+                        "url": "https://aci.health.nsw.gov.au/networks/eci/clinical/tools/cardiology/aortic-dissection"
+                      }
+                    ]
                 }
             ]
         },
