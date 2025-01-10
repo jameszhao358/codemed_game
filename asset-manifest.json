@@ -1,19 +1,23 @@
 {
   "files": {
-    "main.css": "/codemed_game/static/css/main.755d9724.css",
-    "main.js": "/codemed_game/static/js/main.5b3a4178.js",
+    "main.css": "/codemed_game/static/css/main.17ec71a4.css",
+    "main.js": "/codemed_game/static/js/main.298f54e8.js",
     "static/js/453.07a6ab98.chunk.js": "/codemed_game/static/js/453.07a6ab98.chunk.js",
     "static/media/DePixelHalbfett.ttf": "/codemed_game/static/media/DePixelHalbfett.519749799470abd72e4e.ttf",
     "static/media/balatro.ttf": "/codemed_game/static/media/balatro.4bc479bb6ca136f0675e.ttf",
     "static/media/index.cjs": "/codemed_game/static/media/index.3799a449eaa3633df8f4.cjs",
+    "static/media/sinustachytrace.png": "/codemed_game/static/media/sinustachytrace.efbb9302e38077c23e24.png",
+    "static/media/afibtrace.png": "/codemed_game/static/media/afibtrace.54cf72c5a8834aebfc4c.png",
+    "static/media/ecgpaperdraft1.png": "/codemed_game/static/media/ecgpaperdraft1.cfef73101ffe8c082eec.png",
+    "static/media/inferiorstemitrace.png": "/codemed_game/static/media/inferiorstemitrace.fb9edfb6ba5c72dc4246.png",
     "static/media/logo.svg": "/codemed_game/static/media/logo.6ce24c58023cc2f8fd88.svg",
     "index.html": "/codemed_game/index.html",
-    "main.755d9724.css.map": "/codemed_game/static/css/main.755d9724.css.map",
-    "main.5b3a4178.js.map": "/codemed_game/static/js/main.5b3a4178.js.map",
+    "main.17ec71a4.css.map": "/codemed_game/static/css/main.17ec71a4.css.map",
+    "main.298f54e8.js.map": "/codemed_game/static/js/main.298f54e8.js.map",
     "453.07a6ab98.chunk.js.map": "/codemed_game/static/js/453.07a6ab98.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.755d9724.css",
-    "static/js/main.5b3a4178.js"
+    "static/css/main.17ec71a4.css",
+    "static/js/main.298f54e8.js"
   ]
 }
