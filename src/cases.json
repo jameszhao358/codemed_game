@@ -11,7 +11,7 @@
             "obs": {
                 "BP": "135/85",
                 "Temp": "36.8",
-                "HR": "75",
+                "HR": "66",
                 "RR": "20",
                 "SPO2": "98%"
             },
@@ -20,7 +20,7 @@
                 {
                     "name": "ECG",
                     "result": "ST elevation in leads II, III, and aVF",
-                    "image": "./assets/images/inferiorstemitrace.png",
+                    "image": "trace1",
                     "points": "critical",
                     "critical": true
                 },
@@ -234,7 +234,7 @@
             "obs": {
                 "BP": "110/70",
                 "Temp": "36.8",
-                "HR": "140",
+                "HR": "135",
                 "RR": "20",
                 "SPO2": "98%"
             },
@@ -243,6 +243,7 @@
                 {
                     "name": "ECG",
                     "result": "Irregularly irregular rhythm, narrow QRS complex, no discernible P waves",
+                    "image": "trace2",
                     "points": "critical",
                     "critical": true
                 },
@@ -315,8 +316,8 @@
                     "name": "TFT",
                     "isTable": true,
                     "result": "TSH: 2.0: (0.4–4.0 mIU/L)\nFree T4: 16: (9–19 pmol/L)\nFree T3: 4.5: (3.5–6.5 pmol/L)",
-                    "points": "unnecessary",
-                    "critical": false
+                    "points": "critical",
+                    "critical": true
                 },
                 {
                     "name": "Echocardiogram",
@@ -326,9 +327,9 @@
                 },
                 {
                     "name": "CXR",
-                    "result": "Normal cardiac silhouette, no pulmonary oedema or consolidation.",
-                    "points": "ancillary",
-                    "critical": false
+                    "result": "No evidence of cardiomegaly / pulmonary oedema",
+                    "points": "critical",
+                    "critical": true
                 },
                 {
                     "name": "Coronary Angiogram",
@@ -429,7 +430,7 @@
             "obs": {
                 "BP": "180/110",
                 "Temp": "36.5",
-                "HR": "110",
+                "HR": "105",
                 "RR": "26",
                 "SPO2": "98%"
             },
@@ -438,6 +439,7 @@
                 {
                     "name": "ECG",
                     "result": "Sinus tachycardia, no ischaemic changes",
+                    "image": "trace3",
                     "points": "critical",
                     "critical": true
                 },
@@ -616,7 +618,7 @@
                 },
 
                 {
-                    "prompt": "Are you going to call cardiothoracic surgery?",
+                    "prompt": "Are you going to call the cardiothoracic surgery team?",
                     "options": ["Yes", "No"],
                     "correctOption": "Yes",
                     "explanation": "In Stanford A dissections, surgical repair represents the mainstay of treatment. Stanford B dissections can be managed medically.",
@@ -635,12 +637,12 @@
             "specialty": "respiratory",
             "stages": ["provisional", "differential", "investigations", "management", "mcq"],
             "stem": "32F presents with worsening shortness of breath and wheezing for the past hour. She is unable to speak in full sentences. She has a past history of asthma.",
-            "patientImage": "./assets/images/patient3.png",
+            "patientImage": "./assets/images/patient4.png",
             
             "obs": {
               "BP": "140/90",
               "Temp": "36.5",
-              "HR": "110",
+              "HR": "105",
               "RR": "32",
               "SPO2": "91%"
             },
@@ -649,6 +651,7 @@
               {
                 "name": "ECG",
                 "result": "Sinus tachycardia, no ischaemic changes",
+                "image": "trace3",
                 "points": "critical",
                 "critical": true
               },
@@ -726,7 +729,7 @@
               },
               {
                 "name": "CXR",
-                "result": "Lungs clear, no evidence of pneumothorax",
+                "result": "No evidence of consolidation / pneumothorax",
                 "points": "critical",
                 "critical": true
               },
@@ -767,7 +770,7 @@
                 "critical": false
               },
               {
-                "name": "Peak Flow",
+                "name": "Peak Flow Meter",
                 "result": "300 L/min (45% of predicted value)",
                 "points": "critical",
                 "critical": true

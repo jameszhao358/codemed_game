@@ -20,7 +20,7 @@ function InvestigationMenu({ onInvestigationClick, selectedSpecialty}) {
         special: ['Endomyocardial Biopsy', 'Stress Test', 'Right Heart Catheterisation']
       },
       respiratory: {
-        bedside: ['ECG', 'Urinalysis', 'ABG', 'BSL'],
+        bedside: ['ECG', 'Urinalysis', 'ABG', 'BSL', 'Peak Flow Meter'],
         labs: [
           { name: 'FBC', tubeColor: 'purple' },
           { name: 'Coags', tubeColor: 'light-blue' },
@@ -32,7 +32,7 @@ function InvestigationMenu({ onInvestigationClick, selectedSpecialty}) {
           { name: 'TFT', tubeColor: 'gold' }
         ],
         imaging: ['CXR', 'Ultrasound', 'Bronchoscopy', 'CT Chest', 'CTPA', 'MRI', 'V/Q Scan'],
-        special: ['Peak Flow', 'Spirometry', 'Thoracentesis', 'Biopsy', 'Right Heart Catheterisation']
+        special: ['Spirometry', 'Thoracentesis', 'Biopsy', 'Right Heart Catheterisation']
       },
     };
   

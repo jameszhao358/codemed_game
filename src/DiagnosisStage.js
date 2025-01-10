@@ -1,5 +1,15 @@
 import doctorImage from "./assets/images/perrycardium2.png";
 import React, {useState, useEffect, useRef} from "react";
+import ecgGrid from "./assets/images/ecgpaperdraft1.png";
+import trace1 from "./assets/images/inferiorstemitrace.png";
+import trace2 from "./assets/images/afibtrace.png";
+import trace3 from "./assets/images/sinustachytrace.png";
+
+const ecgOverlays = {
+    trace1: trace1,
+    trace2: trace2,
+    trace3: trace3,
+  };
 
 function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData, investigationPoints }) {
 
@@ -17,6 +27,21 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData, inv
     const [tableInvestigation, setTableInvestigation] = useState(null); // Stores the selected investigation for table
     const [isTableModalVisible, setIsTableModalVisible] = useState(false); // Tracks modal visibility
     const [isExplanationVisible, setIsExplanationVisible] = useState(false);
+    const imageCache = useRef(new Map());
+
+    useEffect(() => {
+        const preloadImages = () => {
+          const imagesToPreload = [ecgGrid, ...Object.values(ecgOverlays)];
+          imagesToPreload.forEach((src) => {
+            if (!imageCache.current.has(src)) {
+              const img = new Image();
+              img.src = src;
+              imageCache.current.set(src, img);
+            }
+          });
+        };
+        preloadImages();
+      }, []);
 
     useEffect(() => {
         setShuffledOptions([...questions[currentQuestionIndex].options].sort(() => Math.random() - 0.5));
@@ -128,22 +153,43 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData, inv
         
         {isTableModalVisible && tableInvestigation && (
             <div className="modal">
-                <div className="modal-content">
+                <div
+                className={`modal-content ${
+                    tableInvestigation.name === "ECG" ? "ecg-modal" : ""
+                }`}
+                >
                 <h3>{tableInvestigation.name}</h3>
-                <table>
+                {tableInvestigation.name === "ECG" ? (
+                    <div className="ecg-container">
+                    <img
+                        src={imageCache.current.get(ecgGrid).src}
+                        alt="ECG Grid"
+                        className="ecg-grid"
+                    />
+                    <img
+                        src={imageCache.current.get(ecgOverlays[tableInvestigation.image]).src}
+                        alt="ECG overlay"
+                        className="ecg-trace"
+                    />
+                    </div>
+                ) : tableInvestigation.isTable ? (
+                    <table>
                     <tbody>
-                    {tableInvestigation.result.split("\n").map((line, index) => {
+                        {tableInvestigation.result.split("\n").map((line, index) => {
                         const [parameter, value, reference] = line.split(": ");
                         return (
-                        <tr key={index}>
+                            <tr key={index}>
                             <td>{parameter}</td>
                             <td>{value}</td>
                             <td>{reference}</td>
-                        </tr>
+                            </tr>
                         );
-                    })}
+                        })}
                     </tbody>
-                </table>
+                    </table>
+                ) : (
+                    <p>{tableInvestigation.result}</p>
+                )}
                 <button
                     className="close-button"
                     onClick={() => setIsTableModalVisible(false)}
@@ -155,23 +201,27 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData, inv
         )}
 
         <div className = "investigation-report-container">
-        {criticalInvestigations.map((inv, index) => (
-            <p
-                key={index}
-                style={{
-                    cursor: inv.isTable ? 'pointer' : 'default',
-                    color: inv.isTable ? '#007bff' : '#505050',
-                }}
-                onClick={() => {
-                    if (inv.isTable) {
-                    setTableInvestigation({ ...inv }); // Set the selected investigation for the table
-                    setIsTableModalVisible(true); // Open the modal
+            {criticalInvestigations.map((inv, index) => (
+                <p
+                    key={index}
+                    style={{
+                    cursor: inv.name === "ECG" || inv.isTable ? "pointer" : "default",
+                    color: inv.name === "ECG" ? "#ff0000" : inv.isTable ? "#007bff" : "#505050",
+                    }}
+                    onClick={() => {
+                    if (inv.name === "ECG" || inv.isTable) {
+                        setTableInvestigation({ ...inv }); // Set the selected investigation
+                        setIsTableModalVisible(true); // Open the modal
                     }
-                }}
+                    }}
                 >
-                {inv.isTable ? `${inv.name} (click for results)` : `${inv.name}: ${inv.result}`}
-            </p>
-        ))}
+                    {inv.name === "ECG"
+                    ? `${inv.name} (click for results)`
+                    : inv.isTable
+                    ? `${inv.name} (click for table)`
+                    : `${inv.name}: ${inv.result}`}
+                </p>
+            ))}
         </div>
 
         <div className = "diagnosis-question-container">

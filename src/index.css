@@ -461,6 +461,7 @@
   z-index: 2; /* Layer above grid */
   width: 100%;
   animation: reveal-left-to-right 1.5s linear;
+  opacity: 0.7;
 }
 
 @keyframes reveal-left-to-right {
@@ -666,7 +667,7 @@
   height: auto;
   padding: 5px;
   margin: auto;
-  margin-top: 165px;
+  margin-top: 150px;
   margin-bottom: -20px;
   border-radius: 16px;
   font-family: 'Balatro';

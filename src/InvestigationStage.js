@@ -1,8 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PatientImage from './patientComponent';
 import InvestigationMenu from './investigationComponent';
 import notePad from "./assets/images/notepad.png";
+
 import ecgGrid from "./assets/images/ecgpaperdraft1.png";
+import trace1 from "./assets/images/inferiorstemitrace.png";
+import trace2 from "./assets/images/afibtrace.png";
+import trace3 from "./assets/images/sinustachytrace.png";
+
+const ecgOverlays = {
+  trace1: trace1,
+  trace2: trace2,
+  trace3: trace3,
+  // Add more mappings for additional overlays
+};
 
 function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
   const [selectedInvestigation, setSelectedInvestigation] = useState(null);
@@ -22,6 +33,23 @@ function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
 
   const totalCritical = currentCase.investigations.filter((inv) => inv.critical).length;
   const [selectedInvestigations, setSelectedInvestigations] = useState([]);
+
+  const imageCache = useRef(new Map());
+  
+  React.useEffect(() => {
+    const preloadImages = () => {
+      const imagesToPreload = [ecgGrid, ...Object.values(ecgOverlays)];
+      imagesToPreload.forEach((src) => {
+        if (!imageCache.current.has(src)) {
+          const img = new Image();
+          img.src = src;
+          imageCache.current.set(src, img); 
+        }
+      });
+    };
+
+    preloadImages(); 
+  }, []); 
 
   const handleInvestigationClick = (investigationName) => {
     const selected = currentCase.investigations.find(
@@ -180,33 +208,43 @@ function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
                 <p> Critical investigation results are recorded here. </p>
               )}
                     
-              {currentCase.investigations
-                .filter((inv) => inv.critical)
-                .map((criticalInv) => (
-                  <p
-                    key={criticalInv.name}
-                    style={{
-                      cursor: criticalInv.isTable && criticalRevealed[criticalInv.name] ? 'pointer' : 'default',
-                      color: !criticalRevealed[criticalInv.name]
-                        ? 'grey' // Unrevealed investigations show as grey
-                        : criticalInv.isTable
-                        ? '#007bff' // Revealed table investigations as blue
-                        : '#333333', // Revealed non-table investigations as dark gray
-                    }}
-                    onClick={() => {
-                      if (criticalInv.isTable && criticalRevealed[criticalInv.name]) {
-                        setSelectedInvestigation({...criticalInv}); // Reuse your existing logic
-                        setIsModalVisible(true); // Open the modal
-                      }
-                    }}
-                  >
-                    {criticalRevealed[criticalInv.name]
-                    ? criticalInv.isTable
-                      ? `${criticalInv.name} (click for table)`
-                      : `${criticalInv.name}: ${criticalInv.result}`
-                    : "???"}
-                  </p>
-                ))}
+                    {currentCase.investigations
+                      .filter((inv) => inv.critical)
+                      .map((criticalInv) => (
+                        <p
+                          key={criticalInv.name}
+                          style={{
+                            cursor:
+                              (criticalInv.isTable || criticalInv.name === "ECG") &&
+                              criticalRevealed[criticalInv.name]
+                                ? "pointer"
+                                : "default",
+                              color: !criticalRevealed[criticalInv.name]
+                                ? "grey" // Unrevealed investigations show as grey
+                                : criticalInv.name === "ECG"
+                                ? "#ff0000" // Red for revealed ECGs
+                                : criticalInv.isTable
+                                ? "#007bff" // Blue for revealed table investigations
+                                : "#333333", // Dark gray for other revealed investigations
+                          }}
+                          onClick={() => {
+                            if (
+                              (criticalInv.isTable || criticalInv.name === "ECG") &&
+                              criticalRevealed[criticalInv.name]
+                            ) {
+                              setSelectedInvestigation({ ...criticalInv });
+                              setIsModalVisible(true); // Open the modal
+                            }
+                          }}
+                        >
+                          {criticalRevealed[criticalInv.name]
+                            ? criticalInv.isTable || criticalInv.name === "ECG"
+                              ? `${criticalInv.name} (click for results)`
+                              : `${criticalInv.name}: ${criticalInv.result}`
+                            : "???"}
+                        </p>
+                      ))
+                    }
               
             </div>
             <button
@@ -237,12 +275,12 @@ function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
             {selectedInvestigation.name === "ECG" && (
               <div className="ecg-container">
                 <img
-                  src={ecgGrid}
+                  src={imageCache.current.get(ecgGrid).src}
                   alt="ECG Grid"
                   className="ecg-grid"
                 />
                 <img
-                  src={require(`${selectedInvestigation.image}`)}
+                  src={imageCache.current.get(ecgOverlays[selectedInvestigation.image]).src}
                   alt="ECG overlay"
                   className="ecg-trace"
                 />
