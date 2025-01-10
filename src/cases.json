@@ -20,6 +20,7 @@
                 {
                     "name": "ECG",
                     "result": "ST elevation in leads II, III, and aVF",
+                    "image": "./assets/images/inferiorstemitrace.png",
                     "points": "critical",
                     "critical": true
                 },

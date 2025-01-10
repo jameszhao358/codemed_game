@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PatientImage from './patientComponent';
 import InvestigationMenu from './investigationComponent';
 import notePad from "./assets/images/notepad.png";
+import ecgGrid from "./assets/images/ecgpaperdraft1.png";
 
 function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
   const [selectedInvestigation, setSelectedInvestigation] = useState(null);
@@ -227,13 +228,31 @@ function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
 
       {isModalVisible && selectedInvestigation && (
         <div className="modal">
-          <div className="modal-content">
+          <div
+            className={`modal-content ${
+              selectedInvestigation.name === "ECG" ? "ecg-modal" : ""
+            }`}
+          >
             <h3>{selectedInvestigation.name}</h3>
-            {selectedInvestigation.isTable ?? false ? (
+            {selectedInvestigation.name === "ECG" && (
+              <div className="ecg-container">
+                <img
+                  src={ecgGrid}
+                  alt="ECG Grid"
+                  className="ecg-grid"
+                />
+                <img
+                  src={require(`${selectedInvestigation.image}`)}
+                  alt="ECG overlay"
+                  className="ecg-trace"
+                />
+              </div>
+            )}
+            {selectedInvestigation.isTable ? (
               <table>
                 <tbody>
                   {selectedInvestigation.result.split("\n").map((line, index) => {
-                    const columns = line.split(": "); // Split the line into an array of columns
+                    const columns = line.split(": ");
                     return (
                       <tr key={index}>
                         {columns.map((column, colIndex) => (
@@ -245,14 +264,16 @@ function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
                 </tbody>
               </table>
             ) : (
-              <p>
-                {selectedInvestigation.result.split("\n").map((line, index) => (
-                  <React.Fragment key={index}>
-                    {line}
-                    <br />
-                  </React.Fragment>
-                ))}
-              </p>
+              selectedInvestigation.name !== "ECG" && (
+                <p>
+                  {selectedInvestigation.result.split("\n").map((line, index) => (
+                    <React.Fragment key={index}>
+                      {line}
+                      <br />
+                    </React.Fragment>
+                  ))}
+                </p>
+              )
             )}
             <button
               className="ok-button"
