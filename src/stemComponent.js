@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 
-function PatientStem({stem}) {
+function PatientStem({stem, setCurrentStage}) {
 
   useEffect(() => {
     const container = document.querySelector('.patient-stem-container');
@@ -10,9 +10,18 @@ function PatientStem({stem}) {
   }, []);
 
   return (
-    <div className="patient-stem-container">
-      <h2 className="patient-stem">{stem}</h2>
-    </div>
+    <>
+      <div className="patient-stem-container">
+        <h2 className="patient-stem">{stem}</h2>
+      </div>
+      <button 
+          className = "back-button"
+          onClick={() => 
+            setCurrentStage({ stage: "specialty", investigationPoints: [], diagnosisPoints: [] })}
+        >
+          &lt;
+      </button>
+    </>
   );
 }
   

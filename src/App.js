@@ -36,7 +36,14 @@ import respiratory from "./assets/images/respiratory.png";
       <div className="App">
 
         {currentStage.stage !== "start" && currentStage.stage !== "specialty" && (
-            <PatientStem key={caseID} stem={currentCase.stem} currentStage={currentStage.stage} />
+          <>
+            <PatientStem 
+              key={caseID} 
+              stem={currentCase.stem} 
+              currentStage={currentStage.stage}
+              setCurrentStage={setCurrentStage}
+            />
+          </>
         )}
 
         {currentStage.stage === "start" && (
