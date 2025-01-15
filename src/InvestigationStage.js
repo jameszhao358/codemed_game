@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import PatientImage from './patientComponent';
-import InvestigationMenu from './investigationComponent';
+import React, { useState, useEffect, useRef } from "react";
+import PatientImage from "./patientComponent";
+import InvestigationMenu from "./investigationComponent";
 import notePad from "./assets/images/notepad.png";
 
 import ecgGrid from "./assets/images/ecgpaperdraft1.png";
@@ -15,7 +15,11 @@ const ecgOverlays = {
   // Add more mappings for additional overlays
 };
 
-function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
+function InvestigationStage({
+  currentCase,
+  setCurrentStage,
+  selectedSpecialty,
+}) {
   const [selectedInvestigation, setSelectedInvestigation] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [criticalCount, setCriticalCount] = useState(0);
@@ -31,11 +35,13 @@ function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
   const minHR = parseInt(currentCase.obs.HR, 10) - 10;
   const maxHR = parseInt(currentCase.obs.HR, 10) + 10;
 
-  const totalCritical = currentCase.investigations.filter((inv) => inv.critical).length;
+  const totalCritical = currentCase.investigations.filter(
+    (inv) => inv.critical
+  ).length;
   const [selectedInvestigations, setSelectedInvestigations] = useState([]);
 
   const imageCache = useRef(new Map());
-  
+
   React.useEffect(() => {
     const preloadImages = () => {
       const imagesToPreload = [ecgGrid, ...Object.values(ecgOverlays)];
@@ -43,68 +49,72 @@ function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
         if (!imageCache.current.has(src)) {
           const img = new Image();
           img.src = src;
-          imageCache.current.set(src, img); 
+          imageCache.current.set(src, img);
         }
       });
     };
 
-    preloadImages(); 
-  }, []); 
+    preloadImages();
+  }, []);
 
   const handleInvestigationClick = (investigationName) => {
     const selected = currentCase.investigations.find(
       (investigation) => investigation.name === investigationName
     );
     const category = selected.points;
-    const points = category === "critical" ? 100 : category === "ancillary" ? 10 : -10;
+    const points =
+      category === "critical" ? 100 : category === "ancillary" ? 10 : -10;
 
     setSelectedInvestigation(selected);
-    setIsModalVisible(true);  
+    setIsModalVisible(true);
 
     if (!selectedInvestigations.includes(investigationName)) {
-    setInvestigationPoints((prevPoints) =>
-      prevPoints.map((entry) =>
-        entry.category === category
-          ? { ...entry, points: entry.points + points }
-          : entry
-      )
-    );
+      setInvestigationPoints((prevPoints) =>
+        prevPoints.map((entry) =>
+          entry.category === category
+            ? { ...entry, points: entry.points + points }
+            : entry
+        )
+      );
 
-    if (selected.critical) {
-      setCriticalRevealed((prev) => ({
-        ...prev,
-        [investigationName]: true,
-      }));
-    }
+      if (selected.critical) {
+        setCriticalRevealed((prev) => ({
+          ...prev,
+          [investigationName]: true,
+        }));
+      }
 
-    if (!selectedInvestigations.includes(investigationName)) {
-      setSelectedInvestigations((prevArray) => [...prevArray, investigationName]);
+      if (!selectedInvestigations.includes(investigationName)) {
+        setSelectedInvestigations((prevArray) => [
+          ...prevArray,
+          investigationName,
+        ]);
 
-      if (selected.critical && criticalCount < totalCritical) {
-        setCriticalCount((prevCount) => prevCount + 1);
+        if (selected.critical && criticalCount < totalCritical) {
+          setCriticalCount((prevCount) => prevCount + 1);
 
-        const notepadElement = document.querySelector('.toggle-button');
-        if (notepadElement) {
-          notepadElement.classList.add('pulse2');
-          setTimeout(() => {
-            notepadElement.classList.remove('pulse2');
-          }, 1000); 
+          const notepadElement = document.querySelector(".toggle-button");
+          if (notepadElement) {
+            notepadElement.classList.add("pulse2");
+            setTimeout(() => {
+              notepadElement.classList.remove("pulse2");
+            }, 1000);
+          }
         }
       }
-    }
     }
   };
 
   useEffect(() => {
-    const popup = document.querySelector('.popup-message');
+    const popup = document.querySelector(".popup-message");
     if (popup) {
       setTimeout(() => {
-        popup.classList.add('fade-in');
+        popup.classList.add("fade-in");
       }, 700); // Delay before appearing (500ms)
-  
+
       setTimeout(() => {
-        popup.classList.remove('fade-in');
-        popup.classList.add('fade-out');
+        popup.classList.remove("fade-in");
+        popup.classList.add("fade-out");
       }, 2500); // Starts fading out after 4 seconds total (500ms delay + 3.5s display time)
 
       setTimeout(() => {
@@ -123,29 +133,28 @@ function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
     setCriticalRevealed(initialRevealed);
   }, [currentCase]);
 
-  useEffect(() => { 
+  useEffect(() => {
     const interval = setInterval(() => {
       setHeartRate((prevHR) => {
         const fluctuation = Math.floor(Math.random() * 7) - 3;
         const newHR = prevHR + fluctuation;
 
         return Math.min(Math.max(newHR, minHR), maxHR);
-        });
-      }, 2000); 
+      });
+    }, 2000);
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
   }, [minHR, maxHR]);
 
   useEffect(() => {
-    const container = document.querySelector('.investigate-container');
+    const container = document.querySelector(".investigate-container");
     if (container) {
-      container.classList.add('slide-up');
+      container.classList.add("slide-up");
     }
   }, []);
 
   return (
-    <div className="investigate-container">
-
+    <div className={`investigate-container ${isModalVisible && "to-front"}`}>
       <div className="popup-message">Choose your investigations!</div>
 
       <PatientImage image={currentCase.patientImage} />
@@ -166,23 +175,30 @@ function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
           onClick={() => setIsListVisible((prev) => !prev)}
         />
         <h3>Critical Investigations</h3>
-        <p className={criticalCount === totalCritical ? 'highlight-animation' : ''}>
+        <p
+          className={
+            criticalCount === totalCritical ? "highlight-animation" : ""
+          }
+        >
           {criticalCount} / {totalCritical}
         </p>
         {criticalCount === totalCritical && (
-          <button 
+          <button
             className="proceed-button"
             onClick={() => {
+              const investigateContainer = document.querySelector(
+                ".investigate-container"
+              );
+              if (investigateContainer) {
+                investigateContainer.style.animation = "none";
+                void investigateContainer.offsetWidth;
+                investigateContainer.style.animation =
+                  "slideDown 1s ease-in forwards";
+              }
 
-              const investigateContainer = document.querySelector(".investigate-container");
-                        if (investigateContainer) {
-
-                        investigateContainer.style.animation = "none";
-                        void investigateContainer.offsetWidth;
-                        investigateContainer.style.animation = "slideDown 1s ease-in forwards";
-                        }
-
-              document.querySelector('.investigate-container').classList.add('slide-down');
+              document
+                .querySelector(".investigate-container")
+                .classList.add("slide-down");
 
               setTimeout(() => {
                 setCurrentStage({
@@ -190,7 +206,6 @@ function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
                   investigationPoints: [...investigationPoints], // Pass points directly
                 });
               }, 1000);
-
             }}
           >
             Proceed
@@ -198,7 +213,7 @@ function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
         )}
       </div>
 
-      {isListVisible && (  
+      {isListVisible && (
         <div className="modal">
           <div className="modal-box">
             <div className="modal-box-content">
@@ -207,56 +222,53 @@ function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
                 .every((inv) => !criticalRevealed[inv.name]) && (
                 <p> Critical investigation results are recorded here. </p>
               )}
-                    
-                    {currentCase.investigations
-                      .filter((inv) => inv.critical)
-                      .map((criticalInv) => (
-                        <p
-                          key={criticalInv.name}
-                          style={{
-                            cursor:
-                              (criticalInv.isTable || criticalInv.name === "ECG") &&
-                              criticalRevealed[criticalInv.name]
-                                ? "pointer"
-                                : "default",
-                              color: !criticalRevealed[criticalInv.name]
-                                ? "grey" // Unrevealed investigations show as grey
-                                : criticalInv.name === "ECG"
-                                ? "#ff0000" // Red for revealed ECGs
-                                : criticalInv.isTable
-                                ? "#007bff" // Blue for revealed table investigations
-                                : "#333333", // Dark gray for other revealed investigations
-                          }}
-                          onClick={() => {
-                            if (
-                              (criticalInv.isTable || criticalInv.name === "ECG") &&
-                              criticalRevealed[criticalInv.name]
-                            ) {
-                              setSelectedInvestigation({ ...criticalInv });
-                              setIsModalVisible(true); // Open the modal
-                            }
-                          }}
-                        >
-                          {criticalRevealed[criticalInv.name]
-                            ? criticalInv.isTable || criticalInv.name === "ECG"
-                              ? `${criticalInv.name} (click for results)`
-                              : `${criticalInv.name}: ${criticalInv.result}`
-                            : "???"}
-                        </p>
-                      ))
-                    }
-              
+
+              {currentCase.investigations
+                .filter((inv) => inv.critical)
+                .map((criticalInv) => (
+                  <p
+                    key={criticalInv.name}
+                    style={{
+                      cursor:
+                        (criticalInv.isTable || criticalInv.name === "ECG") &&
+                        criticalRevealed[criticalInv.name]
+                          ? "pointer"
+                          : "default",
+                      color: !criticalRevealed[criticalInv.name]
+                        ? "grey" // Unrevealed investigations show as grey
+                        : criticalInv.name === "ECG"
+                        ? "#ff0000" // Red for revealed ECGs
+                        : criticalInv.isTable
+                        ? "#007bff" // Blue for revealed table investigations
+                        : "#333333", // Dark gray for other revealed investigations
+                    }}
+                    onClick={() => {
+                      if (
+                        (criticalInv.isTable || criticalInv.name === "ECG") &&
+                        criticalRevealed[criticalInv.name]
+                      ) {
+                        setSelectedInvestigation({ ...criticalInv });
+                        setIsModalVisible(true); // Open the modal
+                      }
+                    }}
+                  >
+                    {criticalRevealed[criticalInv.name]
+                      ? criticalInv.isTable || criticalInv.name === "ECG"
+                        ? `${criticalInv.name} (click for results)`
+                        : `${criticalInv.name}: ${criticalInv.result}`
+                      : "???"}
+                  </p>
+                ))}
             </div>
             <button
-                className="close-button"
-                onClick={() => setIsListVisible(false)} // Close the list
-              >
-                Close
+              className="close-button"
+              onClick={() => setIsListVisible(false)} // Close the list
+            >
+              Close
             </button>
           </div>
         </div>
       )}
-
 
       <InvestigationMenu
         selectedSpecialty={selectedSpecialty}
@@ -280,7 +292,11 @@ function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
                   className="ecg-grid"
                 />
                 <img
-                  src={imageCache.current.get(ecgOverlays[selectedInvestigation.image]).src}
+                  src={
+                    imageCache.current.get(
+                      ecgOverlays[selectedInvestigation.image]
+                    ).src
+                  }
                   alt="ECG overlay"
                   className="ecg-trace"
                 />
@@ -289,27 +305,31 @@ function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
             {selectedInvestigation.isTable ? (
               <table>
                 <tbody>
-                  {selectedInvestigation.result.split("\n").map((line, index) => {
-                    const columns = line.split(": ");
-                    return (
-                      <tr key={index}>
-                        {columns.map((column, colIndex) => (
-                          <td key={colIndex}>{column}</td>
-                        ))}
-                      </tr>
-                    );
-                  })}
+                  {selectedInvestigation.result
+                    .split("\n")
+                    .map((line, index) => {
+                      const columns = line.split(": ");
+                      return (
+                        <tr key={index}>
+                          {columns.map((column, colIndex) => (
+                            <td key={colIndex}>{column}</td>
+                          ))}
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             ) : (
               selectedInvestigation.name !== "ECG" && (
                 <p>
-                  {selectedInvestigation.result.split("\n").map((line, index) => (
-                    <React.Fragment key={index}>
-                      {line}
-                      <br />
-                    </React.Fragment>
-                  ))}
+                  {selectedInvestigation.result
+                    .split("\n")
+                    .map((line, index) => (
+                      <React.Fragment key={index}>
+                        {line}
+                        <br />
+                      </React.Fragment>
+                    ))}
                 </p>
               )
             )}
@@ -322,7 +342,6 @@ function InvestigationStage({currentCase, setCurrentStage, selectedSpecialty}) {
           </div>
         </div>
       )}
-
     </div>
   );
 }
