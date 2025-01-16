@@ -12,7 +12,7 @@
 }
 
 .to-front {
-  z-index: 10;
+  z-index: 1;
 }
 
 .start-title span {
@@ -421,7 +421,7 @@
 */
 
 .modal {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;

@@ -13,9 +13,15 @@ export const AppContext = createContext({});
 
 const AppContextProvider = ({ children }) => {
   const [currentStage, setCurrentStage] = useState(STAGE_START);
-  const [investigationPoints, setInvestigationPoints] = useState([]);
+  const [investigationPoints, setInvestigationPoints] = useState([
+    { category: "critical", points: 0 },
+    { category: "ancillary", points: 0 },
+    { category: "unnecessary", points: 0 },
+  ]);
   const [diagnosisPoints, setDiagnosisPoints] = useState([]);
   const [selectedSpecialty, setSelectedSpecialty] = useState(null);
+  const [totalPoints, setTotalPoints] = useState(0);
+  const [overallScore, setOverallScore] = useState(0);
   const [caseID, setCaseID] = useState(5);
 
   const handleSpecialty = useCallback((specialty) => {
@@ -29,6 +35,8 @@ const AppContextProvider = ({ children }) => {
     } else {
       alert(`No cases available yet.`);
     }
+
+    return filteredCases;
   }, []);
 
   const resetStage = () => {
@@ -47,6 +55,10 @@ const AppContextProvider = ({ children }) => {
       handleSpecialty,
       setInvestigationPoints,
       setDiagnosisPoints,
+      totalPoints,
+      setTotalPoints,
+      overallScore, 
+      setOverallScore,
       setCurrentStage,
       setCaseID,
       resetStage,
@@ -58,6 +70,8 @@ const AppContextProvider = ({ children }) => {
       handleSpecialty,
       investigationPoints,
       selectedSpecialty,
+      totalPoints,
+      overallScore
     ]
   );
 

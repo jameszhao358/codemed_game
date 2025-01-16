@@ -7,6 +7,7 @@ import ecgGrid from "./assets/images/ecgpaperdraft1.png";
 import trace1 from "./assets/images/inferiorstemitrace.png";
 import trace2 from "./assets/images/afibtrace.png";
 import trace3 from "./assets/images/sinustachytrace.png";
+import { STAGE_DIAGNOSIS, useAppContext } from "./context/appContext";
 
 const ecgOverlays = {
   trace1: trace1,
@@ -25,12 +26,7 @@ function InvestigationStage({
   const [criticalCount, setCriticalCount] = useState(0);
   const [criticalRevealed, setCriticalRevealed] = useState({});
   const [isListVisible, setIsListVisible] = useState(false);
-  const [investigationPoints, setInvestigationPoints] = useState([
-    { category: "critical", points: 0 },
-    { category: "ancillary", points: 0 },
-    { category: "unnecessary", points: 0 },
-  ]);
-
+  const {investigationPoints, setInvestigationPoints } = useAppContext();
   const [heartRate, setHeartRate] = useState(parseInt(currentCase.obs.HR, 10));
   const minHR = parseInt(currentCase.obs.HR, 10) - 10;
   const maxHR = parseInt(currentCase.obs.HR, 10) + 10;
@@ -77,6 +73,13 @@ function InvestigationStage({
         )
       );
 
+      setSelectedInvestigations((prevArray) => [
+        ...prevArray,
+        investigationName,
+      ]);
+
+      console.log("Investigation points:", investigationPoints);
+
       if (selected.critical) {
         setCriticalRevealed((prev) => ({
           ...prev,
@@ -84,22 +87,15 @@ function InvestigationStage({
         }));
       }
 
-      if (!selectedInvestigations.includes(investigationName)) {
-        setSelectedInvestigations((prevArray) => [
-          ...prevArray,
-          investigationName,
-        ]);
+      if (selected.critical && criticalCount < totalCritical) {
+        setCriticalCount((prevCount) => prevCount + 1);
 
-        if (selected.critical && criticalCount < totalCritical) {
-          setCriticalCount((prevCount) => prevCount + 1);
-
-          const notepadElement = document.querySelector(".toggle-button");
-          if (notepadElement) {
-            notepadElement.classList.add("pulse2");
-            setTimeout(() => {
-              notepadElement.classList.remove("pulse2");
-            }, 1000);
-          }
+        const notepadElement = document.querySelector(".toggle-button");
+        if (notepadElement) {
+          notepadElement.classList.add("pulse2");
+          setTimeout(() => {
+            notepadElement.classList.remove("pulse2");
+          }, 1000);
         }
       }
     }
@@ -153,6 +149,10 @@ function InvestigationStage({
     }
   }, []);
 
+  useEffect(() => {
+    console.log("Updated Investigation Points:", investigationPoints);
+  }, [investigationPoints]);
+
   return (
     <div className={`investigate-container ${isModalVisible && "to-front"}`}>
       <div className="popup-message">Choose your investigations!</div>
@@ -201,10 +201,7 @@ function InvestigationStage({
                 .classList.add("slide-down");
 
               setTimeout(() => {
-                setCurrentStage({
-                  stage: "diagnosis",
-                  investigationPoints: [...investigationPoints], // Pass points directly
-                });
+                setCurrentStage(STAGE_DIAGNOSIS);
               }, 1000);
             }}
           >

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import caseData from './cases.json';
+import {STAGE_INVESTIGATION, useAppContext} from "./context/appContext";
 
 function animationCounter(start, target, elementRef) {
     let current = start;
@@ -21,7 +21,21 @@ function animationCounter(start, target, elementRef) {
     requestAnimationFrame(step);
 }
 
-function ScoringStage({ investigationPoints = [], diagnosisPoints = [], totalPoints, setTotalPoints, currentCase, overallScore, setOverallScore, setCaseID, setCurrentStage }) {
+function ScoringStage({currentCase, setCaseID, setCurrentStage }) {
+    const {
+        investigationPoints,
+        setInvestigationPoints,
+        diagnosisPoints,
+        setDiagnosisPoints,
+        totalPoints,
+        setTotalPoints,
+        overallScore,
+        setOverallScore,
+        handleSpecialty,
+        selectedSpecialty,
+        caseID,
+    } = useAppContext();
+    
     const totalInvestigationPoints = investigationPoints.reduce((sum, entry) => sum + entry.points, 0);
     const totalDiagnosisPoints = diagnosisPoints.filter((points) => points > 0).length * 100;
     const totalEarned = totalInvestigationPoints + totalDiagnosisPoints;
@@ -40,19 +54,21 @@ function ScoringStage({ investigationPoints = [], diagnosisPoints = [], totalPoi
     }, [totalEarned, totalPoints]);
   
     const proceedToNextCase = () => {
-        const filteredCases = caseData.cases.filter((c) => c.specialty === currentCase.specialty);
-        const currentIndex = filteredCases.findIndex((c) => c.id === currentCase.id);
+        const filteredCases = handleSpecialty(selectedSpecialty);
+        const currentIndex = filteredCases.findIndex((c) => c.id === caseID);
         const nextIndex = (currentIndex + 1) % filteredCases.length;
         const nextCaseID = filteredCases[nextIndex].id;
         
         setTotalPoints((prev) => prev + totalInvestigationPoints + totalDiagnosisPoints);
-        setCaseID(nextCaseID);
         setOverallScore(overallScore + totalEarned);
-        setCurrentStage({
-            stage: "investigation",
-            investigationPoints: [], // Reset for the next case
-            diagnosisPoints: [],
-      });
+        setInvestigationPoints([
+            { category: "critical", points: 0 },
+            { category: "ancillary", points: 0 },
+            { category: "unnecessary", points: 0 },
+          ]);
+        setDiagnosisPoints([]); // Reset via context
+        setCaseID(nextCaseID);
+        setCurrentStage(STAGE_INVESTIGATION); // Transition to next stage
     };
   
     return (
