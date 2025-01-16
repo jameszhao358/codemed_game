@@ -1,28 +1,19 @@
-import React, {useEffect} from 'react';
+import React from "react";
+import { useAppContext } from "./context/appContext";
 
-function PatientStem({stem, setCurrentStage}) {
-
-  useEffect(() => {
-    const container = document.querySelector('.patient-stem-container');
-    if (container) {
-      container.classList.add('slide-down-stem');
-    }
-  }, []);
+function PatientStem({ stem }) {
+  const { resetStage } = useAppContext();
 
   return (
     <>
-      <div className="patient-stem-container">
+      <div className="patient-stem-container slide-down-stem">
         <h2 className="patient-stem">{stem}</h2>
       </div>
-      <button 
-          className = "back-button"
-          onClick={() => 
-            setCurrentStage({ stage: "specialty", investigationPoints: [], diagnosisPoints: [] })}
-        >
-          &lt;
+      <button className="back-button" onClick={resetStage}>
+        &lt;
       </button>
     </>
   );
 }
-  
-  export default PatientStem;
+
+export default PatientStem;

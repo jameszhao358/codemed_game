@@ -4,6 +4,7 @@ import ecgGrid from "./assets/images/ecgpaperdraft1.png";
 import trace1 from "./assets/images/inferiorstemitrace.png";
 import trace2 from "./assets/images/afibtrace.png";
 import trace3 from "./assets/images/sinustachytrace.png";
+import {STAGE_SCORING, useAppContext} from "./context/appContext";
 
 const ecgOverlays = {
     trace1: trace1,
@@ -19,7 +20,7 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData, inv
       );
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [attempts, setAttempts] = useState(0);
-    const [diagnosisPoints, setDiagnosisPoints] = useState([]);
+    const { setDiagnosisPoints } = useAppContext();
     const [shuffledOptions, setShuffledOptions] = useState([]);
     const [dialogue, setDialogue] = useState(questions[0].prompt);
     const isFirstRender = useRef(true);
@@ -110,7 +111,7 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData, inv
 
     return (
     <>
-      <div className="diagnosis-container">
+      <div className={`diagnosis-container ${isTableModalVisible && "to-front"}`}>
         {isExplanationVisible && (
             <div className="modal">
                 <div className="modal-content">
@@ -265,11 +266,7 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData, inv
                             }
 
                             setTimeout(() => {
-                                setCurrentStage({
-                                  stage: "scoring", // Transition to scoring stage
-                                  investigationPoints, // Pass points directly
-                                  diagnosisPoints,
-                                });
+                                setCurrentStage(STAGE_SCORING);
                               }, 1000);
                         }
                     }}
