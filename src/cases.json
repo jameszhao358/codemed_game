@@ -290,8 +290,8 @@
                     "name": "EUC",
                     "isTable": true,
                     "result": "Sodium: 140: (135–145 mmol/L)\nPotassium: 4.0: (3.5–5.0 mmol/L)\nChloride: 102: (95–105 mmol/L)\nBicarbonate: 24: (22–28 mmol/L)\nUrea: 5.0: (2.5–7.5 mmol/L)\nCreatinine: 80: (60–110 µmol/L)",
-                    "points": "ancillary",
-                    "critical": false
+                    "points": "critical",
+                    "critical": true
                 },
                 {
                     "name": "LFT",
@@ -328,8 +328,8 @@
                 {
                     "name": "CXR",
                     "result": "No evidence of cardiomegaly / pulmonary oedema",
-                    "points": "critical",
-                    "critical": true
+                    "points": "ancillary",
+                    "critical": false
                 },
                 {
                     "name": "Coronary Angiogram",
@@ -371,25 +371,46 @@
                         "Atrial flutter", 
                         "Ventricular fibrillation", 
                         "Ventricular tachycardia"], 
-                    "correctOption": "Atrial fibrillation" 
+                    "correctOption": "Atrial fibrillation",
+                    "explanation": "ECG shows an irregularly irregular rhythm with no discernible P waves. Atrial flutter describes rapid atrial contraction and presents as a “sawtooth” ECG pattern. Ventricular fibrillation / tachycardia would present with abnormal / absent QRS complexes.",
+                    "sources": [
+                      {
+                        "name": "McCallum et al (2019) Australian Prescriber",
+                        "url": "https://www.nps.org.au/assets/p186-McCallum-et-al.pdf"
+                      }
+                    ] 
                 },
                 { 
-                    "prompt": "What is the role of calculating a CHADSVASC score in a patient with AF?", 
+                    "prompt": "What is the role of calculating a CHA2DS2-VA score in a patient with AF?", 
                     "options": [
                         "To decide between rate and rhythm control strategies", 
                         "To determine the risk of stroke", 
-                        "To determine the risk of a heart failure exacerbation", 
-                        "To determine the risk of DVT"], 
-                    "correctOption": "To determine the risk of stroke" 
+                        "To stratify mortality risk in atrial-fibrillation patients", 
+                        "To determine the risk of cardiac arrest"], 
+                    "correctOption": "To determine the risk of stroke",
+                    "explanation": "The CHA₂DS₂-VA score is used in atrial fibrillation (AF) to assess a patient's risk of stroke and guide decisions regarding the need for anticoagulation therapy. Higher scores correlate with increased risk of ischemic stroke or systemic embolism.",
+                    "sources": [
+                      {
+                        "name": "McCallum et al (2019) Australian Prescriber",
+                        "url": "https://www.nps.org.au/assets/p186-McCallum-et-al.pdf"
+                      }
+                    ] 
                 },
                 { 
-                    "prompt": "This patient is stable with a CHADSVASC score of 3. What is your management plan?", 
+                    "prompt": "This patient is stable with a CHA2DS2-VA score of 3. What is your management plan?", 
                     "options": [
                         "Rate control, anticoagulation, emergency cardioversion", 
                         "Rate control, anticoagulation, cardioversion to be considered", 
                         "Rhythm control, anticoagulation, cardioversion to be considered", 
                         "Rate control, antiplatelets, cardioversion to be considered"], 
-                    "correctOption": "Rate control, anticoagulation, cardioversion to be considered"
+                    "correctOption": "Rate control, anticoagulation, cardioversion to be considered",
+                    "explanation": "Given ST elevation in 2 contiguous leads + chest pain, a provisional diagnosis of STEMI should be made until proven otherwise. The unremarkable chest x-ray can help rule out respiratory causes of chest pain (pneumothorax, pneumonia) and cardiac causes (aortic dissection, pericardial effusion). Troponins are likely to be normal within 2 hours of symptom onset. \n \n• ST elevation of II, III and aVF suggests inferior MI\n• ST elevation of V5, V6, I and aVL suggests lateral MI\n• ST elevation of V1-4 suggests anterior MI",
+                    "sources": [
+                      {
+                        "name": "Pathway for Acute Coronary Syndrome Assessment (PACSA) Flow Chart",
+                        "url": "https://aci.health.nsw.gov.au/__data/assets/pdf_file/0019/824140/PACSA-STEMI-Reperfusion-flow-chart-SAMPLE.pdf"
+                      }
+                    ]
                 },
                 { 
                     "prompt": "What would you use for rate control in this patient?", 
@@ -398,7 +419,14 @@
                         "Amiodarone and dihydropyridine calcium channel blockers", 
                         "Flecainide and sotalol", 
                         "Amiodarone and digoxin"], 
-                    "correctOption": "Beta blockers and non-dihydropyridine calcium channel blockers"
+                    "correctOption": "Beta blockers and non-dihydropyridine calcium channel blockers",
+                    "explanation": "Given ST elevation in 2 contiguous leads + chest pain, a provisional diagnosis of STEMI should be made until proven otherwise. The unremarkable chest x-ray can help rule out respiratory causes of chest pain (pneumothorax, pneumonia) and cardiac causes (aortic dissection, pericardial effusion). Troponins are likely to be normal within 2 hours of symptom onset. \n \n• ST elevation of II, III and aVF suggests inferior MI\n• ST elevation of V5, V6, I and aVL suggests lateral MI\n• ST elevation of V1-4 suggests anterior MI",
+                    "sources": [
+                      {
+                        "name": "Pathway for Acute Coronary Syndrome Assessment (PACSA) Flow Chart",
+                        "url": "https://aci.health.nsw.gov.au/__data/assets/pdf_file/0019/824140/PACSA-STEMI-Reperfusion-flow-chart-SAMPLE.pdf"
+                      }
+                    ]
                 },
                 { 
                     "prompt": "What are our first-line options for pharmacological cardioversion in this patient?", 
@@ -407,7 +435,14 @@
                         "Amiodarone and dihydropyridine calcium channel blockers", 
                         "Flecainide and sotalol", 
                         "Amiodarone and digoxin"], 
-                    "correctOption": "Flecainide and sotalol"
+                    "correctOption": "Flecainide and sotalol",
+                    "explanation": "Given ST elevation in 2 contiguous leads + chest pain, a provisional diagnosis of STEMI should be made until proven otherwise. The unremarkable chest x-ray can help rule out respiratory causes of chest pain (pneumothorax, pneumonia) and cardiac causes (aortic dissection, pericardial effusion). Troponins are likely to be normal within 2 hours of symptom onset. \n \n• ST elevation of II, III and aVF suggests inferior MI\n• ST elevation of V5, V6, I and aVL suggests lateral MI\n• ST elevation of V1-4 suggests anterior MI",
+                    "sources": [
+                      {
+                        "name": "Pathway for Acute Coronary Syndrome Assessment (PACSA) Flow Chart",
+                        "url": "https://aci.health.nsw.gov.au/__data/assets/pdf_file/0019/824140/PACSA-STEMI-Reperfusion-flow-chart-SAMPLE.pdf"
+                      }
+                    ]
                 },
                 { 
                     "prompt": "Recall the MOA of flecainide and sotalol, respectively.", 
@@ -416,7 +451,15 @@
                         "Potassium channel blockade, sodium channel blockade", 
                         "Calcium channel blockade, sodium channel blockade", 
                         "Potassium channel blockade, calcium channel blockade"], 
-                        "correctOption": "Sodium channel blockade, potassium channel blockade"}
+                    "correctOption": "Sodium channel blockade, potassium channel blockade",
+                    "explanation": "Given ST elevation in 2 contiguous leads + chest pain, a provisional diagnosis of STEMI should be made until proven otherwise. The unremarkable chest x-ray can help rule out respiratory causes of chest pain (pneumothorax, pneumonia) and cardiac causes (aortic dissection, pericardial effusion). Troponins are likely to be normal within 2 hours of symptom onset. \n \n• ST elevation of II, III and aVF suggests inferior MI\n• ST elevation of V5, V6, I and aVL suggests lateral MI\n• ST elevation of V1-4 suggests anterior MI",
+                    "sources": [
+                      {
+                        "name": "Pathway for Acute Coronary Syndrome Assessment (PACSA) Flow Chart",
+                        "url": "https://aci.health.nsw.gov.au/__data/assets/pdf_file/0019/824140/PACSA-STEMI-Reperfusion-flow-chart-SAMPLE.pdf"
+                      }
+                    ]
+                  }
             ]
         },
 
