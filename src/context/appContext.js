@@ -40,7 +40,11 @@ const AppContextProvider = ({ children }) => {
   }, []);
 
   const resetStage = () => {
-    setInvestigationPoints([]);
+    setInvestigationPoints([
+      { category: "critical", points: 0 },
+      { category: "ancillary", points: 0 },
+      { category: "unnecessary", points: 0 },
+    ]);
     setDiagnosisPoints([]);
     setCurrentStage(STAGE_SPECIALTY);
   };
