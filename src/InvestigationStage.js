@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import PatientImage from "./patientComponent";
 import InvestigationMenu from "./investigationComponent";
-import notePad from "./assets/images/notepad.png";
+import QuestionBox from "./questionBox";
+import arrow from "./assets/images/arrow.png";
+import magnifyingglass from "./assets/images/mag.png"
 
 import ecgGrid from "./assets/images/ecgpaperdraft1.png";
 import trace1 from "./assets/images/inferiorstemitrace.png";
@@ -23,20 +25,29 @@ function InvestigationStage({
 }) {
   const [selectedInvestigation, setSelectedInvestigation] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isExplanationVisible, setIsExplanationVisible] = useState(false);
   const [criticalCount, setCriticalCount] = useState(0);
+  const [ancillaryCount, setAncillaryCount] = useState(0);
   const [criticalRevealed, setCriticalRevealed] = useState({});
+  const [ancillaryRevealed, setAncillaryRevealed] = useState({});
   const [isListVisible, setIsListVisible] = useState(false);
-  const {investigationPoints, setInvestigationPoints } = useAppContext();
+  const [isList2Visible, setIsList2Visible] = useState(false);
+  const [finishPre, setFinishPre] = useState(false);
+
+  const { investigationPoints, setInvestigationPoints } = useAppContext();
+  const { transitionToDiagnosis, setTransitionToDiagnosis } = useAppContext();
+
   const [heartRate, setHeartRate] = useState(parseInt(currentCase.obs.HR, 10));
   const minHR = parseInt(currentCase.obs.HR, 10) - 10;
   const maxHR = parseInt(currentCase.obs.HR, 10) + 10;
 
   const totalCritical = currentCase.investigations.filter(
-    (inv) => inv.critical
+    (inv) => inv.points === "critical"
   ).length;
   const [selectedInvestigations, setSelectedInvestigations] = useState([]);
 
   const imageCache = useRef(new Map());
+  const investigateContainerRef = useRef(null);
 
   React.useEffect(() => {
     const preloadImages = () => {
@@ -78,46 +89,29 @@ function InvestigationStage({
         investigationName,
       ]);
 
-      console.log("Investigation points:", investigationPoints);
-
-      if (selected.critical) {
+      if (selected.points === "critical") {
         setCriticalRevealed((prev) => ({
           ...prev,
           [investigationName]: true,
         }));
       }
 
-      if (selected.critical && criticalCount < totalCritical) {
-        setCriticalCount((prevCount) => prevCount + 1);
+      if (selected.points === "ancillary") {
+        setAncillaryRevealed((prev) => ({
+          ...prev,
+          [investigationName]: true,
+        }));
+      }
 
-        const notepadElement = document.querySelector(".toggle-button");
-        if (notepadElement) {
-          notepadElement.classList.add("pulse2");
-          setTimeout(() => {
-            notepadElement.classList.remove("pulse2");
-          }, 1000);
-        }
+      if (selected.points === "critical" && criticalCount < totalCritical) {
+        setCriticalCount((prevCount) => prevCount + 1);
+      }
+
+      if (selected.points === "ancillary") {
+        setAncillaryCount((prevCount) => prevCount + 1);
       }
     }
   };
-
-  useEffect(() => {
-    const popup = document.querySelector(".popup-message");
-    if (popup) {
-      setTimeout(() => {
-        popup.classList.add("fade-in");
-      }, 700); // Delay before appearing (500ms)
-
-      setTimeout(() => {
-        popup.classList.remove("fade-in");
-        popup.classList.add("fade-out");
-      }, 2500); // Starts fading out after 4 seconds total (500ms delay + 3.5s display time)
-
-      setTimeout(() => {
-        popup.remove(); // Destroy popup after fade-out animation
-      }, 4000);
-    }
-  }, []);
 
   useEffect(() => {
     const initialRevealed = {};
@@ -143,71 +137,74 @@ function InvestigationStage({
   }, [minHR, maxHR]);
 
   useEffect(() => {
-    const container = document.querySelector(".investigate-container");
-    if (container) {
-      container.classList.add("slide-up");
-    }
-  }, []);
-
-  useEffect(() => {
     console.log("Updated Investigation Points:", investigationPoints);
   }, [investigationPoints]);
 
   return (
-    <div className={`investigate-container ${isModalVisible && "to-front"}`}>
-      <div className="popup-message">Choose your investigations!</div>
+    <div
+        ref={investigateContainerRef}
+        className={`investigate-container ${
+            isModalVisible || isExplanationVisible ? "to-front" : ""
+        } ${
+            transitionToDiagnosis ? "slide-left-out" : "slide-up"
+        }`}
+    >
 
-      <PatientImage image={currentCase.patientImage} />
+      <div className={`patient-wrapper ${
+        currentCase.preInv
+          ? finishPre
+            ? "slide-down-bit"
+            : "slide-up-high"
+          : ""
+      }`}>
 
-      <div className="obs-container">
-        <p>BP: {currentCase.obs.BP}</p>
-        <p>Temp: {currentCase.obs.Temp}</p>
-        <p>HR: {heartRate}</p>
-        <p>RR: {currentCase.obs.RR}</p>
-        <p>SPO2: {currentCase.obs.SPO2}</p>
-      </div>
+        <div className="obs-container">
+          <p>BP: {currentCase.obs.BP}</p>
+          <p>Temp: {currentCase.obs.Temp}</p>
+          <p>HR: {heartRate}</p>
+          <p>RR: {currentCase.obs.RR}</p>
+          <p>SPO2: {currentCase.obs.SPO2}</p>
+        </div>
+        
+        <PatientImage image={currentCase.patientImage} />
 
-      <div className="investigation-records-container">
-        <img
-          src={notePad}
-          alt="Notepad"
-          className="toggle-button"
-          onClick={() => setIsListVisible((prev) => !prev)}
-        />
-        <h3>Critical Investigations</h3>
-        <p
-          className={
-            criticalCount === totalCritical ? "highlight-animation" : ""
-          }
-        >
-          {criticalCount} / {totalCritical}
-        </p>
-        {criticalCount === totalCritical && (
-          <button
-            className="proceed-button"
-            onClick={() => {
-              const investigateContainer = document.querySelector(
-                ".investigate-container"
-              );
-              if (investigateContainer) {
-                investigateContainer.style.animation = "none";
-                void investigateContainer.offsetWidth;
-                investigateContainer.style.animation =
-                  "slideDown 1s ease-in forwards";
-              }
-
-              document
-                .querySelector(".investigate-container")
-                .classList.add("slide-down");
-
-              setTimeout(() => {
-                setCurrentStage(STAGE_DIAGNOSIS);
-              }, 1000);
-            }}
+        <div className="investigation-records-container">
+          <img
+            src={magnifyingglass}
+            alt="Magnifying Glass"
+          />
+          <h3>Investigations:</h3>
+          <p
+            className={`critical-button ${
+              criticalCount === totalCritical ? "highlight-animation" : ""
+            }`}
+            onClick={() => setIsListVisible((prev) => !prev)}
           >
-            Proceed
-          </button>
-        )}
+            Critical: {criticalCount} / {totalCritical}
+          </p>
+          <p
+            className='ancillary-button'
+            onClick={() => setIsList2Visible((prev) => !prev)}
+          > 
+            Ancillary: +{ancillaryCount} 
+          </p>
+          
+        </div>
+
+        {criticalCount === totalCritical && (
+            <img
+              src={arrow}
+              alt="Arrow"
+              className="proceed-button"
+              onClick={() => {
+                setTransitionToDiagnosis(true);
+                setTimeout(() => {
+                  setCurrentStage(STAGE_DIAGNOSIS);
+                }, 1000);
+              }}
+            />
+          )}
+
       </div>
 
       {isListVisible && (
@@ -215,13 +212,13 @@ function InvestigationStage({
           <div className="modal-box">
             <div className="modal-box-content">
               {currentCase.investigations
-                .filter((inv) => inv.critical)
+                .filter((inv) => inv.points === "critical")
                 .every((inv) => !criticalRevealed[inv.name]) && (
                 <p> Critical investigation results are recorded here. </p>
               )}
 
               {currentCase.investigations
-                .filter((inv) => inv.critical)
+                .filter((inv) => inv.points === "critical")
                 .map((criticalInv) => (
                   <p
                     key={criticalInv.name}
@@ -267,11 +264,87 @@ function InvestigationStage({
         </div>
       )}
 
-      <InvestigationMenu
-        selectedSpecialty={selectedSpecialty}
-        investigations={currentCase.investigations.map((inv) => inv.name)}
-        onInvestigationClick={handleInvestigationClick}
-      />
+      {isList2Visible && (
+        <div className="modal">
+          <div className="modal-box">
+            <div className="modal-box-content">
+              {currentCase.investigations
+                .filter((inv) => inv.points === "ancillary")
+                .every((inv) => !ancillaryRevealed[inv.name]) && (
+                <p> Ancillary investigation results are recorded here. </p>
+              )}
+
+              {currentCase.investigations
+                .filter((inv) => inv.points === "ancillary")
+                .map(
+                  (ancillaryInv) =>
+                    ancillaryRevealed[ancillaryInv.name] && ( // Only display revealed investigations
+                      <p
+                        key={ancillaryInv.name}
+                        style={{
+                          cursor:
+                            ancillaryInv.isTable && ancillaryRevealed[ancillaryInv.name]
+                              ? "pointer"
+                              : "default",
+                          color: ancillaryInv.isTable
+                            ? "#007bff" // Blue for revealed table investigations
+                            : "#333333", // Dark gray for other investigations
+                        }}
+                        onClick={() => {
+                          if (ancillaryInv.isTable) {
+                            setSelectedInvestigation({ ...ancillaryInv });
+                            setIsModalVisible(true); // Open the modal for details
+                          }
+                        }}
+                      >
+                        {ancillaryInv.isTable
+                          ? `${ancillaryInv.name} (click for details)`
+                          : `${ancillaryInv.name}: ${ancillaryInv.result}`}
+                      </p>
+                    )
+                )}
+            </div>
+            <button
+              className="close-button"
+              onClick={() => setIsList2Visible(false)} // Close the list
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {currentCase.preInv && (
+        <div
+          className={`pre-question-box ${
+            finishPre ? "slide-down-preq" : "slide-up"
+          }`}
+        >
+          <QuestionBox
+            questions={currentCase["pre-questions"] || []}
+            onComplete={() => setFinishPre(true)}
+            containerRef={investigateContainerRef}
+            isExplanationVisible={isExplanationVisible}
+            setIsExplanationVisible={setIsExplanationVisible}
+          />
+        </div>
+      )}
+
+      <div
+        className={`investigation-menu ${
+            currentCase.preInv
+                ? finishPre
+                    ? "slide-up-menu"
+                    : "hidden"
+                : "visible"
+        }`}
+      >
+        <InvestigationMenu
+            selectedSpecialty={selectedSpecialty}
+            investigations={currentCase.investigations.map((inv) => inv.name)}
+            onInvestigationClick={handleInvestigationClick}
+        />
+      </div>
 
       {isModalVisible && selectedInvestigation && (
         <div className="modal">

@@ -24,6 +24,9 @@ const AppContextProvider = ({ children }) => {
   const [overallScore, setOverallScore] = useState(0);
   const [caseID, setCaseID] = useState(5);
 
+  const [transitionToScoring, setTransitionToScoring] = useState(false);
+  const [transitionToDiagnosis, setTransitionToDiagnosis] = useState(false);
+
   const handleSpecialty = useCallback((specialty) => {
     const filteredCases = caseData.cases.filter(
       (c) => c.specialty === specialty
@@ -35,9 +38,9 @@ const AppContextProvider = ({ children }) => {
     } else {
       alert(`No cases available yet.`);
     }
-
-    return filteredCases;
   }, []);
+
+  const getFilteredCasesBySpecialty = useCallback((specialty) => caseData.cases.filter(c => c.specialty === specialty), []);
 
   const resetStage = () => {
     setInvestigationPoints([
@@ -47,6 +50,8 @@ const AppContextProvider = ({ children }) => {
     ]);
     setDiagnosisPoints([]);
     setCurrentStage(STAGE_SPECIALTY);
+    setTransitionToDiagnosis(false);
+    setTransitionToScoring(false);
   };
 
   const contextValue = useMemo(
@@ -57,6 +62,7 @@ const AppContextProvider = ({ children }) => {
       selectedSpecialty,
       caseID,
       handleSpecialty,
+      getFilteredCasesBySpecialty,
       setInvestigationPoints,
       setDiagnosisPoints,
       totalPoints,
@@ -66,6 +72,10 @@ const AppContextProvider = ({ children }) => {
       setCurrentStage,
       setCaseID,
       resetStage,
+      transitionToScoring, 
+      setTransitionToScoring,
+      transitionToDiagnosis,
+      setTransitionToDiagnosis
     }),
     [
       caseID,
@@ -73,9 +83,12 @@ const AppContextProvider = ({ children }) => {
       diagnosisPoints,
       handleSpecialty,
       investigationPoints,
+      getFilteredCasesBySpecialty,
       selectedSpecialty,
       totalPoints,
-      overallScore
+      overallScore,
+      transitionToDiagnosis,
+      transitionToScoring
     ]
   );
 

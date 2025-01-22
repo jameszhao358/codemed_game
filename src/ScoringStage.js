@@ -3,12 +3,12 @@ import {STAGE_INVESTIGATION, useAppContext} from "./context/appContext";
 
 function animationCounter(start, target, elementRef) {
     let current = start;
-    const increment = (target - start) / 60; // Fixed 1-second animation at ~60fps
+    const increment = (target - start) / 60; 
 
     function step() {
         current += increment;
         if (current >= target) {
-            current = target; // Ensure the value stops exactly at the target
+            current = target; 
             if (elementRef.current) elementRef.current.textContent = Math.round(current);
             return;
         }
@@ -21,7 +21,7 @@ function animationCounter(start, target, elementRef) {
     requestAnimationFrame(step);
 }
 
-function ScoringStage({currentCase, setCaseID, setCurrentStage }) {
+function ScoringStage({setCaseID, setCurrentStage }) {
     const {
         investigationPoints,
         setInvestigationPoints,
@@ -31,9 +31,11 @@ function ScoringStage({currentCase, setCaseID, setCurrentStage }) {
         setTotalPoints,
         overallScore,
         setOverallScore,
-        handleSpecialty,
+        getFilteredCasesBySpecialty,
         selectedSpecialty,
         caseID,
+        setTransitionToDiagnosis,
+        setTransitionToScoring
     } = useAppContext();
     
     const totalInvestigationPoints = investigationPoints.reduce((sum, entry) => sum + entry.points, 0);
@@ -54,7 +56,7 @@ function ScoringStage({currentCase, setCaseID, setCurrentStage }) {
     }, [totalEarned, totalPoints]);
   
     const proceedToNextCase = () => {
-        const filteredCases = handleSpecialty(selectedSpecialty);
+        const filteredCases = getFilteredCasesBySpecialty(selectedSpecialty);
         const currentIndex = filteredCases.findIndex((c) => c.id === caseID);
         const nextIndex = (currentIndex + 1) % filteredCases.length;
         const nextCaseID = filteredCases[nextIndex].id;
@@ -68,6 +70,8 @@ function ScoringStage({currentCase, setCaseID, setCurrentStage }) {
           ]);
         setDiagnosisPoints([]); // Reset via context
         setCaseID(nextCaseID);
+        setTransitionToDiagnosis(false);
+        setTransitionToScoring(false);
         setCurrentStage(STAGE_INVESTIGATION); // Transition to next stage
     };
   

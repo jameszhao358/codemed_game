@@ -1,10 +1,10 @@
-import doctorImage from "./assets/images/perrycardium2.png";
 import React, {useState, useEffect, useRef} from "react";
 import ecgGrid from "./assets/images/ecgpaperdraft1.png";
 import trace1 from "./assets/images/inferiorstemitrace.png";
 import trace2 from "./assets/images/afibtrace.png";
 import trace3 from "./assets/images/sinustachytrace.png";
 import {STAGE_SCORING, useAppContext} from "./context/appContext";
+import QuestionBox from "./questionBox";
 
 const ecgOverlays = {
     trace1: trace1,
@@ -12,23 +12,26 @@ const ecgOverlays = {
     trace3: trace3,
   };
 
-function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData, investigationPoints }) {
+function DiagnosisStage({ currentCase, setCurrentStage }) {
 
-    const questions = currentCase.questions;
     const criticalInvestigations = currentCase.investigations.filter(
         (investigation) => investigation.critical
       );
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [attempts, setAttempts] = useState(0);
-    const { setDiagnosisPoints } = useAppContext();
-    const [shuffledOptions, setShuffledOptions] = useState([]);
-    const [dialogue, setDialogue] = useState(questions[0].prompt);
-    const isFirstRender = useRef(true);
-    const incorrectResponses = ["Try again...", "Not quite.", "Incorrect.", "Nope."];
+
     const [tableInvestigation, setTableInvestigation] = useState(null); // Stores the selected investigation for table
     const [isTableModalVisible, setIsTableModalVisible] = useState(false); // Tracks modal visibility
     const [isExplanationVisible, setIsExplanationVisible] = useState(false);
+    
+    const { transitionToScoring, setTransitionToScoring } = useAppContext();
     const imageCache = useRef(new Map());
+    const diagnosisContainerRef = useRef(null);
+
+    const handleComplete = () => {
+        setTransitionToScoring(true); // Start the scoring transition
+        setTimeout(() => {
+            setCurrentStage(STAGE_SCORING); // Change the stage after transition
+        }, 1000); // Match animation duration
+    };
 
     useEffect(() => {
         const preloadImages = () => {
@@ -44,113 +47,16 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData, inv
         preloadImages();
       }, []);
 
-    useEffect(() => {
-        setShuffledOptions([...questions[currentQuestionIndex].options].sort(() => Math.random() - 0.5));
-        setDialogue(questions[currentQuestionIndex].prompt);
-        setAttempts(0);
-        if (isFirstRender.current) {isFirstRender.current = false;}
-    }, [currentQuestionIndex, questions]);
-
-    useEffect(() => {
-        const doctorImage = document.querySelector(".doctor-image");
-        if (doctorImage) {
-            // Remove and force reflow to reset animation
-            doctorImage.classList.remove("vibrating");
-            void doctorImage.offsetWidth; // Trigger reflow
-    
-            // Set the animation iterations dynamically
-            const iterations = dialogue.length < 15 ? 2 : 10; // 2 iterations for "Correct!", 10 for others
-            doctorImage.style.setProperty("--vibrating-iterations", iterations);
-    
-            // Reapply the vibrating class
-            doctorImage.classList.add("vibrating");
-        }
-    }, [dialogue]);
-
-    useEffect(() => {
-    const container = document.querySelector('.diagnosis-container');
-    if (container) {
-        container.classList.add('slide-up');
-    }
-    }, []);
-
-    const handleAnswerClick = (option, e) => {
-        if (option === questions[currentQuestionIndex].correctOption) {
-
-            if (attempts === 0) {
-                setDiagnosisPoints((prev) => [...prev, 1]);
-            } else {
-                setDiagnosisPoints((prev) => [...prev, 0]);
-            }
-
-            setDialogue("Correct!"); // Set dialogue to "Correct!" and halt progression
-
-        } else {
-            // Handle incorrect responses
-            setDialogue((prevDialogue) => {
-                let newDialogue;
-                do {
-                    newDialogue = incorrectResponses[Math.floor(Math.random() * incorrectResponses.length)];
-                } while (newDialogue === prevDialogue); // Ensure a different response
-                return newDialogue;
-            });
-            
-            setAttempts((prev) => prev + 1);
-
-            // Add vibration effect to the button
-            const button = e.target;
-            button.classList.remove("vibrating");
-            void button.offsetWidth; // Trigger reflow
-            button.classList.add("vibrating");
-    
-            setTimeout(() => {
-                setDialogue(questions[currentQuestionIndex].prompt); // Reset prompt
-            }, 500);
-        }
-    };
-
     return (
     <>
-      <div className={`diagnosis-container ${isTableModalVisible && "to-front"}`}>
-        {isExplanationVisible && (
-            <div className="modal">
-                <div className="modal-content">
-                    <h3>Explanation</h3>
-                    <p>
-                        <span>
-                            {questions[currentQuestionIndex].explanation}
-                        </span>
-                    </p>
-                    <p className="citation">
-                        {questions[currentQuestionIndex].sources && questions[currentQuestionIndex].sources.length > 0 ? (
-                            questions[currentQuestionIndex].sources.map((source, index) => (
-                                <div key={index}>
-                                    {source.url ? (
-                                        <a
-                                            href={source.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            {source.name}
-                                        </a>
-                                    ) : (
-                                        <span className="non-url">{source.name}</span>
-                                    )}
-                                </div>
-                            ))
-                        ) : (
-                            <div>Source coming soon.</div>
-                        )}
-                    </p>
-                    <button
-                        className="close-button"
-                        onClick={() => setIsExplanationVisible(false)}
-                    >
-                        Close
-                    </button>
-                </div>
-            </div>
-        )}
+      <div
+        ref={diagnosisContainerRef}
+        className={`diagnosis-container ${
+            isTableModalVisible || isExplanationVisible ? "to-front" : ""
+        } ${
+            transitionToScoring ? "slide-down" : "slide-left-in"
+        }`}
+        >
         
         {isTableModalVisible && tableInvestigation && (
             <div className="modal">
@@ -225,80 +131,14 @@ function DiagnosisStage({ currentCase, setCaseID, setCurrentStage, caseData, inv
             ))}
         </div>
 
-        <div className = "diagnosis-question-container">
+        <QuestionBox
+            questions={currentCase.questions}
+            onComplete={handleComplete}
+            containerRef={diagnosisContainerRef}
+            isExplanationVisible={isExplanationVisible}
+            setIsExplanationVisible={setIsExplanationVisible}
+        />
 
-            <img
-            src={doctorImage}
-            alt = "doctor"
-            className="doctor-image"
-            />
-
-            <h3 
-                style={{
-                    '--typing-duration': dialogue.length <= 15 ? '0.2s' : '1s',
-                    '--typing-delay': isFirstRender.current ? '0.5s' : '0s',
-                    'fontSize': dialogue.length > 54 ? "18px" : "20px",
-                }}
-                key={dialogue}>{dialogue} 
-            </h3> 
-
-            {dialogue === "Correct!" && (
-                <>
-                <button
-                    className="continue-button"
-                    onClick={() => {
-                        if (currentQuestionIndex + 1 < questions.length) {
-                            setCurrentQuestionIndex(currentQuestionIndex + 1); // Move to the next question
-                            setDialogue(questions[currentQuestionIndex + 1].prompt); // Update dialogue
-                        } else {
-                            const diagnosisContainer = document.querySelector(".diagnosis-container");
-                            if (diagnosisContainer) {
-                                diagnosisContainer.style.animation = "none";
-                                void diagnosisContainer.offsetWidth;
-                                diagnosisContainer.style.animation = "slideDown 1s ease-in forwards";
-                            }
-
-                            const stemContainer = document.querySelector('.patient-stem-container');
-                            if (stemContainer) {
-                            stemContainer.style.animation = 'none'; // Reset animation
-                            void stemContainer.offsetWidth; // Trigger reflow
-                            stemContainer.style.animation = 'slideUpStem 0.7s ease-in forwards';
-                            }
-
-                            setTimeout(() => {
-                                setCurrentStage(STAGE_SCORING);
-                              }, 1000);
-                        }
-                    }}
-                >
-                    Continue
-                </button>
-
-                <button
-                    className="view-explanation-button"
-                    onClick={() => setIsExplanationVisible(true)}
-                    >
-                    View Explanation
-                </button>
-                </>
-            )}
-
-            <div className="answer-grid">
-                {shuffledOptions.map((option, index) => (
-                    <button
-                    key={index}
-                    className="answer-button"
-                    onClick={(e) => handleAnswerClick(option, e)}
-                    disabled = {dialogue === "Correct!"}
-                    >
-                        {option}
-                    </button>
-                ))}
-            </div>
-
-            <p> Dr. Perry Cardium</p>
-
-        </div>
       </div>
     </>
     );

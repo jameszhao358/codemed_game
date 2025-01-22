@@ -43,7 +43,7 @@ function InvestigationMenu({ onInvestigationClick, selectedSpecialty}) {
     const options = submenuOptions[selectedSpecialty];
   
     return (
-      <div className="investigation-component">
+      <>
         <div className="menu-container">
           {['BEDSIDE', 'LABS', 'IMAGING', 'SPECIAL'].map((category) => (
             <button
@@ -54,26 +54,26 @@ function InvestigationMenu({ onInvestigationClick, selectedSpecialty}) {
               {category}
             </button>
           ))}
+
+          {activeSubmenu && options && (
+            <div className="submenu-container">
+            {options[activeSubmenu]?.map((option) => {
+              const isLabOption = typeof option === 'object';
+          
+              return (
+                <button
+                  key={isLabOption ? option.name : option}
+                  className={`submenu-button ${isLabOption ? option.tubeColor : ''}`} // Add tubeColor class only for labs
+                  onClick={() => onInvestigationClick(isLabOption ? option.name : option)}
+                >
+                  {isLabOption ? option.name : option}
+                </button>
+              );
+            })}
+            </div>
+          )}
         </div>
-  
-        {activeSubmenu && options && (
-          <div className="submenu-container">
-          {options[activeSubmenu]?.map((option) => {
-            const isLabOption = typeof option === 'object';
-        
-            return (
-              <button
-                key={isLabOption ? option.name : option}
-                className={`submenu-button ${isLabOption ? option.tubeColor : ''}`} // Add tubeColor class only for labs
-                onClick={() => onInvestigationClick(isLabOption ? option.name : option)}
-              >
-                {isLabOption ? option.name : option}
-              </button>
-            );
-          })}
-        </div>
-        )}
-      </div>
+      </>
     );
   }
   

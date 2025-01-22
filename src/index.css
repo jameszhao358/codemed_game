@@ -84,9 +84,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  position: relative;
   background: white;
   padding: 30px;
   width: 200px;
+  height: 300px;
   border-radius: 16px;
   border: none;
   cursor: pointer;
@@ -94,8 +97,7 @@
 }
 
 .specialty-button img {
-  margin-top: -30px;
-  margin-bottom: -15px;
+  margin-top: 20px;
 }
 
 .cardiology-button {
@@ -108,11 +110,10 @@
   animation: wave 1.5s infinite ease-in-out;
   animation-delay: -0.3s;
   position: relative;
-  top: -5px;
 }
 
 .specialty-button span {
-  bottom: auto;
+  margin-top: auto;
   font-size: 24px;
   font-family: "Balatro";
   color: #d85555;
@@ -130,10 +131,29 @@
   padding-top: 0px;
   top: 0;
   left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .slide-down {
-  animation: slideDown 1s ease-out fowards;
+  animation: slideDown 1s ease-in forwards;
+}
+
+.slide-down-preq {
+  animation: slideDownPreq 0.5s ease-in forwards;
+}
+
+.slide-down-bit {
+  animation: slideDownBit 0.5s ease-out forwards;
+}
+
+.slide-left-out {
+  animation: slideLeftOut 1s ease-in forwards;
+}
+
+.slide-left-in {
+  animation: slideLeftIn 1s ease-out forwards;
 }
 
 .slide-down-stem {
@@ -159,6 +179,50 @@
   }
   100% {
     transform: translateY(120%);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDownBit {
+  0% {
+    transform: translateY(-20%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDownPreq {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(150%);
+    opacity: 1;
+  }
+}
+
+@keyframes slideLeftIn {
+  0% {
+    transform: translateX(120%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideLeftOut {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-120%);
     opacity: 1;
   }
 }
@@ -194,12 +258,23 @@
   animation-delay: 0.3s;
 }
 
+.patient-wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 150px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .patient-image {
-  display: block;
-  margin: 160px auto 20px; /* Centers the image and adds bottom margin */
-  transform: scale(0.75); /* Scales the image similar to the Phaser scaling */
+  transform: scale(0.8); /* Scales the image similar to the Phaser scaling */
   filter: brightness(110%);
   user-select: none;
+  width: fit-content;
+  margin-right: -10px;
 }
 
 .patient-image:hover {
@@ -225,32 +300,9 @@
   background-color: #6ed1ff;
 }
 
-.popup-message {
-  position: absolute;
-  top: 410px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #b50015;
-  font-family: "Balatro";
-  font-size: 20px;
-  opacity: 0; /* Hidden by default */
-  transition: opacity 0.3s ease-in-out; /* Smooth fade-in and fade-out */
-}
-
-.popup-message.fade-in {
-  opacity: 1; /* Fully visible after fade-in */
-}
-
-.popup-message.fade-out {
-  opacity: 0; /* Fades out smoothly */
-}
-
 .obs-container {
-  position: absolute;
-  top: 205px;
-  left: 240px;
   width: 100px;
-  height: auto; /* Accounts for top and bottom padding */
+  height: fit-content; /* Accounts for top and bottom padding */
   padding: 20px;
   padding-top: 0px;
   padding-bottom: 5px;
@@ -262,56 +314,104 @@
   border-radius: 16px;
 }
 
+.hidden {
+  display: none;
+}
+
 .investigation-records-container {
-  position: absolute;
-  top: 210px;
-  right: 140px;
-  width: 250px;
-  height: 200px; /* Accounts for top and bottom padding */
-  padding: 20px;
-  overflow-y: auto;
+  width: fit-content;
+  height: fit-content; /* Accounts for top and bottom padding */
   font-family: "Balatro";
   color: #333333;
+}
+
+.investigation-records-container img {
+  margin-top: -10px; 
+  transform: scale(0.7);
 }
 
 .investigation-records-container h3 {
   margin-top: 0px;
   font-weight: lighter;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
-  margin-top: 30px;
+  color: rgb(92, 92, 92);
+}
+
+.critical-button {
+  display: block;
+  background-color: rgb(226, 0, 0);
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  padding: 8px;
+  width: fit-content;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.critical-button:hover {
+  transform: scale(1.03);
+}
+
+.ancillary-button {
+  display: block;
+  background-color: rgb(226, 166, 0);
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  padding: 8px;
+  width: fit-content;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.ancillary-button:hover {
+  transform: scale(1.03);
 }
 
 .highlight-animation {
-  animation: pulse 1s forwards;
+  animation: pulse 1s;
 }
 
 @keyframes pulse {
   0% {
     transform: scale(1);
-    color: #333;
   }
   50% {
     transform: scale(1.1);
-    color: #00ff33; /* Highlight color */
   }
   100% {
     transform: scale(1);
-    color: #333;
   }
 }
 
 @keyframes pulse2 {
   0% {
-    transform: scale(1);
+    transform: scale(0.75);
   }
   50% {
-    transform: scale(1.1);
+    transform: scale(0.8);
   }
   100% {
-    transform: scale(1);
+    transform: scale(0.75);
   }
 }
+
+@keyframes pulse-note {
+  0% {
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(0.7);
+  }
+}
+
 
 @keyframes pulse3 {
   0% {
@@ -326,11 +426,10 @@
 }
 
 .menu-container {
-  position: absolute;
-  bottom: 20px;
-  margin-left: 30px;
-  height: 100px;
+  position: relative;
+  height: fit-content;
   display: flex;
+  margin-top: 100px;
   justify-content: center;
   align-items: center;
   gap: 20px;
@@ -357,11 +456,10 @@
 
 .submenu-container {
   position: absolute;
-  bottom: 140px;
+  bottom: 120px;
+  left: 0px;
   display: flex;
   gap: 20px;
-  justify-content: flex-start;
-  padding-left: 35px;
   flex-wrap: wrap;
 }
 
@@ -514,18 +612,15 @@
 }
 
 .toggle-button {
-  scale: 0.8;
-  margin-bottom: -25px;
-  margin-top: -20px;
   cursor: pointer;
 }
 
 .toggle-button:hover {
-  transform: scale(1.1);
+  transform: scale(0.8);
 }
 
-.toggle-button.pulse2 {
-  animation: pulse2 1s ease-in-out;
+.toggle-button.pulse-note {
+  animation: pulse-note 1s ease-in-out;
 }
 
 .modal-box-content {
@@ -662,18 +757,22 @@
   text-shadow: 2px 2px 0px #666666;
 }
 
-.proceed-button {
-  background-color: #337eff;
-  border-radius: 10px;
-  font-family: "Balatro";
-  cursor: pointer;
-  padding: 10px 20px;
-  text-shadow: 2px 2px 0px #666666;
-  border: none;
-  color: white;
-  font-size: 18px;
-  animation: pulse2 1s forwards infinite;
+.close-button:hover {
+  background-color: #4884ec
 }
+
+.proceed-button {
+  position: absolute;
+  cursor: pointer;
+  animation: pulse2 1s forwards infinite;
+  right: 0px;
+  transform: scale(0.75);
+}
+
+.proceed-button:hover {
+  filter: brightness(90%); 
+}
+
 
 .diagnosis-container {
   position: absolute;
@@ -682,6 +781,9 @@
   padding-top: 0px;
   top: 0;
   left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .investigation-report-container {
@@ -689,7 +791,7 @@
   padding: 5px;
   margin: auto;
   margin-top: 150px;
-  margin-bottom: -20px;
+  margin-bottom: 120px;
   border-radius: 16px;
   font-family: "Balatro";
   color: gray;
@@ -705,22 +807,21 @@
 }
 
 .diagnosis-question-container {
-  position: absolute;
+  position: relative;
   width: 790px;
-  height: 270px;
+  height: 250px;
   background-color: white;
-  bottom: 30px;
-  left: 50%;
-  transform: translate(-50%, 0%);
   border-radius: 16px;
   padding: 5px;
   padding-right: 20px;
   font-family: "Balatro";
   text-align: left;
+  margin-top: -65px;
 }
 
 .diagnosis-question-container h3 {
   font-weight: lighter;
+  font-size: 17px;
   margin-left: 217px;
   padding-left: 2px;
   overflow: hidden;
@@ -728,7 +829,7 @@
   display: inline-block;
   color: #c80000;
   visibility: hidden;
-  animation: typing var(--typing-duration, 1s) steps(50, end)
+  animation: typing var(--typing-duration, 1s) steps(var(--typing-steps), end)
       var(--typing-delay, 0.5s) forwards,
     show 0s var(--typing-delay, 0.5s) forwards;
 }
@@ -797,20 +898,22 @@
 .diagnosis-question-container p {
   position: absolute;
   margin-left: 30px;
-  bottom: 0px;
+  bottom: 19px;
   color: rgba(214, 0, 0, 0.549);
 }
 
 .doctor-image {
-  scale: 0.45;
+  scale: 0.7;
   position: absolute;
-  left: 5px;
-  bottom: -120px;
+  left: -50px;
+  bottom: 20px;
   filter: brightness(110%);
 }
 
 .doctor-image.vibrating {
-  animation: vibrating 0.1s linear var(--vibrating-iterations, 10);
+  animation: vibrating 0.1s linear infinite; 
+  animation-iteration-count: var(--vibrating-iterations, 10); 
+  animation-delay: var(--typing-delay, 0s);
 }
 
 .vibrating {
@@ -823,10 +926,10 @@
     transform: translateX(0); /* No movement */
   }
   25% {
-    transform: translateX(-3px); /* Move slightly left */
+    transform: translateX(-2px); /* Move slightly left */
   }
   75% {
-    transform: translateX(3px); /* Move slightly right */
+    transform: translateX(2px); /* Move slightly right */
   }
 }
 
@@ -835,7 +938,7 @@
   position: absolute;
   flex-direction: column;
   gap: 5px;
-  top: 95px;
+  bottom: 20px;
 }
 
 .answer-button {
@@ -862,17 +965,56 @@
   animation: slideUp 1s ease-out forwards;
 }
 
+.slide-up-high {
+  animation: slideUpHigh 1s ease-out forwards;
+}
+
 .slide-up-stem {
   animation: slideUpStem 1s ease-out forwards;
+}
+
+.slide-up-menu {
+  opacity: 0;
+  animation: slideUpMenu 1s ease-out forwards;
 }
 
 @keyframes slideUp {
   0% {
     transform: translateY(100%); /* Start below the screen */
+    opacity: 0; /* Invisible at the start */
+  }
+  1% {
+    transform: translateY(100%); /* Start below the screen */
     opacity: 1; /* Invisible at the start */
   }
   100% {
     transform: translateY(0); /* End in normal position */
+    opacity: 1; /* Fully visible */
+  }
+}
+
+@keyframes slideUpMenu {
+  0% {
+    transform: translateY(100%); /* Start below the screen */
+    opacity: 0; /* Invisible at the start */
+  }
+  1% {
+    transform: translateY(100%); /* Start below the screen */
+    opacity: 1; /* Invisible at the start */
+  }
+  100% {
+    transform: translateY(-100%); /* End in normal position */
+    opacity: 1; /* Fully visible */
+  }
+}
+
+@keyframes slideUpHigh {
+  0% {
+    transform: translateY(100%); /* Start below the screen */
+    opacity: 1; /* Invisible at the start */
+  }
+  100% {
+    transform: translateY(-20%); /* End in normal position */
     opacity: 1; /* Fully visible */
   }
 }
