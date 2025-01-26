@@ -144,7 +144,7 @@ function InvestigationStage({
     <div
         ref={investigateContainerRef}
         className={`investigate-container ${
-            isModalVisible || isExplanationVisible ? "to-front" : ""
+            isModalVisible || isExplanationVisible || isListVisible || isList2Visible ? "to-front" : ""
         } ${
             transitionToDiagnosis ? "slide-left-out" : "slide-up"
         }`}

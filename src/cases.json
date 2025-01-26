@@ -16,26 +16,6 @@
                 "SPO2": "98%"
             },
 
-            "preInv": true,
-
-            "pre-questions": [
-                { "prompt": "What is the Well's score?", 
-                    "options": [
-                        "1", 
-                        "2", 
-                        "3", 
-                        "4"], 
-                    "correctOption": "4",
-                    "explanation": "Well's Score Criteria",
-                    "sources": [
-                      {
-                        "name": "Pathway for Acute Coronary Syndrome Assessment (PACSA) Flow Chart",
-                        "url": "https://aci.health.nsw.gov.au/__data/assets/pdf_file/0019/824140/PACSA-STEMI-Reperfusion-flow-chart-SAMPLE.pdf"
-                      }
-                    ]
-                    }
-                  ],
-
             "investigations": [
                 {
                     "name": "ECG",
@@ -708,7 +688,7 @@
               "HR": "105",
               "RR": "32",
               "SPO2": "91%"
-            },
+            },  
           
             "investigations": [
               {
@@ -960,11 +940,32 @@
               "RR": "22",
               "SPO2": "95%"
             },
+
+            "preInv": true,
+
+            "pre-questions": [
+                { "prompt": "What is the patient's Well's score?", 
+                    "options": [
+                        "1", 
+                        "2", 
+                        "3", 
+                        "4"], 
+                    "correctOption": "4",
+                    "explanation": "Well's Score Criteria",
+                    "sources": [
+                      {
+                        "name": "Pathway for Acute Coronary Syndrome Assessment (PACSA) Flow Chart",
+                        "url": "https://aci.health.nsw.gov.au/__data/assets/pdf_file/0019/824140/PACSA-STEMI-Reperfusion-flow-chart-SAMPLE.pdf"
+                      }
+                    ]
+                    }
+                  ],
           
             "investigations": [
               {
                 "name": "ECG",
                 "result": "Sinus tachycardia, no ischaemic changes",
+                "image": "trace3",
                 "points": "critical",
                 "critical": true
               },

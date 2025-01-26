@@ -791,7 +791,7 @@
   padding: 5px;
   margin: auto;
   margin-top: 150px;
-  margin-bottom: 120px;
+  margin-bottom: 95px;
   border-radius: 16px;
   font-family: "Balatro";
   color: gray;
@@ -816,7 +816,7 @@
   padding-right: 20px;
   font-family: "Balatro";
   text-align: left;
-  margin-top: -65px;
+  margin-top: -55px;
 }
 
 .diagnosis-question-container h3 {
